@@ -12,7 +12,13 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
+import Details from "./components/pages/Details";
+//import NoMatch from "./components/pages/NoMatch";
+import PropertySearch from "./components/pages/PropertySearch";
+import Registration from "./components/pages/Registration";
+import Results from "./components/pages/Results";
 import "./App.css";
+
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -43,7 +49,12 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <PrivateRoute exact path="/results/:id" component={Details} />
+              <PrivateRoute exact path="/property" component={PropertySearch} />
+              <PrivateRoute exact path="/registration" component={Registration} />
+              <PrivateRoute exact path="/results" component={Results} />
             </Switch>
+              {/* <Route path component={NoMatch} />  */}
           </div>
         </Router>
       </Provider>

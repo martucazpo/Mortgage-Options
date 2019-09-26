@@ -18,12 +18,17 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './index.html'));
+  });
+
 // DB Config
-const db = require("./config/keys").mongoURI;
+//const db = require("./config/keys").mongoURI;
 // Connect to MongoDB
 mongoose
   .connect(
-    db,
+   // db,
+   "mongodb://localhost/mortgageOptionsDev",
     { useNewUrlParser: true,
       useUnifiedTopology: true
      }

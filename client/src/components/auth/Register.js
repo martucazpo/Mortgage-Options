@@ -43,6 +43,7 @@ const newUser = {
 this.props.registerUser(newUser, this.props.history); 
   };
 render() {
+  console.log(this.props)
     const { errors } = this.state;
 return (
       <div className="container">

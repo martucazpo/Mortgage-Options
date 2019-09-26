@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { Link } from "react-router"
 class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
@@ -35,6 +36,10 @@ return (
           </div>
         </div>
       </div>
+      <div>
+        <Link href="/registration">Registration</Link>
+      </div>
+  
     );
   }
 }
