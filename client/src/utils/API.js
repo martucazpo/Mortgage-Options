@@ -1,26 +1,44 @@
 import axios from "axios";
-const BASEURL = "https://www.googleapis.com/books/v1/volumes?q=";
+const BASEURL = "";
 
 export default {
   search: function(query) {
     return axios.get(BASEURL + query );
   },
+  getProfilesWithTheirProperties: function(){
+    console.log("this is the one that you want, you really want it");
+    return axios.post("/api/profiles/" + id);
+  },
   // Gets all books
-  getBooks: function() {
+  getProfiles: function() {
     console.log("got");
-    return axios.get("/api/books");
+    return axios.get("/api/profiles");
+  },
+  getProperties: function() {
+    console.log("got");
+    return axios.get("/api/properties");
   },
   // Gets the book with the given id
-  getBook: function(id) {
-    return axios.get("/api/books/" + id);
+  getProfile: function(id) {
+    return axios.get("/api/profiles/" + id);
+  },
+  getProperty: function(id) {
+    return axios.get("/api/properties/" + id);
   },
   // Deletes the book with the given id
-  deleteBook: function(id) {
-    return axios.delete("/api/books/" + id);
+  deleteProfile: function(id) {
+    return axios.delete("/api/profile/" + id);
+  },
+  deleteProperty: function(id) {
+    return axios.delete("/api/properties/" + id);
   },
   // Saves a book to the database
-  saveBook: function(bookData) {
+  saveProfile: function(profileData) {
     console.log('hit');
-    return axios.post("/api/books", bookData);
+    return axios.post("/api/profile", profileData);
+  },
+  saveProperty: function(propertyData) {
+    console.log('hit');
+    return axios.post("/api/properties", propertyData);
   }
 };

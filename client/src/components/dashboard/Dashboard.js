@@ -36,9 +36,6 @@ return (
           </div>
         </div>
       </div>
-      <div>
-        <Link href="/registration">Registration</Link>
-      </div>
   
     );
   }
