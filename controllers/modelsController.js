@@ -71,7 +71,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   populateProfile: function(req, res){
-    db.Profiles
+    db.Profile
     .findOne({_id: req.params.id})
     .populate("property")
     .then(dbModel => res.json(dbModel))

@@ -1,14 +1,17 @@
 import axios from "axios";
-const BASEURL = "";
+const apiKey = process.env.REACT_APP_REAL_ESTATE_KEY;
+const BASEURL = "https://api.bridgedataoutput.com/api/v2/test/listings?access_token=" + apiKey;
+
 
 export default {
-  search: function(query) {
-    return axios.get(BASEURL + query );
+  search: function() {
+    return axios.get(BASEURL);
   },
-  getProfilesWithTheirProperties: function(){
-    console.log("this is the one that you want, you really want it");
-    return axios.post("/api/profiles/" + id);
-  },
+  
+  //getProfilesWithTheirProperties: function(){
+  // console.log("this is the one that you want, you really want it");
+  //  return axios.post("/api/profiles/" + id);
+ // },
   // Gets all books
   getProfiles: function() {
     console.log("got");
@@ -27,15 +30,15 @@ export default {
   },
   // Deletes the book with the given id
   deleteProfile: function(id) {
-    return axios.delete("/api/profile/" + id);
+    return axios.delete("/api/profiles/" + id);
   },
   deleteProperty: function(id) {
     return axios.delete("/api/properties/" + id);
   },
   // Saves a book to the database
-  saveProfile: function(profileData) {
+  saveProfile: function(data) {
     console.log('hit');
-    return axios.post("/api/profile", profileData);
+    return axios.post("/api/profiles", data);
   },
   saveProperty: function(propertyData) {
     console.log('hit');
