@@ -21,7 +21,7 @@ class Form extends Component {
   };
 
   // When the form is submitted, prevent the default event and alert the username and password
-  handleFormSaveProfile = () => {
+  handleForm = () => {
    // event.preventDefault();
       API.saveProfile({
         name: this.state.name,
@@ -49,7 +49,7 @@ class Form extends Component {
           onChange={this.handleInputChange}
         />
         <ProfileDetail name={this.state.name} email={this.state.email}/>
-        <button onClick={this.handleFormSaveProfile}>Submit</button>
+        <button onClick={this.handleForm}>Submit</button>
       </form>
     );
   }

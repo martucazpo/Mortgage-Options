@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-//import { Link } from "react-router"
+import LinkList from "../linksList";
+
 class Dashboard extends Component {
   onLogoutClick = e => {
     e.preventDefault();
@@ -21,6 +22,7 @@ return (
                 <span style={{ fontFamily: "monospace" }}>MERN</span> app 👏
               </p>
             </h4>
+            <LinkList/>
             <button
               style={{
                 width: "150px",

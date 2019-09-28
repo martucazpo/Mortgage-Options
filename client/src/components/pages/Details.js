@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {Component} from 'react';
+import LinkList from '../linksList';
 
-function Details(){
+class Details extends Component{
 
-    return(<h3>Details</h3>);
-
+    render(){
+    return(
+    <div className="details">
+    <h3>Details</h3>
+    <LinkList/>
+    </div>
+            );
+    }
 }
 
 export default Details;

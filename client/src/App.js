@@ -9,6 +9,7 @@ import store from "./store";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
+import EditReg from "./components/pages/EditReg";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -52,6 +53,7 @@ class App extends Component {
               <PrivateRoute exact path="/results/:id" component={Details} />
               <PrivateRoute exact path="/property" component={PropertySearch} />
               <PrivateRoute exact path="/registration" component={Registration} />
+              <PrivateRoute exact path="/registration/:id" component={EditReg}/>
               <PrivateRoute exact path="/results" component={Results} />
             </Switch>
               {/* <Route path component={NoMatch} />  */}

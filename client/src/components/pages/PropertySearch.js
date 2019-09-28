@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import API from "../../utils/API";
+import LinkList from '../linksList';
 
 class PropertySearch extends Component{
 
@@ -18,6 +19,7 @@ class PropertySearch extends Component{
         return(
         <div className="propertySearch">
         <h3>PropertySearch</h3>
+        <LinkList/>
         <button onClick={this.searchProperties} className="btn btn-primary">
           Search
         </button>

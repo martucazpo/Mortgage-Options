@@ -1,8 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
+import LinkList from '../linksList';
 
-function Results(){
+class Results extends Component{
 
-    return(<h3>Results</h3>);
+    render(){
+
+    return(
+    <div className="results">
+    <h3>Results</h3>
+    <LinkList/>
+    </div>);
+
+    }
 }
 
 export default Results;

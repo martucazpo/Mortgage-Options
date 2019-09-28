@@ -17,6 +17,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findProfileById: function(req, res) {
+    console.log("req.params.id");
     db.Profile
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
@@ -45,6 +46,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   updateProfile: function(req, res) {
+    console.log(req.params.id, req.body);
     db.Profile
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
