@@ -28,8 +28,8 @@ export default {
   getProperty: function(id) {
     return axios.get("/api/properties/" + id);
   },
-  updateProfile: function(id){
-    return axios.put("/api/profiles/" + id);
+  updateProfile: function(id,info){
+    return axios.put("/api/profiles/" + id, info);
   },
   // Deletes the book with the given id
   deleteProfile: function(id) {
