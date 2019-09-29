@@ -1,7 +1,6 @@
 import axios from "axios";
 const apiKey = process.env.REACT_APP_REAL_ESTATE_KEY;
-const BASEURL = "https://api.bridgedataoutput.com/api/v2/test/listings?access_token=" + apiKey;
-
+const BASEURL = "https://api.bridgedataoutput.com/api/v2/test_sd/listings?access_token=" + apiKey;
 
 export default {
   search: function() {
