@@ -4,6 +4,7 @@ import LinkList from '../linksList';
 
 let imageArr = [];
 let dataArr = [];
+//let finalArr = [];
 //let dataArrs= [];
 //let ListPrice = Number;
 //let TaxAnnualAmount = Number;
@@ -13,34 +14,39 @@ let dataArr = [];
 class PropertySearch extends Component{
 
     state = {
-        result : {},
-        search : "",
-        dataArrs: [],
-        dataArr:[]
+        result :{},
+        search :"",
+        listPrice : Number,
+        TaxAnnualAmount : Number,
+        img : ""
     };
 
     componentDidMount(){
       this.searchProperties()
     }
 
-    renderImage(dataArr) {
-      return (
-        <div>
-          <img src={dataArr} alt="realestateImages" />
-        </div>
-      );
+    searchProperties() {
+      API.search()
+        .then( res => {for(let j=0;j<res.data.bundle.length;j++){imageArr.push(res.data.bundle[j])}
+        return imageArr})
+        .then(() => {for(let i=0;i<imageArr.length;i++){dataArr.push({ListPrice: imageArr[i].ListPrice,TaxAnnualAmount:imageArr[i].TaxAnnualAmount,img:imageArr[i].Media})}
+        return dataArr})
+        .then(console.log(imageArr,dataArr))
+        .catch(err => console.log(err))
     }
 
-    searchProperties = () => {
-      API.search()
-        .then( res => {imageArr.push(res.data.bundle[7])
-        return imageArr})
-        .then(() => {for(let i = 0; i < imageArr.length; i++){dataArr.push(imageArr[i].ListPrice,imageArr[i].TaxAnnualAmount,imageArr[i].Media[i].MediaURL)}
-        return dataArr})
-        .then(() => {console.log(imageArr,dataArr)})
-        .catch(err => console.log(err))
-    };
-  
+   /* handleForm() {
+      // event.preventDefault();
+         API.saveProperty({
+           listPrice: this.state.listPrice,
+           TaxAnnualAmount: this.state.TaxAnnualAmount,
+           img:this.state.img
+         })
+           .then(console.log("profile saved!"))
+           .catch(err => console.log(err));
+     };*/
+
+
      render(){  
        
         return(
@@ -48,13 +54,9 @@ class PropertySearch extends Component{
         <h3>PropertySearch</h3>
         <div className="gallery">
         <div className="images">
-        {this.state.dataArrs.map(dataArr => this.renderImage(dataArr))}
         </div>
       </div>
         <LinkList/>
-        <button onClick={this.searchProperties} className="btn btn-primary">
-          Search
-        </button>
         </div>)}
 
 }
