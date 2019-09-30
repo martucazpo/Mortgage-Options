@@ -13,9 +13,9 @@ let dataArr = [];
 class PropertySearch extends Component{
 
     state = {
-        result : {},
-        search : "",
-        dataArrs: [],
+        result :{},
+        search :"",
+        dataArrs:[],
         dataArr:[]
     };
 
@@ -33,14 +33,13 @@ class PropertySearch extends Component{
 
     searchProperties = () => {
       API.search()
-        .then( res => {imageArr.push(res.data.bundle[7])
+        .then( res => {for(let j=0;j<res.data.bundle.length;j++){imageArr.push(res.data.bundle[j])}
         return imageArr})
-        .then(() => {for(let i = 0; i < imageArr.length; i++){dataArr.push(imageArr[i].ListPrice,imageArr[i].TaxAnnualAmount,imageArr[i].Media[i].MediaURL)}
+        .then(() => {for(let i = 0; i < imageArr.length; i++){dataArr.push(imageArr[i].ListPrice,imageArr[i].TaxAnnualAmount,imageArr[i].Media[i])}
         return dataArr})
-        .then(() => {console.log(imageArr,dataArr)})
-        .catch(err => console.log(err))
+        .then(console.log(imageArr,dataArr))
+        .catch(err => console.log(err));
     };
-  
      render(){  
        
         return(
