@@ -26,20 +26,22 @@ class EditReg extends Component{
         .catch(err => console.log(err))
     }
     handleInputChange = event => {
+      console.log("I can handle imput change")
         const { name, value } = event.target;
         this.setState({
           [name]: value
-        });
-    };
+        })
+    }
 
 
     handleForm = event => {
         event.preventDefault();
-        API.updateProfile(this.props.match.params.id)
-            .then(res => console.log(res.data))
+        API.updateProfile(this.props.match.params.id, this.state)
+            .then(res => console.log("item updated!!!" + res.data))
             .catch(err => console.log(err))
-        this.props.history.push('/registration');
+         this.props.history.push('/registration');
       }
+    
       render(){
         console.log(this.props)
         return(
@@ -48,14 +50,14 @@ class EditReg extends Component{
           type="text"
           placeholder="Name"
           name="name"
-          value={this.state.name}
+          value={this.props.name}
           onChange={this.handleInputChange}
         />
         <input
           type="email"
           placeholder="email"
           name="email"
-          value={this.state.email}
+          value={this.props.email}
           onChange={this.handleInputChange}
         />
         <ProfileDetail name={this.state.name} email={this.state.email}/>

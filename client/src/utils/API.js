@@ -1,7 +1,6 @@
 import axios from "axios";
 const apiKey = process.env.REACT_APP_REAL_ESTATE_KEY;
-const BASEURL = "https://api.bridgedataoutput.com/api/v2/test/listings?access_token=" + apiKey;
-
+const BASEURL = "https://api.bridgedataoutput.com/api/v2/test_sd/listings?access_token=" + apiKey;
 
 export default {
   search: function() {
@@ -28,8 +27,8 @@ export default {
   getProperty: function(id) {
     return axios.get("/api/properties/" + id);
   },
-  updateProfile: function(id){
-    return axios.put("/api/profiles/" + id);
+  updateProfile: function(id,info){
+    return axios.put("/api/profiles/" + id, info);
   },
   // Deletes the book with the given id
   deleteProfile: function(id) {

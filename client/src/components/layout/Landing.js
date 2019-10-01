@@ -46,6 +46,7 @@ class Landing extends Component {
           <div className="col s3"></div>
         </div>
       </div>
+   
     );
   }
 }
