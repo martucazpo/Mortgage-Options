@@ -5,12 +5,11 @@ var Schema = mongoose.Schema;
 
 var PropertySchema = new Schema({
 
-  address: String,
-  askingPrice: Number,
-  details: String,
-  image1: String,
-  image2: String,
-  image3: String
+  ListPrice: Number,
+  TaxAnnualAmount: Number,
+  img: String,
+  img2: String,
+  img3: String
 });
 
 // This creates our model from the above schema, using mongoose's model method
