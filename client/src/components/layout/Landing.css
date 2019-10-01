@@ -1,0 +1,18 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.skeleton {
+  border: 1px solid black;
+}
+
+.welcomeInfo {
+  margin-top: 5%;
+  margin-bottom: 10%;
+  text-align: center;
+}
+
+.logInButton {
+  text-align: center;
+}
