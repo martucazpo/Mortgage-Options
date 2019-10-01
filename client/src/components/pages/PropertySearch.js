@@ -50,9 +50,9 @@ class PropertySearch extends Component{
     renderListings = () => {
       const listHtml = this.state.listings.map( list => (
         <div>
-          <h1>List Price{list.ListPrice}</h1>
-          <h2>Annual Tax Amount{list.TaxAnnualAmount}</h2>
-          {list.img.map(image => <img src={image.MediaURL}/>)}
+          <strong>List Price  {list.ListPrice}</strong>
+          <p>Annual Tax Amount  {list.TaxAnnualAmount}</p>
+          {list.img.map(image => <img src={image.MediaURL} style={{height:"100px",width:"100px"}}/>)}
         </div>
       ))
       return listHtml
@@ -77,8 +77,6 @@ class PropertySearch extends Component{
         <h3>PropertySearch</h3>
         <div className="gallery">
         <div className="images">
-
-
           { this.renderListings()}
         </div>
       </div>
