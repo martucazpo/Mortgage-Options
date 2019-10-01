@@ -18,7 +18,8 @@ class PropertySearch extends Component{
         search :"",
         listPrice : Number,
         TaxAnnualAmount : Number,
-        img : ""
+        img : "",
+        listings: []
     };
 
     componentDidMount(){
@@ -27,12 +28,34 @@ class PropertySearch extends Component{
 
     searchProperties() {
       API.search()
-        .then( res => {for(let j=0;j<res.data.bundle.length;j++){imageArr.push(res.data.bundle[j])}
-        return imageArr})
-        .then(() => {for(let i=0;i<imageArr.length;i++){dataArr.push({ListPrice: imageArr[i].ListPrice,TaxAnnualAmount:imageArr[i].TaxAnnualAmount,img:imageArr[i].Media})}
-        return dataArr})
+        .then( res => {
+          for(let j=0; j<res.data.bundle.length; j++) {
+            imageArr.push(res.data.bundle[j])
+          }
+          return imageArr
+        })
+        .then(() => {
+          for(let i=0; i<imageArr.length; i++){
+            dataArr.push({
+              ListPrice: imageArr[i].ListPrice,
+              TaxAnnualAmount:imageArr[i].TaxAnnualAmount,img:imageArr[i].Media
+            })
+          }
+          this.setState({ listings: dataArr })
+        })
         .then(console.log(imageArr,dataArr))
         .catch(err => console.log(err))
+    }
+
+    renderListings = () => {
+      const listHtml = this.state.listings.map( list => (
+        <div>
+          <h1>List Price{list.ListPrice}</h1>
+          <h2>Annual Tax Amount{list.TaxAnnualAmount}</h2>
+          {list.img.map(image => <img src={image.MediaURL}/>)}
+        </div>
+      ))
+      return listHtml
     }
 
    /* handleForm() {
@@ -54,6 +77,9 @@ class PropertySearch extends Component{
         <h3>PropertySearch</h3>
         <div className="gallery">
         <div className="images">
+
+
+          { this.renderListings()}
         </div>
       </div>
         <LinkList/>
