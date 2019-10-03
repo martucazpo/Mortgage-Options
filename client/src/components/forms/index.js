@@ -5,9 +5,10 @@ import API from "../../utils/API";
 class Form extends Component {
   // Setting the initial values of this.state.username and this.state.password
   state = {
-    name: "",
-    email: "",
-    propertyValue: ""
+    // name: "",
+    // email: "",
+    desiredPayment: "",
+    downPayment: ""
   };
 
   // handle any changes to the input fields
@@ -25,9 +26,10 @@ class Form extends Component {
   handleForm = () => {
     // event.preventDefault();
     API.saveProfile({
-      name: this.state.name,
-      email: this.state.email,
-      propertyValue: this.state.propertyValue
+      // name: this.state.name,
+      // email: this.state.email,
+      desiredPayment: this.state.desiredPayment,
+      downPayment: this.state.downPayment
     })
       .then(console.log("profile saved!"))
       .catch(err => console.log(err));
@@ -36,7 +38,7 @@ class Form extends Component {
   render() {
     return (
       <form>
-        <input
+        {/* <input
           type="text"
           placeholder="Name"
           name="name"
@@ -49,15 +51,25 @@ class Form extends Component {
           name="email"
           value={this.state.email}
           onChange={this.handleInputChange}
-        />
+        /> */}
         <input
-          type="propertyValue"
-          placeholder="Sales Price"
-          name="propertyValue"
-          value={this.state.propertyValue}
+          type="desiredPayment"
+          placeholder="Desired Payment Amount"
+          name="desiredPayment"
+          value={this.state.desiredPayment}
           onChange={this.handleInputChange}
         />
-        <ProfileDetail name={this.state.name} email={this.state.email} />
+        <input
+          type="downPayment"
+          placeholder="Down Payment"
+          name="downPayment"
+          value={this.state.downPayment}
+          onChange={this.handleInputChange}
+        />
+        <ProfileDetail
+          desiredPayment={this.state.desiredPayment}
+          downPayment={this.state.downPayment}
+        />
         <button onClick={this.handleForm}>Submit</button>
       </form>
     );
