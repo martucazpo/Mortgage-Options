@@ -5,12 +5,15 @@ import API from "../../utils/API";
 import { List, ListItem } from "../List";
 import LinkList from "../linksList";
 import EditBtn from "../EditBtn";
+import Calculator from "../Calculator";
 
 class Registration extends Component {
   state = {
     profiles: [],
-    name: "",
-    email: ""
+    // name: "",
+    // email: "",
+    desiredPayment: "",
+    downPayment: ""
   };
 
   componentDidMount() {
@@ -22,8 +25,10 @@ class Registration extends Component {
       .then(res =>
         this.setState({
           profiles: res.data,
-          name: this.state.name,
-          email: this.state.email
+          // name: this.state.name,
+          // email: this.state.email,
+          desiredPayment: this.state.desiredPayment,
+          downPayment: this.state.downPayment
         })
       )
       .catch(err => console.log(err));
@@ -46,8 +51,10 @@ class Registration extends Component {
   handleForm = () => {
     // event.preventDefault();
     API.saveProfile({
-      name: this.state.name,
-      email: this.state.email
+      // name: this.state.name,
+      // email: this.state.email,
+      desiredPayment: this.state.desiredPayment,
+      downPayment: this.state.downPayment
     })
       .then(console.log("profile saved!"))
       .catch(err => console.log(err));
@@ -62,9 +69,12 @@ class Registration extends Component {
           {this.state.profiles.map(profile => (
             <ListItem key={profile._id}>
               <strong>
-                <div>{profile.name}</div>
-                <div>{profile.email}</div>
+                {/* <div>{profile.name}</div>
+                <div>{profile.email}</div> */}
+                <div>{profile.downPayment}</div>
+                <div>{profile.desiredPayment}</div>
               </strong>
+              <Calculator />
               <EditBtn id={profile._id} />
               <DeleteBtn onClick={() => this.deleteProfile(profile._id)} />
             </ListItem>
