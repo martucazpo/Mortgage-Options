@@ -5,6 +5,7 @@ import API from "../../utils/API";
 import { List, ListItem } from "../List";
 import LinkList from "../linksList";
 import EditBtn from "../EditBtn";
+import "./Registration.css";
 
 class Registration extends Component {
   state = {
@@ -55,21 +56,35 @@ class Registration extends Component {
 
   render() {
     return (
-      <div className="formDiv">
-        <LinkList />
-        <Form handleForm={this.handleForm} />
-        <List>
-          {this.state.profiles.map(profile => (
-            <ListItem key={profile._id}>
-              <strong>
-                <div>{profile.name}</div>
-                <div>{profile.email}</div>
-              </strong>
-              <EditBtn id={profile._id} />
-              <DeleteBtn onClick={() => this.deleteProfile(profile._id)} />
-            </ListItem>
-          ))}
-        </List>
+      <div>
+        <div className="row">
+          <div className="col s2"></div>
+          <div className="col s8 skeleton regBox">
+            <div className="formDiv">
+              <Form handleForm={this.handleForm} />
+              <List>
+                {this.state.profiles.map(profile => (
+                  <ListItem key={profile._id}>
+                    <strong>
+                      <div>{profile.name}</div>
+                      <div>{profile.email}</div>
+                    </strong>
+                    <EditBtn id={profile._id} />
+                    <DeleteBtn
+                      onClick={() => this.deleteProfile(profile._id)}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </div>
+          </div>
+        </div>
+        <div className="col s2"></div>
+        <div className="row">
+          <div className="col s12 links">
+            <LinkList />
+          </div>
+        </div>
       </div>
     );
   }
