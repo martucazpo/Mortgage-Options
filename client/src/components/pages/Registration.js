@@ -13,7 +13,8 @@ class Registration extends Component {
     // name: "",
     // email: "",
     desiredPayment: "",
-    downPayment: ""
+    downPayment: "",
+    taxBracket: ""
   };
 
   componentDidMount() {
