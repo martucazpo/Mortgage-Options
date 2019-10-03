@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.skeleton {
+  border: 2px solid black;
+}
+
+.rbox {
+  height: 400px;
+}
+
+.links {
+  text-align: center;
+}

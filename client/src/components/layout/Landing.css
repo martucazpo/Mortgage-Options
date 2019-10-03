@@ -4,15 +4,21 @@
 }
 
 .skeleton {
-  border: 1px solid black;
+  border: 2px solid black;
 }
 
 .welcomeInfo {
-  margin-top: 5%;
-  margin-bottom: 10%;
+  margin-top: 3%;
+  margin-bottom: 2%;
   text-align: center;
 }
 
 .logInButton {
   text-align: center;
+}
+
+.welcomeBanner {
+  background-color: cornflowerblue;
+  color: white;
+  height: 500px;
 }

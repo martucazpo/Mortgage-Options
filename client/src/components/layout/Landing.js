@@ -7,7 +7,7 @@ class Landing extends Component {
       <div>
         <div className="row welcomeInfo">
           <div className="col s1"></div>
-          <div className="col s10 skeleton">
+          <div className="col s10 skeleton welcomeBanner">
             <h3>Welcome to Mortgage Options</h3>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -46,7 +46,6 @@ class Landing extends Component {
           <div className="col s3"></div>
         </div>
       </div>
-   
     );
   }
 }
