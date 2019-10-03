@@ -16,8 +16,8 @@ class PropertySearch extends Component{
     state = {
         result :{},
         search :"",
-        listPrice : Number,
-        TaxAnnualAmount : Number,
+        ListPrice : 0,
+        TaxAnnualAmount : 0,
         img : "",
         listings: []
     };
@@ -47,27 +47,32 @@ class PropertySearch extends Component{
         .catch(err => console.log(err))
     }
 
+    handleForm =() => {
+      // event.preventDefault();
+        console.log(this.state.ListPrice);
+        console.log(this.state.TaxAnnualAmount);
+        console.log(this.state.img)
+         API.saveProperty({
+           ListPrice: this.state.ListPrice,
+           TaxAnnualAmount: this.state.TaxAnnualAmount,
+           img: this.state.img
+         })
+           .then(console.log("property saved!"))
+           .catch(err => console.log(err));
+     }
+
     renderListings = () => {
       const listHtml = this.state.listings.map( list => (
         <div>
           <strong>List Price  {list.ListPrice}</strong>
           <p>Annual Tax Amount  {list.TaxAnnualAmount}</p>
-          {list.img.map(image => <img src={image.MediaURL} style={{height:"100px",width:"100px"}}/>)}
+          {list.img.map(image => <img src={image.MediaURL}  alt={""} style={{height:"100px",width:"100px"}}/>)}
+          <button onClick={() => this.handleForm()} className="btn btn-primary" style={{ marginTop: "5px" }}>Save Property</button>
         </div>
       ))
       return listHtml
     }
 
-   /* handleForm() {
-      // event.preventDefault();
-         API.saveProperty({
-           listPrice: this.state.listPrice,
-           TaxAnnualAmount: this.state.TaxAnnualAmount,
-           img:this.state.img
-         })
-           .then(console.log("profile saved!"))
-           .catch(err => console.log(err));
-     };*/
 
 
      render(){  
