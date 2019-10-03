@@ -10,7 +10,6 @@ import "./Registration.css";
 
 import Calculator from "../Calculator";
 
-
 class Registration extends Component {
   state = {
     profiles: [],
@@ -66,7 +65,6 @@ class Registration extends Component {
 
   render() {
     return (
-
       <div>
         <div className="row">
           <div className="col s2"></div>
@@ -96,26 +94,6 @@ class Registration extends Component {
             <LinkList />
           </div>
         </div>
-=======
-      <div className="formDiv">
-        <LinkList />
-        <Form handleForm={this.handleForm} />
-        <List>
-          {this.state.profiles.map(profile => (
-            <ListItem key={profile._id}>
-              <strong>
-                {/* <div>{profile.name}</div>
-                <div>{profile.email}</div> */}
-                <div>{profile.downPayment}</div>
-                <div>{profile.desiredPayment}</div>
-              </strong>
-              <Calculator />
-              <EditBtn id={profile._id} />
-              <DeleteBtn onClick={() => this.deleteProfile(profile._id)} />
-            </ListItem>
-          ))}
-        </List>
-
       </div>
     );
   }
