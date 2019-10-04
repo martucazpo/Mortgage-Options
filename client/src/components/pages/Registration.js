@@ -5,6 +5,8 @@ import API from "../../utils/API";
 import { List, ListItem } from "../List";
 import LinkList from "../linksList";
 import EditBtn from "../EditBtn";
+import { withRouter } from 'react-router-dom';
+
 
 class Registration extends Component {
   state = {
@@ -14,7 +16,14 @@ class Registration extends Component {
   };
 
   componentDidMount() {
-    this.loadProfile();
+ this.loadProfile();
+ this.findUser();
+  }
+
+  findUser = () => {
+    API.getUser({email:this.props.match.params.email})
+    .then(res => {console.log(res.data)})
+    .catch(err => console.log(err))
   }
 
   loadProfile = () => {
@@ -75,4 +84,4 @@ class Registration extends Component {
   }
 }
 
-export default Registration;
+export default withRouter(Registration);

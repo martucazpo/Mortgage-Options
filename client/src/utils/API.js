@@ -22,12 +22,19 @@ export default {
     console.log("got");
     return axios.get("/api/properties");
   },
+  getUsers: function() {
+    console.log("got");
+    return axios.get("/api/users");
+  },
   // Gets the book with the given id
   getProfile: function(id) {
     return axios.get("/api/profiles/" + id);
   },
   getProperty: function(id) {
     return axios.get("/api/properties/" + id);
+  },
+  getUser: function(email, info) {
+    return axios.get("/api/users/" + email, info);
   },
   updateProfile: function(id, info) {
     return axios.put("/api/profiles/" + id, info);

@@ -8,6 +8,7 @@ const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
+const modelsController = require("../../controllers/modelsController")
 
 // @route POST api/users/register
 // @desc Register user
@@ -94,6 +95,10 @@ const email = req.body.email;
     });
   });
 });
+
+router.route("/").get(modelsController.findAllUsers).post(modelsController.createUser);
+
+router.route("/:id").get(modelsController.findUserById);
 
 module.exports = router;
   
