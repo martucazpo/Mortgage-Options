@@ -8,11 +8,17 @@ import EditBtn from "../EditBtn";
 import { withRouter } from 'react-router-dom';
 
 
+import "./Registration.css";
+
+import Calculator from "../Calculator";
+
 class Registration extends Component {
   state = {
     profiles: [],
-    name: "",
-    email: ""
+    // name: "",
+    // email: "",
+    desiredPayment: "",
+    downPayment: ""
   };
 
   componentDidMount() {
@@ -31,8 +37,10 @@ class Registration extends Component {
       .then(res =>
         this.setState({
           profiles: res.data,
-          name: this.state.name,
-          email: this.state.email
+          // name: this.state.name,
+          // email: this.state.email,
+          desiredPayment: this.state.desiredPayment,
+          downPayment: this.state.downPayment
         })
       )
       .catch(err => console.log(err));
@@ -55,8 +63,10 @@ class Registration extends Component {
   handleForm = () => {
     // event.preventDefault();
     API.saveProfile({
-      name: this.state.name,
-      email: this.state.email
+      // name: this.state.name,
+      // email: this.state.email,
+      desiredPayment: this.state.desiredPayment,
+      downPayment: this.state.downPayment
     })
       .then(console.log("profile saved!"))
       .catch(err => console.log(err));
@@ -64,21 +74,35 @@ class Registration extends Component {
 
   render() {
     return (
-      <div className="formDiv">
-        <LinkList />
-        <Form handleForm={this.handleForm} />
-        <List>
-          {this.state.profiles.map(profile => (
-            <ListItem key={profile._id}>
-              <strong>
-                <div>{profile.name}</div>
-                <div>{profile.email}</div>
-              </strong>
-              <EditBtn id={profile._id} />
-              <DeleteBtn onClick={() => this.deleteProfile(profile._id)} />
-            </ListItem>
-          ))}
-        </List>
+      <div>
+        <div className="row">
+          <div className="col s2"></div>
+          <div className="col s8 skeleton regBox">
+            <div className="formDiv">
+              <Form handleForm={this.handleForm} />
+              <List>
+                {this.state.profiles.map(profile => (
+                  <ListItem key={profile._id}>
+                    <strong>
+                      <div>{profile.name}</div>
+                      <div>{profile.email}</div>
+                    </strong>
+                    <EditBtn id={profile._id} />
+                    <DeleteBtn
+                      onClick={() => this.deleteProfile(profile._id)}
+                    />
+                  </ListItem>
+                ))}
+              </List>
+            </div>
+          </div>
+        </div>
+        <div className="col s2"></div>
+        <div className="row">
+          <div className="col s12 links">
+            <LinkList />
+          </div>
+        </div>
       </div>
     );
   }
