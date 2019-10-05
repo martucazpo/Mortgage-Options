@@ -5,6 +5,11 @@ import API from "../../utils/API";
 import { List, ListItem } from "../List";
 import LinkList from "../linksList";
 import EditBtn from "../EditBtn";
+import { withRouter } from "react-router-dom";
+import Navbar from "../layout/Navbar";
+
+import "./Registration.css";
+
 import Calculator from "../Calculator";
 import MortgageCalculator from "mortgage-calculator-react";
 
@@ -20,12 +25,22 @@ class Registration extends Component {
     // name: "",
     // email: "",
     desiredPayment: "",
+    loanTerm: "",
     downPayment: ""
   };
 
   componentDidMount() {
     this.loadProfile();
+    this.findUser();
   }
+
+  findUser = () => {
+    API.getUser({ email: this.props.match.params.email })
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => console.log(err));
+  };
 
   loadProfile = () => {
     API.getProfiles()
@@ -35,6 +50,7 @@ class Registration extends Component {
           // name: this.state.name,
           // email: this.state.email,
           desiredPayment: this.state.desiredPayment,
+          loanTerm: this.state.loanTerm,
           downPayment: this.state.downPayment
         })
       )
@@ -61,6 +77,7 @@ class Registration extends Component {
       // name: this.state.name,
       // email: this.state.email,
       desiredPayment: this.state.desiredPayment,
+      loanTerm: this.state.loanTerm,
       downPayment: this.state.downPayment
     })
       .then(console.log("profile saved!"))
@@ -80,12 +97,13 @@ class Registration extends Component {
                 {/* <div>{profile.name}</div>
                 <div>{profile.email}</div> */}
                 <div>{profile.downPayment}</div>
+                <div>{profile.loanTerm}</div>
                 <div>{profile.desiredPayment}</div>
               </strong>
 
               <Calculator
                 desired={profile.desiredPayment}
-                length={1}
+                loanTerm={profile.loanTerm}
                 down={profile.downPayment}
                 rate={0.01052}
               />
@@ -100,4 +118,4 @@ class Registration extends Component {
   }
 }
 
-export default Registration;
+export default withRouter(Registration);

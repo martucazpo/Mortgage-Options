@@ -16,6 +16,12 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  findAllUsers: function(req, res) {
+    db.User
+      .find(req.query)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   findProfileById: function(req, res) {
     console.log("req.params.id");
     db.Profile
@@ -26,6 +32,13 @@ module.exports = {
   findPropertyById: function(req, res) {
     db.Property
       .findById(req.params.id)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findUserById: function(req, res) {
+    console.log("req.params.email");
+    db.User
+      .findOne(req.params.email)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -41,6 +54,14 @@ module.exports = {
     console.log('hit create property')
     console.log(req.body);
     db.Property
+      .create(req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  createUser: function(req, res) {
+    console.log('hit create user')
+    console.log(req.body);
+    db.User
       .create(req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

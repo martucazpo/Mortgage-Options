@@ -21,6 +21,9 @@ var ProfileSchema = new Schema({
   desiredPayment: {
     type: Number
   },
+  loanTerm: {
+    type: Number
+  },
   property: [
     {
       type: Schema.Types.ObjectId,

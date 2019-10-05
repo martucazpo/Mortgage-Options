@@ -6,6 +6,7 @@ import { withRouter } from "react-router-dom";
 class EditReg extends Component {
   state = {
     desiredPayment: "",
+    loanTerm: "",
     downPayment: ""
   };
 
@@ -14,8 +15,9 @@ class EditReg extends Component {
       .then(res => {
         console.log("My res", res);
         this.setState({
-          name: res.data.name,
-          email: res.data.email
+          desiredPayment: res.data.desiredPayment,
+          loanTerm: res.data.loanTerm,
+          downPayment: res.data.downPayment
         });
       })
       .catch(err => console.log(err));
@@ -41,17 +43,24 @@ class EditReg extends Component {
     return (
       <form>
         <input
-          type="text"
-          placeholder="Name"
-          name="name"
-          value={this.props.name}
+          type="desiredPayment"
+          placeholder="Desired Payment Amount"
+          name="desiredPayment"
+          value={this.state.desiredPayment}
           onChange={this.handleInputChange}
         />
         <input
-          type="email"
-          placeholder="email"
-          name="email"
-          value={this.props.email}
+          type="loanTerm"
+          placeholder="Desired Loan Term"
+          name="loanTerm"
+          value={this.state.loanTerm}
+          onChange={this.handleInputChange}
+        />
+        <input
+          type="downPayment"
+          placeholder="Down Payment"
+          name="downPayment"
+          value={this.state.downPayment}
           onChange={this.handleInputChange}
         />
         <ProfileDetail name={this.state.name} email={this.state.email} />

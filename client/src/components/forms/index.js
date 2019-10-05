@@ -8,6 +8,7 @@ class Form extends Component {
     // name: "",
     // email: "",
     desiredPayment: "",
+    loanTerm: "",
     downPayment: ""
   };
 
@@ -29,6 +30,7 @@ class Form extends Component {
       // name: this.state.name,
       // email: this.state.email,
       desiredPayment: this.state.desiredPayment,
+      loanTerm: this.state.loanTerm,
       downPayment: this.state.downPayment
     })
       .then(console.log("profile saved!"))
@@ -60,6 +62,13 @@ class Form extends Component {
           onChange={this.handleInputChange}
         />
         <input
+          type="loanTerm"
+          placeholder="Desired Loan Term"
+          name="loanTerm"
+          value={this.state.loanTerm}
+          onChange={this.handleInputChange}
+        />
+        <input
           type="downPayment"
           placeholder="Down Payment"
           name="downPayment"
@@ -68,6 +77,7 @@ class Form extends Component {
         />
         <ProfileDetail
           desiredPayment={this.state.desiredPayment}
+          loanTerm={this.state.loanTerm}
           downPayment={this.state.downPayment}
         />
         <button onClick={this.handleForm}>Submit</button>
