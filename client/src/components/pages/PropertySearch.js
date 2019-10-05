@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import LinkList from "../linksList";
+import Navbar from "../layout/Navbar";
 
 let imageArr = [];
 let dataArr = [];
@@ -46,6 +47,20 @@ class PropertySearch extends Component {
       .catch(err => console.log(err));
   }
 
+  renderImages = img => {
+    if (img <= 0) {
+      return;
+    }
+    const oneImage = [img[0]];
+    return oneImage.map(image => (
+      <img
+        src={image.MediaURL}
+        alt={""}
+        style={{ height: "100px", width: "100px" }}
+      />
+    ));
+  };
+
   handleForm = () => {
     // event.preventDefault();
     console.log(this.state.ListPrice);
@@ -65,13 +80,7 @@ class PropertySearch extends Component {
       <div>
         <strong>List Price {list.ListPrice}</strong>
         <p>Annual Tax Amount {list.TaxAnnualAmount}</p>
-        {list.img.map(image => (
-          <img
-            src={image.MediaURL}
-            alt={""}
-            style={{ height: "100px", width: "100px" }}
-          />
-        ))}
+        {this.renderImages(list.img)}
         <button
           onClick={() => this.handleForm()}
           className="btn btn-primary"
@@ -87,11 +96,18 @@ class PropertySearch extends Component {
   render() {
     return (
       <div>
-        <div className="propertySearch">
-          <h3>PropertySearch</h3>
-          <div className="gallery">
-            <div className="images">{this.renderListings()}</div>
+        <Navbar />
+        <h3>PropertySearch</h3>
+        <div className="row">
+          <div className="col s1"></div>
+          <div className="col s10 skeleton">
+            <div className="propertySearch">
+              <div className="gallery">
+                <div className="images">{this.renderListings()}</div>
+              </div>
+            </div>
           </div>
+          <div className="col s1"></div>
         </div>
         <div className="row">
           <div className="col s12 links">

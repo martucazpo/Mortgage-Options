@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import LinkList from "../linksList";
 import "./Results.css";
+import Navbar from "../layout/Navbar";
 
 class Results extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <div className="results">
           <h3>Results</h3>
         </div>
