@@ -10,26 +10,28 @@ import { withRouter } from 'react-router-dom';
 
 import "./Registration.css";
 
-import Calculator from "../Calculator";
+//import Calculator from "../Calculator";
 
 class Registration extends Component {
   state = {
     profiles: [],
-    // name: "",
-    // email: "",
-    desiredPayment: "",
-    downPayment: ""
+    name: "",
+    email: "",
+    desiredPayment: 0,
+    downPayment: 0
   };
 
   componentDidMount() {
- this.loadProfile();
- this.findUser();
-  }
-
-  findUser = () => {
     API.getUser({email:this.props.match.params.email})
-    .then(res => {console.log(res.data)})
-    .catch(err => console.log(err))
+    .then(res => {
+      console.log(res); 
+      this.setState({
+        name : res.data.name,
+        email : res.data.email
+      })
+    })
+    this.loadProfile();
+
   }
 
   loadProfile = () => {
@@ -73,6 +75,7 @@ class Registration extends Component {
   };
 
   render() {
+    console.log(this.state)
     return (
       <div>
         <div className="row">
@@ -81,28 +84,36 @@ class Registration extends Component {
             <div className="formDiv">
               <Form handleForm={this.handleForm} />
               <List>
-                {this.state.profiles.map(profile => (
-                  <ListItem key={profile._id}>
+                <ListItem key={this.state.name}>
+                <div>
                     <strong>
-                      <div>{profile.name}</div>
-                      <div>{profile.email}</div>
-                    </strong>
+                      <div>{this.state.name}</div>
+                      <div>{this.state.email}</div>
+                    </strong>   
+                 <div>
+                  {this.state.profiles.map(profile=>(
+                    <>
+                      <strong>
+                        <div>{profile.desiredPayment}</div>
+                        <div>{profile.downPayment}</div>
+                      </strong>
                     <EditBtn id={profile._id} />
-                    <DeleteBtn
-                      onClick={() => this.deleteProfile(profile._id)}
-                    />
-                  </ListItem>
-                ))}
-              </List>
+                    <DeleteBtn onClick={() => this.deleteProfile(profile._id)}/>
+                    </>
+                  ))}
+                  </div>
+                    </div>
+                    </ListItem>
+                    </List>
             </div>
           </div>
         </div>
-        <div className="col s2"></div>
-        <div className="row">
-          <div className="col s12 links">
+      <div className="col s2"></div>
+      <div className="row">
+        <div className="col s12 links">
             <LinkList />
-          </div>
         </div>
+      </div>
       </div>
     );
   }

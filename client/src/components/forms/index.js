@@ -53,14 +53,14 @@ class Form extends Component {
           onChange={this.handleInputChange}
         /> */}
         <input
-          type="desiredPayment"
+          type="text"
           placeholder="Desired Payment Amount"
           name="desiredPayment"
           value={this.state.desiredPayment}
           onChange={this.handleInputChange}
         />
         <input
-          type="downPayment"
+          type="text"
           placeholder="Down Payment"
           name="downPayment"
           value={this.state.downPayment}
