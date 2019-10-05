@@ -5,8 +5,8 @@ import API from "../../utils/API";
 import { List, ListItem } from "../List";
 import LinkList from "../linksList";
 import EditBtn from "../EditBtn";
-import { withRouter } from 'react-router-dom';
-
+import { withRouter } from "react-router-dom";
+import Navbar from "../layout/Navbar";
 
 import "./Registration.css";
 
@@ -22,15 +22,17 @@ class Registration extends Component {
   };
 
   componentDidMount() {
- this.loadProfile();
- this.findUser();
+    this.loadProfile();
+    this.findUser();
   }
 
   findUser = () => {
-    API.getUser({email:this.props.match.params.email})
-    .then(res => {console.log(res.data)})
-    .catch(err => console.log(err))
-  }
+    API.getUser({ email: this.props.match.params.email })
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(err => console.log(err));
+  };
 
   loadProfile = () => {
     API.getProfiles()
@@ -75,6 +77,7 @@ class Registration extends Component {
   render() {
     return (
       <div>
+        <Navbar />
         <div className="row">
           <div className="col s2"></div>
           <div className="col s8 skeleton regBox">
