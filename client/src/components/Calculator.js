@@ -1,20 +1,22 @@
-// import API from "../utils/API";
+import API from "../utils/API";
 import React from "react";
+// down, desired, length, rate
+function Calculator(props) {
+  console.log("MY PROPS", props);
+  var totalSales = props.desired * props.length;
 
-function MortgageCalc(down, desired, length, rate) {
-  var totalSales = desired * length;
-
-  var totalLoan = totalSales - down;
+  var totalLoan = totalSales - props.down;
 
   var taxloan = totalSales * 0.01052;
 
   var loanRate = (totalSales * 0.05) / 365;
 
-  var totalPymt = totalLoan / length + taxloan / 12 + (loanRate * 365) / 12;
+  var totalPymt =
+    totalLoan / props.length + taxloan / 12 + (loanRate * 365) / 12;
 
   console.log(totalSales, totalLoan, taxloan, loanRate, totalPymt);
 
-  return <div>hi</div>;
+  return <div>{totalSales}</div>;
 }
 
 // Mortgagecalc(5000, 800, 360, 0.05);
@@ -23,4 +25,4 @@ function MortgageCalc(down, desired, length, rate) {
 
 // mortgagecalc(3500, 1500, 180, 0.05);
 
-export default MortgageCalc;
+export default Calculator;

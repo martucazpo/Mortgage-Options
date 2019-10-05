@@ -6,6 +6,13 @@ import { List, ListItem } from "../List";
 import LinkList from "../linksList";
 import EditBtn from "../EditBtn";
 import Calculator from "../Calculator";
+import MortgageCalculator from "mortgage-calculator-react";
+
+// const reactElement = (
+//   <div>
+//     <MortgageCalculator />
+//   </div>
+// );
 
 class Registration extends Component {
   state = {
@@ -61,6 +68,7 @@ class Registration extends Component {
   };
 
   render() {
+    console.log("My state", this.state);
     return (
       <div className="formDiv">
         <LinkList />
@@ -74,7 +82,14 @@ class Registration extends Component {
                 <div>{profile.downPayment}</div>
                 <div>{profile.desiredPayment}</div>
               </strong>
-              <Calculator />
+
+              <Calculator
+                desired={profile.desiredPayment}
+                length={1}
+                down={profile.downPayment}
+                rate={0.01052}
+              />
+
               <EditBtn id={profile._id} />
               <DeleteBtn onClick={() => this.deleteProfile(profile._id)} />
             </ListItem>
