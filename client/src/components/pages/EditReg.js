@@ -46,7 +46,7 @@ class EditReg extends Component{
         console.log(this.props)
         return(
             <form>
-        <input
+        {/* <input
           type="text"
           placeholder="Name"
           name="name"
@@ -59,7 +59,7 @@ class EditReg extends Component{
           name="email"
           value={this.props.email}
           onChange={this.handleInputChange}
-        />
+        /> */}
         <ProfileDetail name={this.state.name} email={this.state.email}/>
         <button onClick={this.handleForm}>Submit</button>
       </form>

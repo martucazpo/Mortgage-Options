@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import LinkList from "../linksList";
+import {withRouter} from 'react-router-dom';
 
 let imageArr = [];
 let dataArr = [];
-//let finalArr = [];
-//let dataArrs= [];
-//let ListPrice = Number;
-//let TaxAnnualAmount = Number;
-//let MediaURL = "";
+
 
 class PropertySearch extends Component {
   state = {
@@ -17,10 +14,22 @@ class PropertySearch extends Component {
     ListPrice: 0,
     TaxAnnualAmount: 0,
     img: "",
-    listings: []
+    listings: [],
+    email:"",
+    profileId : ""
   };
 
   componentDidMount() {
+    API.getUser({email:this.props.match.params.email})
+    .then(res => {
+      console.log(res); 
+      this.setState({
+        name : res.data.name,
+        email : res.data.email,
+        profileId : res.data.profile[0]
+      })
+    })
+    .catch(err => console.log(err))
     this.searchProperties();
   }
 
@@ -40,40 +49,50 @@ class PropertySearch extends Component {
             img: imageArr[i].Media
           });
         }
-        this.setState({ listings: dataArr });
+        this.setState({ listings: dataArr
+         });
       })
-      .then(console.log(imageArr, dataArr))
+      .then(console.log(dataArr,imageArr))
       .catch(err => console.log(err));
+    
   }
 
-  handleForm = () => {
-    // event.preventDefault();
-    console.log(this.state.ListPrice);
-    console.log(this.state.TaxAnnualAmount);
-    console.log(this.state.img);
-    API.saveProperty({
-      ListPrice: this.state.ListPrice,
-      TaxAnnualAmount: this.state.TaxAnnualAmount,
-      img: this.state.img
+  handleForm = (props) => {
+    let profileId = this.state.profileId;
+    // event.preventDefault()
+    API.saveProperty({ 
+      ListPrice: this.props.ListPrice,
+      TaxAnnualAmount: this.props.TaxAnnualAmount,
+      img: this.props.img
     })
       .then(console.log("property saved!"))
       .catch(err => console.log(err));
+    API.populateProperty(
+      profileId
+    )
+    .then(console.log("this property is populated!"))
+    .catch(err => console.log(err))
   };
 
   renderListings = () => {
     const listHtml = this.state.listings.map(list => (
-      <div>
+      <div key={list.ListPrice}>
         <strong>List Price {list.ListPrice}</strong>
         <p>Annual Tax Amount {list.TaxAnnualAmount}</p>
         {list.img.map(image => (
           <img
+            key={image.MediaURL}
             src={image.MediaURL}
             alt={""}
             style={{ height: "100px", width: "100px" }}
           />
         ))}
         <button
-          onClick={() => this.handleForm()}
+          onClick={() => this.handleForm({
+            ListPrice:this.ListPrice,
+            TaxAnnualAmount:this.TaxAnnualAmount,
+            img:this.img
+          })}
           className="btn btn-primary"
           style={{ marginTop: "5px" }}
         >
@@ -85,6 +104,7 @@ class PropertySearch extends Component {
   };
 
   render() {
+    console.log(this.state)
     return (
       <div>
         <div className="propertySearch">
@@ -103,4 +123,4 @@ class PropertySearch extends Component {
   }
 }
 
-export default PropertySearch;
+export default withRouter(PropertySearch);

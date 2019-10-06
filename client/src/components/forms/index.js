@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import ProfileDetail from "../profileDetails";
 import API from "../../utils/API";
+import {withRouter} from 'react-router-dom';
 
 class Form extends Component {
   // Setting the initial values of this.state.username and this.state.password
   state = {
     // name: "",
-    // email: "",
+    email: this.props.email,
     desiredPayment: "",
     downPayment: ""
   };
@@ -20,22 +21,25 @@ class Form extends Component {
     this.setState({
       [name]: value
     });
+  }
+
+  handleForm = (event) => {
+    console.log("HELLO")
+    event.preventDefault();
+    API.saveProfile({
+    // name: this.state.name
+     // email:this.props.email,
+      desiredPayment: this.state.desiredPayment,
+       downPayment: this.state.downPayment
+     });
+    API.populateProps({email:this.props.match.params.email})
+       .then(console.log("populated"))
+       .catch(err => console.log(err));
   };
 
-  // When the form is submitted, prevent the default event and alert the username and password
-  handleForm = () => {
-    // event.preventDefault();
-    API.saveProfile({
-      // name: this.state.name,
-      // email: this.state.email,
-      desiredPayment: this.state.desiredPayment,
-      downPayment: this.state.downPayment
-    })
-      .then(console.log("profile saved!"))
-      .catch(err => console.log(err));
-  };
 
   render() {
+    console.log(this.state)
     return (
       <form>
         {/* <input
@@ -76,4 +80,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default withRouter(Form);
