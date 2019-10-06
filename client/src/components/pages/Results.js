@@ -3,6 +3,7 @@ import LinkList from "../linksList";
 import "./Results.css";
 import {withRouter} from 'react-router-dom';
 import API from '../../utils/API';
+import Navbar from "../layout/Navbar";
 
 class Results extends Component {
 
@@ -60,6 +61,7 @@ class Results extends Component {
     console.log(this.state);
     return (
       <div>
+        <Navbar />
         <div className="results">
           <h3>Results</h3>
         </div>

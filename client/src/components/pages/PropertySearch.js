@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import API from "../../utils/API";
 import LinkList from "../linksList";
 import {withRouter} from 'react-router-dom';
+import Navbar from "../layout/Navbar";
 
 let imageArr = [];
 let dataArr = [];
@@ -56,14 +57,31 @@ class PropertySearch extends Component {
       .catch(err => console.log(err));
     
   }
+      
+  renderImages = img => {
+    if (img <= 0) {
+      return;
+    }
+    const oneImage = [img[0]];
+    return oneImage.map(image => (
+      <img
+        key={image.MediaUrl}
+        src={image.MediaURL}
+        alt={""}
+        style={{ height: "100px", width: "100px" }}
+      />
+    ));
+  };
 
-  handleForm = (props) => {
-    let profileId = this.state.profileId;
-    // event.preventDefault()
-    API.saveProperty({ 
-      ListPrice: this.props.ListPrice,
-      TaxAnnualAmount: this.props.TaxAnnualAmount,
-      img: this.props.img
+  handleForm = () => {
+    // event.preventDefault();
+    console.log(this.state.ListPrice);
+    console.log(this.state.TaxAnnualAmount);
+    console.log(this.state.img);
+    API.saveProperty({
+      ListPrice: this.state.ListPrice,
+      TaxAnnualAmount: this.state.TaxAnnualAmount,
+      img: this.state.img
     })
       .then(console.log("property saved!"))
       .catch(err => console.log(err));
@@ -79,14 +97,8 @@ class PropertySearch extends Component {
       <div key={list.ListPrice}>
         <strong>List Price {list.ListPrice}</strong>
         <p>Annual Tax Amount {list.TaxAnnualAmount}</p>
-        {list.img.map(image => (
-          <img
-            key={image.MediaURL}
-            src={image.MediaURL}
-            alt={""}
-            style={{ height: "100px", width: "100px" }}
-          />
         ))}
+        {this.renderImages(list.img)}
         <button
           onClick={() => this.handleForm({
             ListPrice:this.ListPrice,
@@ -107,11 +119,18 @@ class PropertySearch extends Component {
     console.log(this.state)
     return (
       <div>
-        <div className="propertySearch">
-          <h3>PropertySearch</h3>
-          <div className="gallery">
-            <div className="images">{this.renderListings()}</div>
+        <Navbar />
+        <h3>PropertySearch</h3>
+        <div className="row">
+          <div className="col s1"></div>
+          <div className="col s10 skeleton">
+            <div className="propertySearch">
+              <div className="gallery">
+                <div className="images">{this.renderListings()}</div>
+              </div>
+            </div>
           </div>
+          <div className="col s1"></div>
         </div>
         <div className="row">
           <div className="col s12 links">
