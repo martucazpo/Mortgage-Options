@@ -86,7 +86,7 @@ class PropertySearch extends Component {
       .then(console.log("property saved!"))
       .catch(err => console.log(err));
     API.populateProperty(
-      profileId
+      this.state.profileId
     )
     .then(console.log("this property is populated!"))
     .catch(err => console.log(err))
