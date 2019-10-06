@@ -8,12 +8,6 @@ export default {
   search: function() {
     return axios.get(BASEURL);
   },
-
-  //getProfilesWithTheirProperties: function(){
-  // console.log("this is the one that you want, you really want it");
-  //  return axios.post("/api/profiles/" + id);
-  // },
-  // Gets all books
   getProfiles: function() {
     console.log("got");
     return axios.get("/api/profiles");
@@ -33,8 +27,16 @@ export default {
   getProperty: function(id) {
     return axios.get("/api/properties/" + id);
   },
+  populateProperty: function(profileId) {
+    console.log("IIIIIDDDDDD" + profileId)
+    return axios.get("/api/profiles/" + profileId);
+  },
   getUser: function(email, info) {
     return axios.get("/api/users/" + email, info);
+  },
+  populateProps: function(){
+    console.log("populated");
+    return axios.get("/api/users/test");
   },
   updateProfile: function(id, info) {
     return axios.put("/api/profiles/" + id, info);
@@ -49,10 +51,10 @@ export default {
   // Saves a book to the database
   saveProfile: function(data) {
     console.log("hit");
-    return axios.post("/api/profiles", data);
+    return axios.post("/api/profiles/", data);
   },
   saveProperty: function(propertyData) {
     console.log("hit");
-    return axios.post("/api/properties", propertyData);
+    return axios.post("/api/properties/", propertyData);
   }
 };
