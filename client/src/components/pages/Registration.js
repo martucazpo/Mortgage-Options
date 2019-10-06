@@ -18,7 +18,7 @@ class Registration extends Component {
     name: "",
     email: "",
     desiredPayment: 0,
-    downPayment: 0
+    downPayment: 0,
   };
 
   componentDidMount() {
@@ -32,6 +32,7 @@ class Registration extends Component {
     })
     .catch(err => console.log(err))
     this.loadProfile();
+    API.getProperty()
 
   }
 

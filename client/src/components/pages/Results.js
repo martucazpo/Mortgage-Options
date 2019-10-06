@@ -1,8 +1,61 @@
 import React, { Component } from "react";
 import LinkList from "../linksList";
 import "./Results.css";
+import {withRouter} from 'react-router-dom';
+import API from '../../utils/API';
 
 class Results extends Component {
+
+  state = {
+    name: "",
+    email: "",
+    desiredPayment: 0,
+    downPayment: 0,
+    ListPrice: 0,
+    TaxAnnualAmount: 0,
+    profileId: "",
+    propertyId: ""
+  };
+
+
+  componentDidMount() {
+    API.getUser({email:this.props.match.params.email})
+    .then(res => {
+      console.log(res); 
+      this.setState({
+        name : res.data.name,
+        email : res.data.email,
+        profileId : res.data.profile[0]
+      })
+    })
+    .catch(err => console.log(err));
+
+
+    API.getProfile(this.state.profileId)
+    .then(res => {
+    console.log(res);
+    this.setState({
+      downPayment : res.data.downPayment,
+      desiredPayment : res.data.desiredPayment,
+      propertyId : res.data.propertyId
+      })
+    })
+    .catch(err => console.log(err));
+
+
+    API.getProperty(this.state.propertyId)
+    .then(res => {
+      console.log(res);
+      this.setState({
+        ListPrice : res.data.ListPrice,
+        TaxAnnualAmount : res.data.TaxAnnualAmount
+      })
+    })
+    .catch(err => console.log(err));
+  
+  }
+
+
   render() {
     return (
       <div>
@@ -26,4 +79,4 @@ class Results extends Component {
   }
 }
 
-export default Results;
+export default withRouter(Results);
