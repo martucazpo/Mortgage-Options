@@ -14,7 +14,7 @@ class Results extends Component {
     ListPrice: 0,
     TaxAnnualAmount: 0,
     profileId: "",
-    propertyId: ""
+    propertyId: []
   };
 
 
@@ -35,9 +35,9 @@ class Results extends Component {
     .then(res => {
     console.log(res);
     this.setState({
-      downPayment : res.data.downPayment,
-      desiredPayment : res.data.desiredPayment,
-      propertyId : res.data.propertyId
+      downPayment : res.data[0].downPayment,
+      desiredPayment : res.data[0].desiredPayment,
+      propertyId : res.data[0].property
       })
     })
     .catch(err => console.log(err));
@@ -57,6 +57,7 @@ class Results extends Component {
 
 
   render() {
+    console.log(this.state);
     return (
       <div>
         <div className="results">
