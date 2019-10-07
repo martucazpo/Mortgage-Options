@@ -9,16 +9,32 @@ let dataArr = [];
 
 
 class PropertySearch extends Component {
-  state = {
-    result: {},
-    search: "",
-    ListPrice: 0,
-    TaxAnnualAmount: 0,
-    img: "",
-    listings: [],
-    email:"",
-    profileId : ""
-  };
+  constructor (props) {
+    super(props);
+    this.state = {
+        result: {},
+        search: "",
+        ListPrice: 0,
+        TaxAnnualAmount: 0,
+        img: "",
+        listings: [],
+        email:"",
+        profileId : ""
+    }
+    this.handleForm = this.handleForm.bind(this);
+  }
+
+
+  // state = {
+  //   result: {},
+  //   search: "",
+  //   ListPrice: 0,
+  //   TaxAnnualAmount: 0,
+  //   img: "",
+  //   listings: [],
+  //   email:"",
+  //   profileId : ""
+  // };
 
   componentDidMount() {
     API.getUser({email:this.props.match.params.email})
@@ -75,6 +91,9 @@ class PropertySearch extends Component {
 
   handleForm = () => {
     // event.preventDefault();
+    this.ListPrice = this.ListPrice.bind(this);
+    this.TaxAnnualAmount = this.TaxAnnualAmount.bind(this);
+    this.img = this.img.bind(this);
     console.log(this.state.ListPrice);
     console.log(this.state.TaxAnnualAmount);
     console.log(this.state.img);
