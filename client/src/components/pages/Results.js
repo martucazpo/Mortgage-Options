@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import LinkList from "../linksList";
 import "./Results.css";
 import AmortizationChart from "../amortization";
-import Navbar from "../layout/Navbar";
-import AmortizationChart from "../amortization";
+// import Navbar from "../layout/Navbar";
+// import AmortizationChart from "../amortization";
 
 class Results extends Component {
   render() {
     return (
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <div className="results">
           <h3>Results</h3>
         </div>
