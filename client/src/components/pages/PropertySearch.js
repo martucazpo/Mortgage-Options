@@ -141,7 +141,7 @@ class PropertySearch extends Component {
           Save Property
         </button>
       </div>
-    ));
+    ))
     return listHtml;
   };
 
@@ -153,7 +153,7 @@ class PropertySearch extends Component {
   };
 
   render() {
-    console.log(this.state)
+    console.log("dogs",this.state)
     return (
       <div>
         <Navbar />
