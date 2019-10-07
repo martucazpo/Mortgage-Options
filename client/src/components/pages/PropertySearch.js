@@ -86,7 +86,7 @@ class PropertySearch extends Component {
       .then(console.log("property saved!"))
       .catch(err => console.log(err));
     API.populateProperty(
-      profileId
+     this.state.profileId
     )
     .then(console.log("this property is populated!"))
     .catch(err => console.log(err))
@@ -97,7 +97,7 @@ class PropertySearch extends Component {
       <div key={list.ListPrice}>
         <strong>List Price {list.ListPrice}</strong>
         <p>Annual Tax Amount {list.TaxAnnualAmount}</p>
-        ))}
+        
         {this.renderImages(list.img)}
         <button
           onClick={() => this.handleForm({
@@ -111,12 +111,12 @@ class PropertySearch extends Component {
           Save Property
         </button>
       </div>
-    ));
+    ))
     return listHtml;
   };
 
   render() {
-    console.log(this.state)
+    console.log("dogs",this.state)
     return (
       <div>
         <Navbar />
