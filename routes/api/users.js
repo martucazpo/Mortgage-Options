@@ -99,6 +99,7 @@ const email = req.body.email;
 router.route("/").get(modelsController.findAllUsers).post(modelsController.createUser);
 
 router.route("/:id").get(modelsController.findUserById);
+router.route("/test").get(modelsController.getPopProf);
 
 module.exports = router;
   

@@ -23,9 +23,17 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findProfileById: function(req, res) {
-    console.log("req.params.id");
+    console.log("req.params.id 123");
+    console.log("buffalo",req.params.id)
     db.Profile
       .findById(req.params.id)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findProfile: function(req, res) {
+    console.log("req.params.id 456");
+    db.Profile
+      .findOne(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -36,27 +44,61 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findUserById: function(req, res) {
-    console.log("req.params.email");
     db.User
       .findOne(req.params.email)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
-  createProfile: function(req, res) {
+createProfile: function(req, res) {
     console.log('hit create profile')
-    console.log(req.body);
+    console.log(req.body)
+    const {email, ...rest} = req.body;
+    console.log("vf")
     db.Profile
-      .create(req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .create(rest)
+      .then(dbProfile => {
+        console.log('Profile id',dbProfile._id)
+        db.User.findOneAndUpdate({email:email}, 
+        { $push: { profile: dbProfile._id } }, { new:true }).then(abc => {
+          console.log('ABC',abc)
+        });
+        console.log("pushed to pushy place");
+      })
+      .catch(err => res.status(422).json(err))
+  },
+  getPopProf: function(req,res){
+    console.log("YOOOOOOO DUUUde");
+    // console.log("PARAMS",req.params)
+    // console.log("BODY", req.body)
+     db.User.findOne(req.params.email)
+     .populate("profile")
+     .then(profile =>console.log("populated!",profile))
+     .catch(err => (console.log(err)))
   },
   createProperty: function(req, res) {
     console.log('hit create property')
-    console.log(req.body);
+    console.log(req.body)
+    console.log("vf")
     db.Property
       .create(req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+      .then(dbProperty => {
+        console.log('Property id',dbProperty._id)
+        db.Profile.findOneAndUpdate(req.params.id, 
+        { $push: { property: dbProperty._id } }, { new:true }).then(abc => {
+          console.log('ABC',abc)
+        });
+        console.log("pushed to pushy place");
+      })
+      .catch(err => res.status(422).json(err))
+  },
+  getPropProp: function(req,res){
+    console.log("YOOOOOOO DUUUde");
+    // console.log("PARAMS",req.params)
+    // console.log("BODY", req.body)
+     db.Profile.findById(_id)
+     .populate("property")
+     .then(property =>console.log("populated!",property))
+     .catch(err => (console.log(err)))
   },
   createUser: function(req, res) {
     console.log('hit create user')

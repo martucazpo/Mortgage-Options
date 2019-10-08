@@ -30,17 +30,18 @@ class Registration extends Component {
   };
 
   componentDidMount() {
-    this.loadProfile();
-    this.findUser();
-  }
-
-  findUser = () => {
     API.getUser({ email: this.props.match.params.email })
       .then(res => {
-        console.log(res.data);
+        console.log(res);
+        this.setState({
+          name: res.data.name,
+          email: res.data.email
+        });
       })
       .catch(err => console.log(err));
-  };
+    this.loadProfile();
+    API.getProperty();
+  }
 
   loadProfile = () => {
     API.getProfiles()
@@ -70,49 +71,64 @@ class Registration extends Component {
     });
   };
 
-  // When the form is submitted, prevent the default event and alert the username and password
-  handleForm = () => {
-    // event.preventDefault();
-    API.saveProfile({
-      // name: this.state.name,
-      // email: this.state.email,
-      desiredPayment: this.state.desiredPayment,
-      loanTerm: this.state.loanTerm,
-      downPayment: this.state.downPayment
-    })
-      .then(console.log("profile saved!"))
-      .catch(err => console.log(err));
-  };
+  //  // When the form is submitted, prevent the default event and alert the username and password
+  //   handleForm = (event) => {
+  //     console.log("HELLO")
+  //     event.preventDefault();
+  //     API.saveProfile({
+  //     // name: this.state.name
+  //     //   email:this.state.email,
+  //       desiredPayment: this.state.desiredPayment,
+  //        downPayment: this.state.downPayment
+  //      })
+  //     API.populateProps({email:this.props.match.params.email})
+  //        .then(console.log("populated"))
+  //        .catch(err => console.log(err));
+  //   };
 
   render() {
-    console.log("My state", this.state);
+    //console.log(this.state)
     return (
-      <div className="formDiv">
-        <LinkList />
-        <Form handleForm={this.handleForm} />
-        <List>
-          {this.state.profiles.map(profile => (
-            <ListItem key={profile._id}>
-              <strong>
-                {/* <div>{profile.name}</div>
-                <div>{profile.email}</div> */}
-                <div>{profile.downPayment}</div>
-                <div>{profile.loanTerm}</div>
-                <div>{profile.desiredPayment}</div>
-              </strong>
-
-              <Calculator
-                desired={profile.desiredPayment}
-                loanTerm={profile.loanTerm}
-                down={profile.downPayment}
-                rate={0.01052}
-              />
-
-              <EditBtn id={profile._id} />
-              <DeleteBtn onClick={() => this.deleteProfile(profile._id)} />
-            </ListItem>
-          ))}
-        </List>
+      <div>
+        <Navbar />
+        <div className="row">
+          <div className="col s2"></div>
+          <div className="col s8 skeleton regBox">
+            <div className="formDiv">
+              <Form email={this.state.email} />
+              <List>
+                <ListItem key={this.state.name}>
+                  <div>
+                    <strong>
+                      <div>{this.state.name}</div>
+                      <div>{this.state.email}</div>
+                    </strong>
+                    <div>
+                      {this.state.profiles.map(profile => (
+                        <div key={profile._id}>
+                          <strong>
+                            <div>{profile.desiredPayment}</div>
+                            <div>{profile.downPayment}</div>
+                          </strong>
+                          <EditBtn id={profile._id} />
+                          <DeleteBtn
+                            onClick={() => this.deleteProfile(profile._id)}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </ListItem>
+              </List>
+            </div>
+          </div>
+        </div>
+        <div className="col s2"></div>
+        <div className="row">
+          <div className="col s12 links">
+            <LinkList />
+          </div>
+        </div>
       </div>
     );
   }
