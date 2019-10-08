@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import ProfileDetail from "../profileDetails";
 import API from "../../utils/API";
-import {withRouter} from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 class Form extends Component {
   // Setting the initial values of this.state.username and this.state.password
   state = {
     // name: "",
-    email: this.props.email,
+    // email: this.props.email,
     desiredPayment: "",
+    loanTerm: "",
     downPayment: ""
   };
 
@@ -21,30 +22,30 @@ class Form extends Component {
     this.setState({
       [name]: value
     });
-  }
+  };
 
-  handleForm = (event) => {
-    console.log("HELLO")
+  handleForm = event => {
+    console.log("HELLO");
     event.preventDefault();
     API.saveProfile({
-    // name: this.state.name
-     // email:this.props.email,
+      // name: this.state.name
+      // email:this.props.email,
       desiredPayment: this.state.desiredPayment,
-       downPayment: this.state.downPayment
-     });
-    API.populateProps({email:this.props.match.params.email})
-       .then(console.log("populated"))
-       .catch(err => console.log(err));
+       downPayment: this.state.downPayment,
+      loanTerm: this.state.loanTerm,
+      downPayment: this.state.downPayment
+    });
+    API.populateProps({ email: this.props.match.params.email })
+      .then(console.log("populated"))
+      .catch(err => console.log(err));
     this.handleLocationReload();
   };
 
   handleLocationReload = () => {
     window.location.reload();
-  };
-
 
   render() {
-    console.log(this.state)
+    console.log(this.state);
     return (
       <form>
         {/* <input
@@ -62,14 +63,21 @@ class Form extends Component {
           onChange={this.handleInputChange}
         /> */}
         <input
-          type="text"
+          type="desiredPayment"
           placeholder="Desired Payment Amount"
           name="desiredPayment"
           value={this.state.desiredPayment}
           onChange={this.handleInputChange}
         />
         <input
-          type="text"
+          type="loanTerm"
+          placeholder="Desired Loan Term"
+          name="loanTerm"
+          value={this.state.loanTerm}
+          onChange={this.handleInputChange}
+        />
+        <input
+          type="downPayment"
           placeholder="Down Payment"
           name="downPayment"
           value={this.state.downPayment}
@@ -77,6 +85,7 @@ class Form extends Component {
         />
         <ProfileDetail
           desiredPayment={this.state.desiredPayment}
+          loanTerm={this.state.loanTerm}
           downPayment={this.state.downPayment}
         />
         <button onClick={this.handleForm}>Submit</button>

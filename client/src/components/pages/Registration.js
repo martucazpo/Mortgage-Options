@@ -11,31 +11,37 @@ import { Link } from 'react-router-dom';
 
 import "./Registration.css";
 
-//import Calculator from "../Calculator";
+import Calculator from "../Calculator";
+import MortgageCalculator from "mortgage-calculator-react";
+
+// const reactElement = (
+//   <div>
+//     <MortgageCalculator />
+//   </div>
+// );
 
 class Registration extends Component {
   state = {
     profiles: [],
-    name: "",
-    email: "",
-    desiredPayment: 0,
-    downPayment: 0,
+    // name: "",
+    // email: "",
+    desiredPayment: "",
+    loanTerm: "",
+    downPayment: ""
   };
 
   componentDidMount() {
-    
-    API.getUser({email:this.props.match.params.email})
-    .then(res => {
-      console.log(res); 
-      this.setState({
-        name : res.data.name,
-        email : res.data.email
+    API.getUser({ email: this.props.match.params.email })
+      .then(res => {
+        console.log(res);
+        this.setState({
+          name: res.data.name,
+          email: res.data.email
+        });
       })
-    })
-    .catch(err => console.log(err))
+      .catch(err => console.log(err));
     this.loadProfile();
-    API.getProperty()
-
+    API.getProperty();
   }
 
   loadProfile = () => {
@@ -46,6 +52,7 @@ class Registration extends Component {
           // name: this.state.name,
           // email: this.state.email,
           desiredPayment: this.state.desiredPayment,
+          loanTerm: this.state.loanTerm,
           downPayment: this.state.downPayment
         })
       )
@@ -86,6 +93,7 @@ class Registration extends Component {
 //        .catch(err => console.log(err));
 //   };
 
+
   render() {
     //console.log(this.state)
     return (
@@ -95,29 +103,31 @@ class Registration extends Component {
           <div className="col s2"></div>
           <div className="col s8 skeleton regBox">
             <div className="formDiv">
-              <Form email={this.state.email}/>
+              <Form email={this.state.email} />
               <List>
                 <ListItem key={this.state.name}>
-                <div>
+                  <div>
                     <strong>
                       <div>{this.state.name}</div>
                       <div>{this.state.email}</div>
-                    </strong>   
-                 <div>
-                  {this.state.profiles.map(profile=>(
-                    <div key={profile._id}>
-                      <strong>
-                        <div>{profile.desiredPayment}</div>
-                        <div>{profile.downPayment}</div>
-                      </strong>
-                    <EditBtn id={profile._id} />
-                    <DeleteBtn onClick={() => this.deleteProfile(profile._id)}/>
+                    </strong>
+                    <div>
+                      {this.state.profiles.map(profile => (
+                        <div key={profile._id}>
+                          <strong>
+                            <div>{profile.desiredPayment}</div>
+                            <div>{profile.downPayment}</div>
+                          </strong>
+                          <EditBtn id={profile._id} />
+                          <DeleteBtn
+                            onClick={() => this.deleteProfile(profile._id)}
+                          />
+                        </div>
+                      ))}
                     </div>
-                  ))}
                   </div>
-                    </div>
-                    </ListItem>
-                    </List>
+                </ListItem>
+              </List>
             </div>
           </div>
         </div>
@@ -126,8 +136,8 @@ class Registration extends Component {
       <div className="row">
         <div className="col s12 links">
             <LinkList />
+          </div>
         </div>
-      </div>
       </div>
     );
   }
