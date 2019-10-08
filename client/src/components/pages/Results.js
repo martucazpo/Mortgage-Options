@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import LinkList from "../linksList";
 import "./Results.css";
-import {withRouter} from 'react-router-dom';
-import API from '../../utils/API';
+import { withRouter } from "react-router-dom";
+import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
 import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
+import dropdown from "react-dropdown";
 
 const data = [
   ["Task", "Hours per Day"],
@@ -23,7 +24,6 @@ const options = {
 };
 
 class Results extends Component {
-
   state = {
     name: "",
     email: "",
@@ -32,19 +32,20 @@ class Results extends Component {
     ListPrice: 0,
     TaxAnnualAmount: 0,
     profileId: "",
-    propertyId: [],
+    propertyId: []
   };
 
-
   componentDidMount() {
-    API.getUser({email:this.props.match.params.email})
-    .then(res => {
-      console.log(res); 
-      this.setState({
-        name : res.data.name,
-        email : res.data.email,
-        profileId : res.data.profile[0]
+    API.getUser({ email: this.props.match.params.email })
+      .then(res => {
+        console.log(res);
+        this.setState({
+          name: res.data.name,
+          email: res.data.email,
+          profileId: res.data.profile[0]
+        });
       })
+
     });
 
     API.getProfile(this.state.profileId)
@@ -61,37 +62,34 @@ class Results extends Component {
       })
     })
   }
-
+  //  {/* <Navbar /> */}
 
   render() {
     console.log(this.state);
     return (
       <div>
-        <Navbar />
         <div className="results">
           <h3>Results</h3>
         </div>
 
         <div className="row">
           <div className="col s1"></div>
-          <div className="col s5 skeleton rbox">dropdown menus go here</div>
+          <div className="col s5 skeleton rbox">enter dropdown/text here</div>
           <div className="col s5 skeleton rbox">
-          <div className="App">
-        <Chart
-          chartType="PieChart"
-          width="100%"
-          height="395px"
-          data={data}
-          options={options}
-        />
-      </div>
+            <div className="App">
+              <Chart
+                chartType="PieChart"
+                width="100%"
+                height="395px"
+                data={data}
+                options={options}
+              />
+            </div>
           </div>
           <div className="col s1"></div>
         </div>
         <div className="row">
-          <div className="col s12 links">
-            <LinkList />
-          </div>
+          <div className="col s12 links"></div>
         </div>
       </div>
     );
@@ -102,3 +100,4 @@ class Results extends Component {
 // ReactDOM.render(<App />, rootElement);
 
 export default withRouter(Results);
+// {/* <LinkList /> */}
