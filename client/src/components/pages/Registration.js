@@ -103,10 +103,15 @@ class Registration extends Component {
           <div className="col s2"></div>
           <div className="col s8 skeleton regBox">
             <div className="formDiv">
+              <h3>{this.state.name}, once you have filled it out, this form will be hidden from you by Elven Magic!</h3>
+              <p>Ok, maybe not exactly Elven Magic, but you're only getting one profile, {this.state.name}</p>
               <Form email={this.state.email} />
               <List>
                 <ListItem key={this.state.name}>
                   <div>
+                    <h3>This is the part that you will be able to see and to edit, {this.state.name}</h3>
+                    <p>so I guess we will have to make it pretty just for you, {this.state.name}</p>
+                    <p>Also the edit page, which probably needs a link back to here.</p>
                     <strong>
                       <div>{this.state.name}</div>
                       <div>{this.state.email}</div>
@@ -131,6 +136,7 @@ class Registration extends Component {
             </div>
           </div>
         </div>
+        <h3>This means you {this.state.name}!</h3>
         <div> <Link to={"/property"}><button type="button">Let's Find A Property!</button></Link></div>
       <div className="col s2"></div>
       <div className="row">

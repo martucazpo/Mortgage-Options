@@ -44,9 +44,8 @@ class Results extends Component {
           email: res.data.email,
           profileId: res.data.profile[0]
         });
-      })
-
-    });
+      });
+  
 
     API.getProfile(this.state.profileId)
     .then(res => {

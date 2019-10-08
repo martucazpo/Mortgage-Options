@@ -33,7 +33,7 @@ class Form extends Component {
       desiredPayment: this.state.desiredPayment,
        downPayment: this.state.downPayment,
       loanTerm: this.state.loanTerm,
-      downPayment: this.state.downPayment
+    
     });
     API.populateProps({ email: this.props.match.params.email })
       .then(console.log("populated"))
@@ -43,6 +43,7 @@ class Form extends Component {
 
   handleLocationReload = () => {
     window.location.reload();
+  };
 
   render() {
     console.log(this.state);
