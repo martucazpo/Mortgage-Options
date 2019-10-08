@@ -31,13 +31,18 @@ class Form extends Component {
       // name: this.state.name
       // email:this.props.email,
       desiredPayment: this.state.desiredPayment,
+       downPayment: this.state.downPayment,
       loanTerm: this.state.loanTerm,
       downPayment: this.state.downPayment
     });
     API.populateProps({ email: this.props.match.params.email })
       .then(console.log("populated"))
       .catch(err => console.log(err));
+    this.handleLocationReload();
   };
+
+  handleLocationReload = () => {
+    window.location.reload();
 
   render() {
     console.log(this.state);

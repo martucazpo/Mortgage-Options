@@ -3,6 +3,7 @@ import API from "../../utils/API";
 import LinkList from "../linksList";
 import {withRouter} from 'react-router-dom';
 import Navbar from "../layout/Navbar";
+import { Link } from 'react-router-dom';
 
 let imageArr = [];
 let dataArr = [];
@@ -19,11 +20,15 @@ class PropertySearch extends Component {
         img: "",
         listings: [],
         email:"",
-        profileId : ""
-    }
+        profileId : "",
+        savedProp : [],
+        _id : ""
+    };
+    this.renderSavedProps = this.renderSavedProps.bind(this);
     this.searchProperties = this.searchProperties.bind(this);
     this.renderListings = this.renderListings.bind(this);
     this.renderImages = this.renderImages.bind(this);
+    this.handleLocationReload = this.handleLocationReload.bind(this);
     //this.result = this.result.bind(this);
     //this.search = this.search.bind(this);
     // this.ListPrice = this.ListPrice.bind(this);
@@ -55,10 +60,38 @@ class PropertySearch extends Component {
         email : res.data.email,
         profileId : res.data.profile[0]
       })
+    });
+
+    API.getProfile(this.state.profileId)
+    .then(res => {
+      this.setState({
+        downPayment : res.data[0].downPayment,
+        desiredPayment : res.data[0].desiredPayment,
+        propertyId : res.data[0].property,
+        profileId : res.data[0]._id
+        }, () => {
+
+          API.findPropertyAndPop(this.state.profileId)
+          .then(res => 
+            this.setState({
+              savedProp: res.data.property,
+              // name: this.state.name,
+              // email: this.state.email,
+              ListPrice: res.data.property.ListPrice,
+              TaxAnnualAmount: res.data.property.TaxAnnualAmount,
+              _id: res.data.property._id,
+              img: res.data.property.img
+            })
+            )
+      })
     })
-    .catch(err => console.log(err))
+    .catch(err => console.log(err));
     this.searchProperties();
   }
+  
+
+    
+
 
   searchProperties() {
     API.search()
@@ -102,11 +135,9 @@ class PropertySearch extends Component {
 
 
   handleForm = (ListPrice, TaxAnnualAmount, img) => {
-    console.log(ListPrice, TaxAnnualAmount, img)
+    console.log(ListPrice, TaxAnnualAmount, img);
+    console.log("KKKKKKKKKKKLick")
     //event.preventDefault();
-    console.log(this.state.ListPrice);
-    console.log(this.state.TaxAnnualAmount);
-    console.log(this.state.img);
     API.saveProperty({
       ListPrice,
       TaxAnnualAmount,
@@ -114,12 +145,9 @@ class PropertySearch extends Component {
       id:this.state.profileId
     })
       .then(console.log("property saved!"))
+        
       .catch(err => console.log(err));
-    API.populateProperty(
-      this.state.profileId
-    )
-    .then(console.log("this property is populated!"))
-    .catch(err => console.log(err))
+      this.handleLocationReload();
   };
 
   renderListings = () => {
@@ -144,11 +172,50 @@ class PropertySearch extends Component {
     return listHtml;
   };
 
+  deleteProperty = id => {
+    API.deleteProperty(id)
+      .then(console.log("profile deleted"))
+      .catch(err => console.log(err));
+      this.handleLocationReload();
+  };
+
+  renderSavedProps = () => {
+    console.log("I would like to be")
+    const propertyHtml = this.state.savedProp.map(savedProps => (
+      <div>
+        <strong>List Price {savedProps.ListPrice}</strong>
+        <p>Annual Tax Amount {savedProps.TaxAnnualAmount}</p>
+        <img 
+        image={savedProps.img}
+        key={savedProps.img}
+        src={savedProps.img}
+        alt={""}
+        style={{ height: "100px", width: "100px" }}
+      />
+        <button
+          onClick={() => this.deleteProperty(
+            savedProps._id
+          )}
+          className="btn btn-primary"
+          style={{ marginTop: "5px" }}
+        >
+          Delete Property
+        </button>
+        <div> <Link to={"/results"}><button type="button">Let's see some results!</button></Link></div>
+      </div>
+    ))
+    return propertyHtml;
+  };
+
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
+  };
+
+  handleLocationReload = () => {
+    window.location.reload();
   };
 
   render() {
@@ -163,11 +230,15 @@ class PropertySearch extends Component {
             <div className="propertySearch">
               <div className="gallery">
                 <div className="images">{this.renderListings()}</div>
+                <h3>Saved Properties</h3>
+                 <div>{this.renderSavedProps()}</div>
+                 <h3>Hi {this.state.name}, for what you want to pay per month we recomend a property priced at "PRICE GOES HERE"</h3> 
+                 <div> <Link to={"/results"}><button type="button">Let's see what that means to you {this.state.name}</button></Link></div>
+                  </div>
               </div>
             </div>
           </div>
           <div className="col s1"></div>
-        </div>
         <div className="row">
           <div className="col s12 links">
             <LinkList />

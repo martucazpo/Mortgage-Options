@@ -7,6 +7,7 @@ import LinkList from "../linksList";
 import EditBtn from "../EditBtn";
 import { withRouter } from "react-router-dom";
 import Navbar from "../layout/Navbar";
+import { Link } from 'react-router-dom';
 
 import "./Registration.css";
 
@@ -62,6 +63,7 @@ class Registration extends Component {
     API.deleteProfile(id)
       .then(console.log("profile deleted"))
       .catch(err => console.log(err));
+     this.handleLocationReload();
   };
 
   handleInputChange = event => {
@@ -71,20 +73,26 @@ class Registration extends Component {
     });
   };
 
-  //  // When the form is submitted, prevent the default event and alert the username and password
-  //   handleForm = (event) => {
-  //     console.log("HELLO")
-  //     event.preventDefault();
-  //     API.saveProfile({
-  //     // name: this.state.name
-  //     //   email:this.state.email,
-  //       desiredPayment: this.state.desiredPayment,
-  //        downPayment: this.state.downPayment
-  //      })
-  //     API.populateProps({email:this.props.match.params.email})
-  //        .then(console.log("populated"))
-  //        .catch(err => console.log(err));
-  //   };
+  handleLocationReload = () => {
+    window.location.reload();
+  };
+
+
+//  // When the form is submitted, prevent the default event and alert the username and password
+//   handleForm = (event) => {
+//     console.log("HELLO")
+//     event.preventDefault();
+//     API.saveProfile({
+//     // name: this.state.name
+//     //   email:this.state.email,
+//       desiredPayment: this.state.desiredPayment,
+//        downPayment: this.state.downPayment
+//      })
+//     API.populateProps({email:this.props.match.params.email})
+//        .then(console.log("populated"))
+//        .catch(err => console.log(err));
+//   };
+
 
   render() {
     //console.log(this.state)
@@ -123,9 +131,10 @@ class Registration extends Component {
             </div>
           </div>
         </div>
-        <div className="col s2"></div>
-        <div className="row">
-          <div className="col s12 links">
+        <div> <Link to={"/property"}><button type="button">Let's Find A Property!</button></Link></div>
+      <div className="col s2"></div>
+      <div className="row">
+        <div className="col s12 links">
             <LinkList />
           </div>
         </div>
