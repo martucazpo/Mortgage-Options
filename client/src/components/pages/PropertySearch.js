@@ -22,7 +22,19 @@ class PropertySearch extends Component {
         profileId : ""
     }
     this.handleForm = this.handleForm.bind(this);
-  }
+    this.searchProperties = this.searchProperties.bind(this);
+    this.renderListings = this.renderListings.bind(this);
+    this.renderImages = this.renderImages.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    //this.result = this.result.bind(this);
+    //this.search = this.search.bind(this);
+    // this.ListPrice = this.ListPrice.bind(this);
+    // this.TaxAnnualAmount = this.TaxAnnualAmount.bind(this);
+    // this.img = this.img.bind(this);
+    // this.listings = this.listings.bind(this);
+    // this.email = this.email.bind(this);
+    // this.profileId = this.profileId.bind(this);
+  } 
 
 
   // state = {
@@ -80,20 +92,20 @@ class PropertySearch extends Component {
     }
     const oneImage = [img[0]];
     return oneImage.map(image => (
-      <img
+      <img 
+        value={image.MediaURL}
         key={image.MediaUrl}
         src={image.MediaURL}
         alt={""}
         style={{ height: "100px", width: "100px" }}
+        onClick={event => this.handleInputChange(event,'value')}
       />
     ));
   };
 
+
   handleForm = () => {
     // event.preventDefault();
-    this.ListPrice = this.ListPrice.bind(this);
-    this.TaxAnnualAmount = this.TaxAnnualAmount.bind(this);
-    this.img = this.img.bind(this);
     console.log(this.state.ListPrice);
     console.log(this.state.TaxAnnualAmount);
     console.log(this.state.img);
@@ -113,16 +125,15 @@ class PropertySearch extends Component {
 
   renderListings = () => {
     const listHtml = this.state.listings.map(list => (
-      <div key={list.ListPrice}>
+      <div onClick={event => this.handleInputChange(event, "value")}>
         <strong>List Price {list.ListPrice}</strong>
         <p>Annual Tax Amount {list.TaxAnnualAmount}</p>
-        
         {this.renderImages(list.img)}
         <button
           onClick={() => this.handleForm({
-            ListPrice:this.ListPrice,
-            TaxAnnualAmount:this.TaxAnnualAmount,
-            img:this.img
+            ListPrice:this.setState.ListPrice,
+            TaxAnnualAmount:this.setState.TaxAnnualAmount,
+            img:this.setState.img
           })}
           className="btn btn-primary"
           style={{ marginTop: "5px" }}
@@ -132,6 +143,13 @@ class PropertySearch extends Component {
       </div>
     ))
     return listHtml;
+  };
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
   };
 
   render() {

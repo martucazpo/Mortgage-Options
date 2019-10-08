@@ -4,6 +4,23 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
+import ReactDOM from "react-dom";
+import Chart from "react-google-charts";
+
+const data = [
+  ["Task", "Hours per Day"],
+  ["Work", 11],
+  ["Eat", 2],
+  ["Commute", 2],
+  ["Watch TV", 2],
+  ["Sleep", 7] // CSS-style declaration
+];
+
+const options = {
+  title: "My Daily Activities",
+  pieHole: 0.4,
+  is3D: false
+};
 
 class Results extends Component {
   state = {
@@ -14,7 +31,7 @@ class Results extends Component {
     ListPrice: 0,
     TaxAnnualAmount: 0,
     profileId: "",
-    propertyId: []
+    propertyId: [],
   };
 
   componentDidMount() {
@@ -63,7 +80,17 @@ class Results extends Component {
         <div className="row">
           <div className="col s1"></div>
           <div className="col s5 skeleton rbox">dropdown menus go here</div>
-          <div className="col s5 skeleton rbox">results graph goes here</div>
+          <div className="col s5 skeleton rbox">
+          <div className="App">
+        <Chart
+          chartType="PieChart"
+          width="100%"
+          height="395px"
+          data={data}
+          options={options}
+        />
+      </div>
+          </div>
           <div className="col s1"></div>
         </div>
         <div className="row">
@@ -73,6 +100,9 @@ class Results extends Component {
     );
   }
 }
+
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<App />, rootElement);
 
 export default withRouter(Results);
 // {/* <LinkList /> */}
