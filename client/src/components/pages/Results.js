@@ -45,28 +45,22 @@ class Results extends Component {
           profileId: res.data.profile[0]
         });
       })
-      .catch(err => console.log(err));
+
+    });
 
     API.getProfile(this.state.profileId)
-      .then(res => {
-        console.log(res);
-        this.setState({
-          downPayment: res.data[0].downPayment,
-          desiredPayment: res.data[0].desiredPayment,
-          propertyId: res.data[0].property
-        });
-      })
-      .catch(err => console.log(err));
+    .then(res => {
+      this.setState({
+        downPayment : res.data[0].downPayment,
+        desiredPayment : res.data[0].desiredPayment,
+        propertyId : res.data[0].property,
+        profileId : res.data[0]._id
+        }, () => {
 
-    API.getProperty(this.state.propertyId)
-      .then(res => {
-        console.log(res);
-        this.setState({
-          ListPrice: res.data.ListPrice,
-          TaxAnnualAmount: res.data.TaxAnnualAmount
-        });
+          API.findPropertyAndPop(this.state.profileId)
+          .then(res => console.log(res))
       })
-      .catch(err => console.log(err));
+    })
   }
   //  {/* <Navbar /> */}
 
