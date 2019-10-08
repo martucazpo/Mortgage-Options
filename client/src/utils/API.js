@@ -8,6 +8,10 @@ export default {
   search: function() {
     return axios.get(BASEURL);
   },
+  findPropertyAndPop: function(id){
+    console.log("That's a BEAR!")
+    return axios.get("/api/properties/tester/" + id)
+  },
   getProfiles: function() {
     console.log("got");
     return axios.get("/api/profiles");
@@ -25,7 +29,7 @@ export default {
     return axios.get("/api/profiles/" + id);
   },
   getProperty: function(id) {
-    return axios.get("/api/properties/" + id);
+    return axios.get("/api/properties/proper/" + id);
   },
   populateProperty: function(profileId) {
     console.log("IIIIIDDDDDD" + profileId)
@@ -46,7 +50,7 @@ export default {
     return axios.delete("/api/profiles/" + id);
   },
   deleteProperty: function(id) {
-    return axios.delete("/api/properties/" + id);
+    return axios.delete("/api/properties/proper/" + id);
   },
   // Saves a book to the database
   saveProfile: function(data) {

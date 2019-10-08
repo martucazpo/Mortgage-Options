@@ -38,9 +38,25 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findPropertyById: function(req, res) {
+    console.log('Find prop by id')
     db.Property
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  findPropertyAndPop: function(req, res) {
+
+    console.log(" akdsf;lkasd f;laksd f;lakjd s;lfkaj ;dlskf j;lakj That there is a BEAR!");
+    console.log("Complete ID: 5d9c03bee837873b2c2cd69d")
+    console.log("Parms Id:", req.params.id);
+    console.log("BOOL", ("5d9c03bee837873b2c2cd69d" === req.params.id))
+    db.Profile
+      .findById(req.params.id)
+      .populate("property")
+      .then(dbModel =>{
+        console.log('MY DB MODEL', dbModel, req.params.id) 
+        res.json(dbModel)
+      })
       .catch(err => res.status(422).json(err));
   },
   findUserById: function(req, res) {
@@ -83,7 +99,7 @@ createProfile: function(req, res) {
       .create(req.body)
       .then(dbProperty => {
         console.log('Property id',dbProperty._id)
-        db.Profile.findOneAndUpdate(req.params.id, 
+        db.Profile.findOneAndUpdate(req.body.id, 
         { $push: { property: dbProperty._id } }, { new:true }).then(abc => {
           console.log('ABC',abc)
         });
