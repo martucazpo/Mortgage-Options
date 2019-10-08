@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-// import LinkList from "../linksList";
-// import "./Results.css";
+import LinkList from "../linksList";
+import "./Results.css";
 import { withRouter } from "react-router-dom";
 import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
 import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
+import dropdown from "react-dropdown";
 
 const data = [
   ["Task", "Hours per Day"],
@@ -31,7 +32,7 @@ class Results extends Component {
     ListPrice: 0,
     TaxAnnualAmount: 0,
     profileId: "",
-    propertyId: [],
+    propertyId: []
   };
 
   componentDidMount() {
@@ -79,17 +80,17 @@ class Results extends Component {
 
         <div className="row">
           <div className="col s1"></div>
-          <div className="col s5 skeleton rbox">dropdown menus go here</div>
+          <div className="col s5 skeleton rbox">enter dropdown/text here</div>
           <div className="col s5 skeleton rbox">
-          <div className="App">
-        <Chart
-          chartType="PieChart"
-          width="100%"
-          height="395px"
-          data={data}
-          options={options}
-        />
-      </div>
+            <div className="App">
+              <Chart
+                chartType="PieChart"
+                width="100%"
+                height="395px"
+                data={data}
+                options={options}
+              />
+            </div>
           </div>
           <div className="col s1"></div>
         </div>
