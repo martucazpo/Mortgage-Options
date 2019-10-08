@@ -35,6 +35,11 @@ class Form extends Component {
     API.populateProps({email:this.props.match.params.email})
        .then(console.log("populated"))
        .catch(err => console.log(err));
+    this.handleLocationReload();
+  };
+
+  handleLocationReload = () => {
+    window.location.reload();
   };
 
 

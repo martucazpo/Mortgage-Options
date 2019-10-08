@@ -7,6 +7,7 @@ import LinkList from "../linksList";
 import EditBtn from "../EditBtn";
 import { withRouter } from "react-router-dom";
 import Navbar from "../layout/Navbar";
+import { Link } from 'react-router-dom';
 
 import "./Registration.css";
 
@@ -55,6 +56,7 @@ class Registration extends Component {
     API.deleteProfile(id)
       .then(console.log("profile deleted"))
       .catch(err => console.log(err));
+     this.handleLocationReload();
   };
 
   handleInputChange = event => {
@@ -63,6 +65,11 @@ class Registration extends Component {
       [name]: value
     });
   };
+
+  handleLocationReload = () => {
+    window.location.reload();
+  };
+
 
 //  // When the form is submitted, prevent the default event and alert the username and password
 //   handleForm = (event) => {
@@ -114,6 +121,7 @@ class Registration extends Component {
             </div>
           </div>
         </div>
+        <div> <Link to={"/property"}><button type="button">Let's Find A Property!</button></Link></div>
       <div className="col s2"></div>
       <div className="row">
         <div className="col s12 links">

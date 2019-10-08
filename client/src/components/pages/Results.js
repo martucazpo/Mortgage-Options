@@ -57,9 +57,10 @@ class Results extends Component {
         }, () => {
 
           API.findPropertyAndPop(this.state.profileId)
-          .then(res => console.log(res))
+          .then(res => console.log(res));
       })
     })
+    .catch(err => console.log(err));
   }
 
 
