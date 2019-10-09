@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import ProfileDetail from "../profileDetails";
 import API from "../../utils/API";
 import { withRouter } from "react-router-dom";
+import materialize from "materialize-css";
+
+// const options = ["one", "two", "three"];
 
 class Form extends Component {
   // Setting the initial values of this.state.username and this.state.password
@@ -31,9 +34,8 @@ class Form extends Component {
       // name: this.state.name
       // email:this.props.email,
       desiredPayment: this.state.desiredPayment,
-       downPayment: this.state.downPayment,
-      loanTerm: this.state.loanTerm,
-    
+      downPayment: this.state.downPayment,
+      loanTerm: this.state.loanTerm
     });
     API.populateProps({ email: this.props.match.params.email })
       .then(console.log("populated"))
@@ -70,13 +72,33 @@ class Form extends Component {
           value={this.state.desiredPayment}
           onChange={this.handleInputChange}
         />
-        <input
-          type="loanTerm"
-          placeholder="Desired Loan Term"
-          name="loanTerm"
-          value={this.state.loanTerm}
-          onChange={this.handleInputChange}
-        />
+        {/* <div style={{ margin: "20px" }}>
+          <Dropdown
+            options={options}
+            onChange={this._onSelect}
+            value={options}
+            placeholder="Select an option"
+
+            // type="loanTerm"
+            // placeholder="Desired Loan Term"
+            // name="loanTerm"
+            // value={this.state.loanTerm}
+            // onChange={this.handleInputChange}
+          />
+        </div> */}
+
+        <label>Amortize your Loan</label>
+        <select class="browser-default">
+          <option value="" disabled selected>
+            Loan Term
+          </option>
+          <option value="360">30 years</option>
+          <option value="240">20 years</option>
+          <option value="180">15 years</option>
+          <option value="120">10 years</option>
+          <option value="60">5 years</option>
+        </select>
+        <br></br>
         <input
           type="downPayment"
           placeholder="Down Payment"

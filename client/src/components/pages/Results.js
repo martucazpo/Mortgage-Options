@@ -6,7 +6,7 @@ import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
 //import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
-import dropdown from "react-dropdown";
+// import dropdown from "react-dropdown";
 
 const data = [
   ["Task", "Hours per Day"],
@@ -37,31 +37,32 @@ class Results extends Component {
   };
 
   componentDidMount() {
-    API.getUser({ email: this.props.match.params.email })
-      .then(res => {
-        console.log(res);
-        this.setState({
-          name: res.data.name,
-          email: res.data.email,
-          profileId: res.data.profile[0]
-        });
+    API.getUser({ email: this.props.match.params.email }).then(res => {
+      console.log(res);
+      this.setState({
+        name: res.data.name,
+        email: res.data.email,
+        profileId: res.data.profile[0]
       });
-  
+    });
 
     API.getProfile(this.state.profileId)
-    .then(res => {
-      this.setState({
-        downPayment : res.data[0].downPayment,
-        desiredPayment : res.data[0].desiredPayment,
-        propertyId : res.data[0].property,
-        profileId : res.data[0]._id
-        }, () => {
-
-          API.findPropertyAndPop(this.state.profileId)
-          .then(res => console.log(res));
+      .then(res => {
+        this.setState(
+          {
+            downPayment: res.data[0].downPayment,
+            desiredPayment: res.data[0].desiredPayment,
+            propertyId: res.data[0].property,
+            profileId: res.data[0]._id
+          },
+          () => {
+            API.findPropertyAndPop(this.state.profileId).then(res =>
+              console.log(res)
+            );
+          }
+        );
       })
-    })
-    .catch(err => console.log(err));
+      .catch(err => console.log(err));
   }
   //  {/* <Navbar /> */}
 
