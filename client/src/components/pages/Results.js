@@ -4,7 +4,7 @@ import "./Results.css";
 import { withRouter } from "react-router-dom";
 import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
-import ReactDOM from "react-dom";
+//import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
 import dropdown from "react-dropdown";
 
@@ -29,6 +29,7 @@ class Results extends Component {
     email: "",
     desiredPayment: 0,
     downPayment: 0,
+    loanTerm: 0,
     ListPrice: 0,
     TaxAnnualAmount: 0,
     profileId: "",

@@ -122,6 +122,7 @@ class Registration extends Component {
                           <strong>
                             <div>{profile.desiredPayment}</div>
                             <div>{profile.downPayment}</div>
+                            <div>{profile.loanTerm}</div>
                           </strong>
                           <EditBtn id={profile._id} />
                           <DeleteBtn

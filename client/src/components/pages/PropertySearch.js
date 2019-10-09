@@ -67,6 +67,7 @@ class PropertySearch extends Component {
       this.setState({
         downPayment : res.data[0].downPayment,
         desiredPayment : res.data[0].desiredPayment,
+        loanTerm : res.data[0].loanTerm,
         propertyId : res.data[0].property,
         profileId : res.data[0]._id
         }, () => {
