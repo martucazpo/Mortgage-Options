@@ -43,21 +43,21 @@ class EditReg extends Component {
     return (
       <form>
         <input
-          type="desiredPayment"
+          type="text"
           placeholder="Desired Payment Amount"
           name="desiredPayment"
           value={this.state.desiredPayment}
           onChange={this.handleInputChange}
         />
         <input
-          type="loanTerm"
+          type="text"
           placeholder="Desired Loan Term"
           name="loanTerm"
           value={this.state.loanTerm}
           onChange={this.handleInputChange}
         />
         <input
-          type="downPayment"
+          type="text"
           placeholder="Down Payment"
           name="downPayment"
           value={this.state.downPayment}
