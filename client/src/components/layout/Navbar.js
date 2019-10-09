@@ -4,19 +4,19 @@ import "./Navbar.css";
 class Navbar extends Component {
   render() {
     return (
-      <div className="navbar-fixed">
-        <nav className="z-depth-0 skeleton navStyle">
-          <div className="nav-wrapper blue">
-            <Link
-              to="/"
-              style={{
-                fontFamily: "monospace"
-              }}
-              className="col s12 brand-logo center white-text"
-            >
-              <i className="material-icons">code</i>
-              Mortgage Options
+      <div>
+        <nav>
+          <div className="nav-wrapper">
+            <Link to="/">
+              <a href="#" className="brand-logo">
+                MORTGAGE OPTIONS
+              </a>
             </Link>
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
+              <li>
+                <a href="*">Hello (username here)</a>
+              </li>
+            </ul>
           </div>
         </nav>
       </div>

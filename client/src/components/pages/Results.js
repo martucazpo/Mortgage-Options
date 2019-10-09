@@ -70,6 +70,7 @@ class Results extends Component {
     console.log(this.state);
     return (
       <div>
+        <Navbar />
         <div className="results">
           <h3>Results</h3>
         </div>

@@ -29,27 +29,9 @@ class PropertySearch extends Component {
     this.renderListings = this.renderListings.bind(this);
     this.renderImages = this.renderImages.bind(this);
     this.handleLocationReload = this.handleLocationReload.bind(this);
-    //this.result = this.result.bind(this);
-    //this.search = this.search.bind(this);
-    // this.ListPrice = this.ListPrice.bind(this);
-    // this.TaxAnnualAmount = this.TaxAnnualAmount.bind(this);
-    // this.img = this.img.bind(this);
-    // this.listings = this.listings.bind(this);
-    // this.email = this.email.bind(this);
-    // this.profileId = this.profileId.bind(this);
+    
   } 
 
-
-  // state = {
-  //   result: {},
-  //   search: "",
-  //   ListPrice: 0,
-  //   TaxAnnualAmount: 0,
-  //   img: "",
-  //   listings: [],
-  //   email:"",
-  //   profileId : ""
-  // };
 
   componentDidMount() {
     API.getUser({email:this.props.match.params.email})
@@ -136,9 +118,7 @@ class PropertySearch extends Component {
 
 
   handleForm = (ListPrice, TaxAnnualAmount, img) => {
-    console.log(ListPrice, TaxAnnualAmount, img);
-    console.log("KKKKKKKKKKKLick")
-    //event.preventDefault();
+    
     API.saveProperty({
       ListPrice,
       TaxAnnualAmount,
@@ -181,7 +161,6 @@ class PropertySearch extends Component {
   };
 
   renderSavedProps = () => {
-    console.log("I would like to be")
     const propertyHtml = this.state.savedProp.map(savedProps => (
       <div>
         <strong>List Price {savedProps.ListPrice}</strong>
@@ -220,7 +199,7 @@ class PropertySearch extends Component {
   };
 
   render() {
-    console.log("dogs",this.state)
+    console.log("set state",this.state)
     return (
       <div>
         <Navbar />
