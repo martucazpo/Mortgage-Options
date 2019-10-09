@@ -1,24 +1,61 @@
-* {
-  padding: 0;
+html {
+  height: 100%;
   margin: 0;
+  padding: 0;
 }
 
-.skeleton {
-  border: 2px solid black;
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.landingContainer {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url("../../images/landingPhoto.jpg");
+  background-position: center;
+  background-color: #203b8c;
+}
+
+.landingRow {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================================= */
+
+.landingLogo {
+  text-align: center;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  font-size: 4em;
 }
 
 .welcomeInfo {
-  margin-top: 4%;
-  margin-bottom: 2%;
   text-align: center;
-}
-
-.logInButton {
-  text-align: center;
-}
-
-.welcomeBanner {
-  background-color: cornflowerblue;
+  padding: 50px;
+  margin-bottom: 12%;
+  font-size: 1.75em;
+  background: rgba(0, 0, 0, 0.5);
   color: white;
-  height: 500px;
+  border-radius: 10px;
+}
+
+.buttonRow {
+  text-align: center;
 }
