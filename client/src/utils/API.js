@@ -9,19 +9,15 @@ export default {
     return axios.get(BASEURL);
   },
   findPropertyAndPop: function(id){
-    console.log("That's a BEAR!")
     return axios.get("/api/properties/tester/" + id)
   },
   getProfiles: function() {
-    console.log("got");
     return axios.get("/api/profiles");
   },
   getProperties: function() {
-    console.log("got");
     return axios.get("/api/properties");
   },
   getUsers: function() {
-    console.log("got");
     return axios.get("/api/users");
   },
   // Gets the book with the given id
@@ -32,20 +28,17 @@ export default {
     return axios.get("/api/properties/proper/" + id);
   },
   populateProperty: function(profileId) {
-    console.log("IIIIIDDDDDD" + profileId)
     return axios.get("/api/profiles/" + profileId);
   },
   getUser: function(email, info) {
     return axios.get("/api/users/" + email, info);
   },
   populateProps: function(){
-    console.log("populated");
     return axios.get("/api/users/test");
   },
   updateProfile: function(id, info) {
     return axios.put("/api/profiles/" + id, info);
   },
-  // Deletes the book with the given id
   deleteProfile: function(id) {
     return axios.delete("/api/profiles/" + id);
   },
@@ -54,11 +47,9 @@ export default {
   },
   // Saves a book to the database
   saveProfile: function(data) {
-    console.log("hit");
     return axios.post("/api/profiles/", data);
   },
   saveProperty: function(propertyData) {
-    console.log("hit");
     return axios.post("/api/properties/", propertyData);
   }
 };

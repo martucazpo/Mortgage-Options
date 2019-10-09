@@ -41,7 +41,6 @@ class Registration extends Component {
       })
       .catch(err => console.log(err));
     this.loadProfile();
-    API.getProperty();
   }
 
   loadProfile = () => {
@@ -49,8 +48,6 @@ class Registration extends Component {
       .then(res =>
         this.setState({
           profiles: res.data,
-          // name: this.state.name,
-          // email: this.state.email,
           desiredPayment: this.state.desiredPayment,
           loanTerm: this.state.loanTerm,
           downPayment: this.state.downPayment
@@ -78,24 +75,7 @@ class Registration extends Component {
   };
 
 
-//  // When the form is submitted, prevent the default event and alert the username and password
-//   handleForm = (event) => {
-//     console.log("HELLO")
-//     event.preventDefault();
-//     API.saveProfile({
-//     // name: this.state.name
-//     //   email:this.state.email,
-//       desiredPayment: this.state.desiredPayment,
-//        downPayment: this.state.downPayment
-//      })
-//     API.populateProps({email:this.props.match.params.email})
-//        .then(console.log("populated"))
-//        .catch(err => console.log(err));
-//   };
-
-
   render() {
-    //console.log(this.state)
     return (
       <div>
         <Navbar />
