@@ -6,7 +6,7 @@ import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
 //import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
-import dropdown from "react-dropdown";
+// import dropdown from "react-dropdown";
 
 const data = [
   ["Task", "Hours per Day"],
