@@ -7,10 +7,8 @@ class Navbar extends Component {
       <div>
         <nav>
           <div className="nav-wrapper">
-            <Link to="/">
-              <a href="#" className="brand-logo">
+            <Link to="/" className="brand-logo">
                 MORTGAGE OPTIONS
-              </a>
             </Link>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li>

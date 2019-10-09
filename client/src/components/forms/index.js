@@ -88,8 +88,8 @@ class Form extends Component {
         </div> */}
 
         <label>Amortize your Loan</label>
-        <select class="browser-default">
-          <option value="" disabled selected>
+        <select className="browser-default">
+          <option value="" disabled >
             Loan Term
           </option>
           <option value="360">30 years</option>
