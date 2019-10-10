@@ -29,6 +29,7 @@ body {
   background-image: url("../../images/landingPhoto.jpg");
   background-position: center;
   background-color: #203b8c;
+  font-family: "Raleway", sans-serif;
 }
 
 .landingRow {
@@ -44,6 +45,8 @@ body {
   margin-top: 5%;
   margin-bottom: 5%;
   font-size: 4em;
+  color: white;
+  text-shadow: 0px 2px black;
 }
 
 .welcomeInfo {

@@ -83,13 +83,15 @@ class Results extends Component {
   render() {
     console.log("this is my current state", this.state);
     return (
-      <div>
+      <div className="resultPage">
         <Navbar />
+
         <div className="results">
           <h3>Results</h3>
 
           {this.renderproperties()}
         </div>
+
 
         <div className="row">
           <div className="col s1"></div>

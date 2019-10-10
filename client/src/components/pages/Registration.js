@@ -12,7 +12,9 @@ import { Link } from "react-router-dom";
 
 import "./Registration.css";
 
-// import MortgageCalculator from "mortgage-calculator-react";
+
+import MortgageCalculator from "mortgage-calculator-react";
+
 
 // const reactElement = (
 //   <div>
@@ -39,8 +41,10 @@ class Registration extends Component {
           // email: res.data.email
         });
       })
+
+
       .catch(err => console.log(err));
-    this.loadProfile();
+
   }
 
   loadProfile = () => {
@@ -76,11 +80,11 @@ class Registration extends Component {
 
   render() {
     return (
-      <div>
+      <div className="regPage">
         <Navbar />
-        <div className="row">
+        <div className="row regRow">
           <div className="col s2"></div>
-          <div className="col s8 skeleton regBox">
+          <div className="col s8 regBox">
             <div className="formDiv">
               <h3>
                 {this.state.name}, once you have filled it out, this form will
