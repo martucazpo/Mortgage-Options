@@ -7,12 +7,14 @@ import LinkList from "../linksList";
 import EditBtn from "../EditBtn";
 import { withRouter } from "react-router-dom";
 import Navbar from "../layout/Navbar";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import calculator from "../Mortgage/Calculator";
 
 import "./Registration.css";
 
-//import Calculator from "../Calculator";
-//import MortgageCalculator from "mortgage-calculator-react";
+
+import MortgageCalculator from "mortgage-calculator-react";
+
 
 // const reactElement = (
 //   <div>
@@ -26,48 +28,45 @@ class Registration extends Component {
     myProfile: [],
     // name: "",
     // email: "",
-    desiredPayment: "",
-    loanTerm: "",
-    downPayment: "",
-    id: "",
-    profileId: ""
+
+    totalPayment: "",
+    termMonths: "",
+    downPayment: ""
   };
 
   componentDidMount() {
-    API.getUser({email:this.props.match.params.email})
-    .then(res => {
-      console.log("ID?",res); 
-      this.setState({
-        name : res.data.name,
-        email : res.data.email,
-        id : res.data._id,
-        profileId : res.data.profile[0]})
-  })
-  .then(
-    API.getProfile(this.state.profileId)
-    .then(res => {
-      console.log("frogs",res)
-      this.setState({
-        myProfile : res.data,
-        downPayment : res.data[0].downPayment,
-        desiredPayment : res.data[0].desiredPayment,
-        loanTerm : res.data[0].loanTerm,
-        propertyId : res.data[0].property,
-        profileId : res.data[0]._id
-        })
+    API.getUser({ email: this.props.match.params.email })
+      .then(res => {
+        console.log(res);
+        this.setState({
+          // name: res.data.name,
+          // email: res.data.email
+        });
+
       })
   )
   .catch(err => console.log(err));  
 
-}
 
-  
+  loadProfile = () => {
+    API.getProfiles()
+      .then(res =>
+        this.setState({
+          profiles: res.data,
+          totalPayment: this.state.totalPayment,
+          termMonths: this.state.termMonths,
+          downPayment: this.state.downPayment
+        })
+      )
+      .catch(err => console.log(err));
+  };
+
 
   deleteProfile = id => {
     API.deleteProfile(id)
       .then(console.log("profile deleted"))
       .catch(err => console.log(err));
-     this.handleLocationReload();
+    this.handleLocationReload();
   };
 
   handleInputChange = event => {
@@ -81,7 +80,6 @@ class Registration extends Component {
     window.location.reload();
   };
 
-
   render() {
     console.log("State",this.state);
     return (
@@ -91,15 +89,30 @@ class Registration extends Component {
           <div className="col s2"></div>
           <div className="col s8 skeleton regBox">
             <div className="formDiv">
-              <h3>{this.state.name}, once you have filled it out, this form will be hidden from you by Elven Magic!</h3>
-              <p>Ok, maybe not exactly Elven Magic, but you're only getting one profile, {this.state.name}</p>
+              <h3>
+                {this.state.name}, once you have filled it out, this form will
+                be hidden from you by Elven Magic!
+              </h3>
+              <p>
+                Ok, maybe not exactly Elven Magic, but you're only getting one
+                profile, {this.state.name}
+              </p>
               <Form email={this.state.email} />
               <List>
                 <ListItem key={this.state.name}>
                   <div>
-                    <h3>This is the part that you will be able to see and to edit, {this.state.name}</h3>
-                    <p>so I guess we will have to make it pretty just for you, {this.state.name}</p>
-                    <p>Also the edit page, which probably needs a link back to here.</p>
+                    <h3>
+                      This is the part that you will be able to see and to edit,{" "}
+                      {this.state.name}
+                    </h3>
+                    <p>
+                      so I guess we will have to make it pretty just for you,{" "}
+                      {this.state.name}
+                    </p>
+                    <p>
+                      Also the edit page, which probably needs a link back to
+                      here.
+                    </p>
                     <strong>
                       <div>{this.state.name}</div>
                       <div>{this.state.email}</div>
@@ -108,9 +121,9 @@ class Registration extends Component {
                       {this.state.myProfile.map(profile => (
                         <div key={profile._id}>
                           <strong>
-                            <div>{profile.desiredPayment}</div>
+                            <div>{profile.totalPayment}</div>
                             <div>{profile.downPayment}</div>
-                            <div>{profile.loanTerm}</div>
+                            <div>{profile.termMonths}</div>
                           </strong>
                           <EditBtn id={profile._id} />
                           <DeleteBtn
@@ -126,10 +139,15 @@ class Registration extends Component {
           </div>
         </div>
         <h3>This means you {this.state.name}!</h3>
-        <div> <Link to={"/property"}><button type="button">Let's Find A Property!</button></Link></div>
-      <div className="col s2"></div>
-      <div className="row">
-        <div className="col s12 links">
+        <div>
+          {" "}
+          <Link to={"/property"}>
+            <button type="button">Let's Find A Property!</button>
+          </Link>
+        </div>
+        <div className="col s2"></div>
+        <div className="row">
+          <div className="col s12 links">
             <LinkList />
           </div>
         </div>

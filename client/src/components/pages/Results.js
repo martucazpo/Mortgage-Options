@@ -7,6 +7,7 @@ import Navbar from "../layout/Navbar";
 //import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
 // import dropdown from "react-dropdown";
+import calculator from "../Mortgage/Calculator";
 
 const data = [
   ["Task", "Hours per Day"],
@@ -27,9 +28,9 @@ class Results extends Component {
   state = {
     name: "",
     email: "",
-    desiredPayment: 0,
+    totalPayment: 0,
     downPayment: 0,
-    loanTerm: 0,
+    termMonths: 0,
     ListPrice: 0,
     TaxAnnualAmount: 0,
     profileId: "",
@@ -51,7 +52,8 @@ class Results extends Component {
         this.setState(
           {
             downPayment: res.data[0].downPayment,
-            desiredPayment: res.data[0].desiredPayment,
+            totalPayment: res.data[0].totalPayment,
+            termMonths: res.data[0].termMonths,
             propertyId: res.data[0].property,
             profileId: res.data[0]._id
           },
@@ -103,4 +105,6 @@ class Results extends Component {
 // ReactDOM.render(<App />, rootElement);
 
 export default withRouter(Results);
-// {/* <LinkList /> */}
+{
+  /* <LinkList /> */
+}
