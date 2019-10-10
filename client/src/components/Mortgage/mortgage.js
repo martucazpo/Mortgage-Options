@@ -20,3 +20,5 @@ export let calculatePayment = (principal, years, rate) => {
   }
   return { monthlyPayment, amortization };
 };
+
+export default calculatePayment;

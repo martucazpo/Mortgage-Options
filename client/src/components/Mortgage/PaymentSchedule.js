@@ -1,6 +1,6 @@
 import React from "react";
 
-class AmortizationChart extends React.Component {
+class PaymentSchedule extends React.Component {
   render() {
     // ES6: Arrow function shorthand when function consists of single line return statement
     let items = this.props.data.map((year, index) => (
@@ -46,4 +46,4 @@ class AmortizationChart extends React.Component {
   }
 }
 
-export default AmortizationChart;
+export default PaymentSchedule;

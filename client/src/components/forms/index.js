@@ -3,6 +3,7 @@ import ProfileDetail from "../profileDetails";
 import API from "../../utils/API";
 import { withRouter } from "react-router-dom";
 import materialize from "materialize-css";
+import ReactDOM from "react-dom";
 
 // const options = ["one", "two", "three"];
 
@@ -11,8 +12,8 @@ class Form extends Component {
   state = {
     // name: "",
     // email: this.props.email,
-    desiredPayment: "",
-    loanTerm: "",
+    totalPayment: "",
+    termMonths: "",
     downPayment: ""
   };
 
@@ -33,9 +34,9 @@ class Form extends Component {
     API.saveProfile({
       // name: this.state.name
       // email:this.props.email,
-      desiredPayment: this.state.desiredPayment,
+      totalPayment: this.state.totalPayment,
       downPayment: this.state.downPayment,
-      loanTerm: this.state.loanTerm
+      termMonths: this.state.loanTerm
     });
     API.populateProps({ email: this.props.match.params.email })
       .then(console.log("populated"))
@@ -66,10 +67,10 @@ class Form extends Component {
           onChange={this.handleInputChange}
         /> */}
         <input
-          type="desiredPayment"
+          type="totalPayment"
           placeholder="Desired Payment Amount"
-          name="desiredPayment"
-          value={this.state.desiredPayment}
+          name="totalPayment"
+          value={this.state.totalPayment}
           onChange={this.handleInputChange}
         />
         {/* <div style={{ margin: "20px" }}>
@@ -92,11 +93,13 @@ class Form extends Component {
           <option value="" disabled selected>
             Loan Term
           </option>
-          <option value="360">30 years</option>
-          <option value="240">20 years</option>
-          <option value="180">15 years</option>
-          <option value="120">10 years</option>
-          <option value="60">5 years</option>
+          <option value="360">30 Years</option>
+          <option value="240">20 Years</option>
+          <option value="180">15 Years</option>
+          <option value="120">10 Years</option>
+          <option value="60">5 Years</option>
+          value={this.state.termMonths}
+          onChange={this.handleInputChange}
         </select>
         <br></br>
         <input
@@ -107,8 +110,8 @@ class Form extends Component {
           onChange={this.handleInputChange}
         />
         <ProfileDetail
-          desiredPayment={this.state.desiredPayment}
-          loanTerm={this.state.loanTerm}
+          desiredPayment={this.state.totalPayment}
+          loanTerm={this.state.termMonths}
           downPayment={this.state.downPayment}
         />
         <button onClick={this.handleForm}>Submit</button>

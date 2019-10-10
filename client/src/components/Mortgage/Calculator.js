@@ -1,6 +1,13 @@
-import API from "../utils/API";
+// import API from "../utils/API";
 import React from "react";
-import mortgageJS from "mortgage-js";
+import mortgageJs from "./mortgage";
+import Util from "./Util";
+import "./DefaultStyle.css";
+import InputWrapper from "./InputWrapper";
+import IconInput from "./IconInput";
+import Switch from "./Switch";
+import PaymentSchedule from "./PaymentSchedule";
+
 const DefaultPrice = 500000;
 const DefaultDownPayment = 100000;
 const DefaultInterestRate = 0.045;
@@ -259,7 +266,7 @@ export default class MortgageCalculator extends React.Component {
       mortgageInsuranceEnabled,
       months
     } = this.mortgageCalculator;
-    const styles = this.props.styles || DefaultStyles;
+    const styles = this.props.styles;
     var paymentCount = this.state.mortgage.paymentSchedule.length;
     var years = Math.floor(paymentCount / 12);
     var remainingMonths = paymentCount % 12;
