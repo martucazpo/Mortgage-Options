@@ -39,9 +39,11 @@ class Form extends Component {
       termMonths: this.state.loanTerm
     });
     API.populateProps({ email: this.props.match.params.email })
-      .then(console.log("populated"))
+      .then(() => {
+        this.props.history.push("/property");
+      })
       .catch(err => console.log(err));
-    this.handleLocationReload();
+    // this.handleLocationReload();
   };
 
   handleLocationReload = () => {

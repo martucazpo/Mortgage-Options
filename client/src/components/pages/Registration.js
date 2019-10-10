@@ -8,7 +8,7 @@ import EditBtn from "../EditBtn";
 import { withRouter } from "react-router-dom";
 import Navbar from "../layout/Navbar";
 import { Link } from "react-router-dom";
-import calculator from "../Mortgage/Calculator";
+import calculator from "../Calculator";
 
 import "./Registration.css";
 
@@ -111,7 +111,7 @@ class Registration extends Component {
                       <div>{this.state.email}</div>
                     </strong>
                     <div>
-                      {this.state.profiles.map(profile => (
+                      {/* {this.state.profiles.map(profile => (
                         <div key={profile._id}>
                           <strong>
                             <div>{profile.totalPayment}</div>
@@ -123,7 +123,7 @@ class Registration extends Component {
                             onClick={() => this.deleteProfile(profile._id)}
                           />
                         </div>
-                      ))}
+                      ))} */}
                     </div>
                   </div>
                 </ListItem>

@@ -4,10 +4,8 @@ import "./Results.css";
 import { withRouter } from "react-router-dom";
 import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
-//import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
-// import dropdown from "react-dropdown";
-import calculator from "../Mortgage/Calculator";
+import MortgageCalculator from "mortgage-calculator-react";
 
 const data = [
   ["Task", "Hours per Day"],
@@ -34,7 +32,8 @@ class Results extends Component {
     ListPrice: 0,
     TaxAnnualAmount: 0,
     profileId: "",
-    propertyId: []
+    propertyId: [],
+    properties: []
   };
 
   componentDidMount() {
@@ -59,7 +58,11 @@ class Results extends Component {
           },
           () => {
             API.findPropertyAndPop(this.state.profileId).then(res =>
-              console.log(res)
+              this.setState({
+                totalPayment: res.data.totalPayment,
+                downPayment: res.data.downPayment,
+                properties: res.data.property
+              })
             );
           }
         );
@@ -67,19 +70,36 @@ class Results extends Component {
       .catch(err => console.log(err));
   }
   //  {/* <Navbar /> */}
-
+  renderproperties = () => {
+    return this.state.properties.map(property => (
+      <div>
+        <p>
+          {property.ListPrice}
+          {property.TaxAnnualAmount}
+        </p>
+      </div>
+    ));
+  };
   render() {
-    console.log(this.state);
+    console.log("this is my current state", this.state);
     return (
       <div>
         <Navbar />
         <div className="results">
           <h3>Results</h3>
+
+          {this.renderproperties()}
         </div>
 
         <div className="row">
           <div className="col s1"></div>
-          <div className="col s5 skeleton rbox">enter dropdown/text here</div>
+          <div className="col s5 skeleton rbox">
+            <div>
+              <MortgageCalculator />
+            </div>
+            <div id="mortgage-calculator-react"></div>
+            <script src="https://www.fastforma.com/mortgage-calculator-react.js"></script>
+          </div>
           <div className="col s5 skeleton rbox">
             <div className="App">
               <Chart
@@ -95,6 +115,7 @@ class Results extends Component {
         </div>
         <div className="row">
           <div className="col s12 links"></div>
+          <LinkList />
         </div>
       </div>
     );
@@ -105,6 +126,3 @@ class Results extends Component {
 // ReactDOM.render(<App />, rootElement);
 
 export default withRouter(Results);
-{
-  /* <LinkList /> */
-}
