@@ -13,10 +13,32 @@ class Form extends Component {
   state = {
     // name: "",
     // email: this.props.email,
+
+    desiredPayment: "",
+    loanTerm: "",
+    name: "",
+    email: "",
+    id : "",
     totalPayment: "",
     termMonths: "",
     downPayment: ""
   };
+
+  componentDidMount(){
+    API.getUser(sessionStorage.getItem('username'))
+    .then(res => {
+
+
+      console.log("LKDJF:LSD")
+      console.log("ID?",res); 
+      this.setState({
+        name : res.data.name,
+        email : res.data.email,
+        id : res.data._id,
+        profileId : res.data.profile[0]})
+  })
+   
+  }
 
   // handle any changes to the input fields
   handleInputChange = event => {
@@ -27,25 +49,36 @@ class Form extends Component {
     this.setState({
       [name]: value
     });
-  };
+  }
 
   handleForm = event => {
     console.log("HELLO");
     event.preventDefault();
+    
     API.saveProfile({
       // name: this.state.name
       // email:this.props.email,
+
+      id : this.state.id,
+      desiredPayment: this.state.desiredPayment,
+      downPayment: this.state.downPayment,
+      loanTerm: this.state.loanTerm,
       totalPayment: this.state.totalPayment,
       downPayment: this.state.downPayment,
       termMonths: this.state.loanTerm
     });
     API.populateProps({ email: this.props.match.params.email })
       .then(() => {
-        this.props.history.push("/property");
+      //  this.props.history.push("/property");
       })
       .catch(err => console.log(err));
+
     // this.handleLocationReload();
-  };
+  }
+
+
+
+
 
   handleLocationReload = () => {
     window.location.reload();

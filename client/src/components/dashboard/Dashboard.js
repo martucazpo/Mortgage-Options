@@ -12,6 +12,7 @@ class Dashboard extends Component {
   };
   render() {
     const { user } = this.props.auth;
+    sessionStorage.setItem("username",user.id);
     return (
       <div style={{ height: "75vh" }} className="container valign-wrapper">
         <div className="row">

@@ -37,7 +37,7 @@ class Results extends Component {
   };
 
   componentDidMount() {
-    API.getUser({ email: this.props.match.params.email }).then(res => {
+    API.getUser(sessionStorage.getItem('username')).then(res => {
       console.log(res);
       this.setState({
         name: res.data.name,

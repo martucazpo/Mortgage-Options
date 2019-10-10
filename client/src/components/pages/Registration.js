@@ -33,13 +33,31 @@ class Registration extends Component {
   };
 
   componentDidMount() {
-    API.getUser({ email: this.props.match.params.email })
-      .then(res => {
-        console.log(res);
-        this.setState({
-          // name: res.data.name,
-          // email: res.data.email
-        });
+    console.log("My Id!",sessionStorage.getItem('username'))
+    API.getUser(sessionStorage.getItem('username'))
+    .then(res => {
+
+
+      console.log("LKDJF:LSD")
+      console.log("ID?",res); 
+      this.setState({
+        name : res.data.name,
+        email : res.data.email,
+        id : res.data._id,
+        profileId : res.data.profile[0]})
+  })
+  .then(data => API.getProfile(this.state.profileId)
+    .then(res => {
+      console.log("frogs",res)
+      this.setState({
+        myProfile : res.data,
+        downPayment : res.data[0].downPayment,
+        desiredPayment : res.data[0].desiredPayment,
+        loanTerm : res.data[0].loanTerm,
+        propertyId : res.data[0].property,
+        profileId : res.data[0]._id
+        })
+
       })
 
 

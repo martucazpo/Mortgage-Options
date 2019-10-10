@@ -32,8 +32,10 @@ class PropertySearch extends Component {
   }
 
   componentDidMount() {
-    API.getUser({ email: this.props.match.params.email }).then(res => {
-      console.log(res);
+
+    API.getUser(sessionStorage.getItem('username'))
+    .then(res => {
+      console.log(res); 
       this.setState({
         name: res.data.name,
         email: res.data.email,
@@ -41,33 +43,32 @@ class PropertySearch extends Component {
       });
     });
 
-    API.getProfile(this.state.profileId)
-      .then(res => {
-        this.setState(
-          {
-            downPayment: res.data[0].downPayment,
-            desiredPayment: res.data[0].desiredPayment,
-            loanTerm: res.data[0].loanTerm,
-            propertyId: res.data[0].property,
-            profileId: res.data[0]._id
-          },
-          () => {
-            API.findPropertyAndPop(this.state.profileId).then(res =>
-              this.setState({
-                savedProp: res.data.property,
-                // name: this.state.name,
-                // email: this.state.email,
-                ListPrice: res.data.property.ListPrice,
-                TaxAnnualAmount: res.data.property.TaxAnnualAmount,
-                _id: res.data.property._id,
-                img: res.data.property.img
-              })
-            );
-          }
-        );
-      })
-      .catch(err => console.log(err));
     this.searchProperties();
+
+    API.getProfile(this.state.profileId)
+    .then(res => {
+      this.setState({
+        downPayment : res.data[0].downPayment,
+        desiredPayment : res.data[0].desiredPayment,
+        loanTerm : res.data[0].loanTerm,
+        propertyId : res.data[0].property,
+        profileId : res.data[0]._id })
+        })
+        .then( data =>
+        API.findPropertyAndPop(this.state.profileId))
+        .then(res =>
+        this.setState({
+        savedProp: res.data.property,
+              // name: this.state.name,
+               // email: this.state.email,
+       ListPrice: res.data.property.ListPrice,
+      TaxAnnualAmount: res.data.property.TaxAnnualAmount,
+      _id: res.data.property._id,
+      img: res.data.property.img
+            }))
+      
+    .catch(err => console.log(err));
+    
   }
 
   searchProperties() {
