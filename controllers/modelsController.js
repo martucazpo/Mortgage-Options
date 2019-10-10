@@ -41,6 +41,9 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findPropertyAndPop: function(req, res) {
+    console.log("POPPING")
+    console.log("RKP ID", req.params.id)
+    console.log("RKBODY ID",req.body.id)
     db.Profile
       .findById(req.params.id)
       .populate("property")
@@ -51,16 +54,18 @@ module.exports = {
   },
   findUserById: function(req, res) {
     db.User
-      .findOne(req.params.email)
+      .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
 createProfile: function(req, res) {
-    const {id, ...rest} = req.body;
+  console.log("RECK",req.body);
+  console.log("RECK ID", req.body.id)
     db.Profile
-      .create(rest)
+      .create(req.body)
       .then(dbProfile => {
-        db.User.findOneAndUpdate(id, 
+        console.log("PROFILE",dbProfile)
+        db.User.findOneAndUpdate({_id : req.body.id}, 
         { $push: { profile: dbProfile._id } }, { new:true }).then(abc => {
           console.log("ABC",abc);
         });
@@ -77,16 +82,17 @@ createProfile: function(req, res) {
     db.Property
       .create(req.body)
       .then(dbProperty => {
-        db.Profile.findOneAndUpdate(req.body.id, 
-        { $push: { property: dbProperty._id } }, { new:true }).then(abc => {console.log("ABC",abc)
+        console.log("looking for profile", req.body.id)
+        db.Profile.findOneAndUpdate({_id:req.body.id}, 
+        { $push: { property: dbProperty._id } }, { new:true }).then(abc => {console.log("FFYG",abc)
         });
       })
       .catch(err => res.status(422).json(err))
   },
   getPropProp: function(req,res){
-    // console.log("PARAMS",req.params)
+     console.log("Property PARAMS",req.params)
     // console.log("BODY", req.body)
-     db.Profile.findById(_id)
+     db.Profile.findById(req.body.id)
      .populate("property")
      .then(property =>console.log("populated!",property))
      .catch(err => (console.log(err)))
@@ -107,7 +113,14 @@ createProfile: function(req, res) {
   },
   updateProfile: function(req, res) {
     db.Profile
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .findOneAndUpdate(req.params.id)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  updateUser: function(req, res) {
+    console.log("UPDATE user")
+    db.User
+      .findOneAndUpdate(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

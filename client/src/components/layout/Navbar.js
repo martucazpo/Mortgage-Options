@@ -12,7 +12,7 @@ class Navbar extends Component {
   };
 
  componentDidMount() {
-    API.getUser({email:this.props.match.params.email})
+    API.getUser(sessionStorage.getItem('username'))
     .then(res => {
       this.setState({
         name : res.data.name,

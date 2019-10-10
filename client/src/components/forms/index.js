@@ -12,8 +12,27 @@ class Form extends Component {
     // email: this.props.email,
     desiredPayment: "",
     loanTerm: "",
-    downPayment: ""
+    downPayment: "",
+    name: "",
+    email: "",
+    id : ""
   };
+
+  componentDidMount(){
+    API.getUser(sessionStorage.getItem('username'))
+    .then(res => {
+
+
+      console.log("LKDJF:LSD")
+      console.log("ID?",res); 
+      this.setState({
+        name : res.data.name,
+        email : res.data.email,
+        id : res.data._id,
+        profileId : res.data.profile[0]})
+  })
+   
+  }
 
   // handle any changes to the input fields
   handleInputChange = event => {
@@ -24,23 +43,29 @@ class Form extends Component {
     this.setState({
       [name]: value
     });
-  };
+  }
 
   handleForm = event => {
     console.log("HELLO");
     event.preventDefault();
+    
     API.saveProfile({
       // name: this.state.name
       // email:this.props.email,
+      id : this.state.id,
       desiredPayment: this.state.desiredPayment,
       downPayment: this.state.downPayment,
       loanTerm: this.state.loanTerm
-    });
+    })
     //  API.popUser(this.props.id)
     //    .then(console.log("populated res"))
     //   .catch(err => console.log(err));
     // this.handleLocationReload();
-  };
+  }
+
+
+
+
 
   handleLocationReload = () => {
     window.location.reload();

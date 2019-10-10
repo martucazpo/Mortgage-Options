@@ -34,8 +34,12 @@ class Registration extends Component {
   };
 
   componentDidMount() {
-    API.getUser({email:this.props.match.params.email})
+    console.log("My Id!",sessionStorage.getItem('username'))
+    API.getUser(sessionStorage.getItem('username'))
     .then(res => {
+
+
+      console.log("LKDJF:LSD")
       console.log("ID?",res); 
       this.setState({
         name : res.data.name,
@@ -43,8 +47,7 @@ class Registration extends Component {
         id : res.data._id,
         profileId : res.data.profile[0]})
   })
-  .then(
-    API.getProfile(this.state.profileId)
+  .then(data => API.getProfile(this.state.profileId)
     .then(res => {
       console.log("frogs",res)
       this.setState({

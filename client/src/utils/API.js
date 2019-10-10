@@ -9,6 +9,7 @@ export default {
     return axios.get(BASEURL);
   },
   findPropertyAndPop: function(id){
+    console.log("popcorn")
     return axios.get("/api/properties/tester/" + id)
   },
   getProfiles: function() {
@@ -30,8 +31,9 @@ export default {
   populateProperty: function(profileId) {
     return axios.get("/api/profiles/" + profileId);
   },
-  getUser: function(email, info) {
-    return axios.get("/api/users/" + email, info);
+  getUser: function(id) {
+    console.log("USER")
+    return axios.get("/api/users/" + id);
   },
   popUser: function(id){
     console.log("I called the ferret!")
@@ -50,8 +52,8 @@ export default {
     return axios.delete("/api/properties/proper/" + id);
   },
   // Saves a book to the database
-  saveProfile: function(id) {
-    return axios.post("/api/profiles/", id);
+  saveProfile: function(profileData) {
+    return axios.post("/api/profiles/", profileData);
   },
   saveProperty: function(propertyData) {
     return axios.post("/api/properties/", propertyData);
