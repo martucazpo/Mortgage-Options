@@ -3,6 +3,9 @@ import ProfileDetail from "../profileDetails";
 import API from "../../utils/API";
 import { withRouter } from "react-router-dom";
 
+// import materialize from "materialize-css";
+// import ReactDOM from "react-dom";
+
 // const options = ["one", "two", "three"];
 
 class Form extends Component {
@@ -10,12 +13,15 @@ class Form extends Component {
   state = {
     // name: "",
     // email: this.props.email,
+
     desiredPayment: "",
     loanTerm: "",
-    downPayment: "",
     name: "",
     email: "",
-    id : ""
+    id : "",
+    totalPayment: "",
+    termMonths: "",
+    downPayment: ""
   };
 
   componentDidMount(){
@@ -52,14 +58,21 @@ class Form extends Component {
     API.saveProfile({
       // name: this.state.name
       // email:this.props.email,
+
       id : this.state.id,
       desiredPayment: this.state.desiredPayment,
       downPayment: this.state.downPayment,
-      loanTerm: this.state.loanTerm
-    })
-    //  API.popUser(this.props.id)
-    //    .then(console.log("populated res"))
-    //   .catch(err => console.log(err));
+      loanTerm: this.state.loanTerm,
+      totalPayment: this.state.totalPayment,
+      downPayment: this.state.downPayment,
+      termMonths: this.state.loanTerm
+    });
+    API.populateProps({ email: this.props.match.params.email })
+      .then(() => {
+      //  this.props.history.push("/property");
+      })
+      .catch(err => console.log(err));
+
     // this.handleLocationReload();
   }
 
@@ -90,10 +103,10 @@ class Form extends Component {
           onChange={this.handleInputChange}
         /> */}
         <input
-          type="desiredPayment"
+          type="totalPayment"
           placeholder="Desired Payment Amount"
-          name="desiredPayment"
-          value={this.state.desiredPayment}
+          name="totalPayment"
+          value={this.state.totalPayment}
           onChange={this.handleInputChange}
         />
         {/* <div style={{ margin: "20px" }}>
@@ -113,14 +126,16 @@ class Form extends Component {
 
         <label>Amortize your Loan</label>
         <select className="browser-default">
-          <option value="" disabled >
+          <option value="" disabled>
             Loan Term
           </option>
-          <option value="360">30 years</option>
-          <option value="240">20 years</option>
-          <option value="180">15 years</option>
-          <option value="120">10 years</option>
-          <option value="60">5 years</option>
+          <option value="360">30 Years</option>
+          <option value="240">20 Years</option>
+          <option value="180">15 Years</option>
+          <option value="120">10 Years</option>
+          <option value="60">5 Years</option>
+          value={this.state.termMonths}
+          onChange={this.handleInputChange}
         </select>
         <br></br>
         <input
@@ -131,8 +146,8 @@ class Form extends Component {
           onChange={this.handleInputChange}
         />
         <ProfileDetail
-          desiredPayment={this.state.desiredPayment}
-          loanTerm={this.state.loanTerm}
+          desiredPayment={this.state.totalPayment}
+          loanTerm={this.state.termMonths}
           downPayment={this.state.downPayment}
         />
         <button onClick={this.handleForm}>Submit</button>

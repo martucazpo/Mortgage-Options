@@ -18,10 +18,10 @@ var ProfileSchema = new Schema({
   downPayment: {
     type: String
   },
-  desiredPayment: {
+  totalPayment: {
     type: Number
   },
-  loanTerm: {
+  termMonths: {
     type: Number
   },
   property: [

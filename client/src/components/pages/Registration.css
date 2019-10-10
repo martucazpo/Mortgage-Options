@@ -4,5 +4,12 @@
 }
 
 .regBox {
-  margin-top: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.regPage {
+  background-color: #e8e8e8;
 }
