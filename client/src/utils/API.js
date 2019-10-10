@@ -33,9 +33,13 @@ export default {
   getUser: function(email, info) {
     return axios.get("/api/users/" + email, info);
   },
-  populateProps: function(){
-    return axios.get("/api/users/test");
+  popUser: function(id){
+    console.log("I called the ferret!")
+    return axios.get("/api/users/pop/" + id);
   },
+  // populateProps: function(){
+  //   return axios.get("/api/users/test");
+  // },
   updateProfile: function(id, info) {
     return axios.put("/api/profiles/" + id, info);
   },
@@ -46,8 +50,8 @@ export default {
     return axios.delete("/api/properties/proper/" + id);
   },
   // Saves a book to the database
-  saveProfile: function(data) {
-    return axios.post("/api/profiles/", data);
+  saveProfile: function(id) {
+    return axios.post("/api/profiles/", id);
   },
   saveProperty: function(propertyData) {
     return axios.post("/api/properties/", propertyData);

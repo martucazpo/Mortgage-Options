@@ -1,7 +1,26 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import API from "../../utils/API";
 import "./Navbar.css";
+import {withRouter} from 'react-router-dom';
+
+
 class Navbar extends Component {
+
+  state = {
+    name : ""
+  };
+
+ componentDidMount() {
+    API.getUser({email:this.props.match.params.email})
+    .then(res => {
+      this.setState({
+        name : res.data.name,
+      });
+  })
+  .catch(err => console.log(err))
+}
+
   render() {
     return (
       <div>
@@ -12,7 +31,7 @@ class Navbar extends Component {
             </Link>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li>
-                <a href="*">Hello (username here)</a>
+                <a href="*">Hello {this.state.name}</a>
               </li>
             </ul>
           </div>
@@ -21,4 +40,4 @@ class Navbar extends Component {
     );
   }
 }
-export default Navbar;
+export default withRouter(Navbar);

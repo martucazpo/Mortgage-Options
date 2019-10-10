@@ -11,8 +11,8 @@ import { Link } from 'react-router-dom';
 
 import "./Registration.css";
 
-import Calculator from "../Calculator";
-import MortgageCalculator from "mortgage-calculator-react";
+//import Calculator from "../Calculator";
+//import MortgageCalculator from "mortgage-calculator-react";
 
 // const reactElement = (
 //   <div>
@@ -23,38 +23,45 @@ import MortgageCalculator from "mortgage-calculator-react";
 class Registration extends Component {
   state = {
     profiles: [],
+    myProfile: [],
     // name: "",
     // email: "",
     desiredPayment: "",
     loanTerm: "",
-    downPayment: ""
+    downPayment: "",
+    id: "",
+    profileId: ""
   };
 
   componentDidMount() {
-    API.getUser({ email: this.props.match.params.email })
-      .then(res => {
-        console.log(res);
-        this.setState({
-          name: res.data.name,
-          email: res.data.email
-        });
-      })
-      .catch(err => console.log(err));
-    this.loadProfile();
-  }
-
-  loadProfile = () => {
-    API.getProfiles()
-      .then(res =>
-        this.setState({
-          profiles: res.data,
-          desiredPayment: this.state.desiredPayment,
-          loanTerm: this.state.loanTerm,
-          downPayment: this.state.downPayment
+    API.getUser({email:this.props.match.params.email})
+    .then(res => {
+      console.log("ID?",res); 
+      this.setState({
+        name : res.data.name,
+        email : res.data.email,
+        id : res.data._id,
+        profileId : res.data.profile[0]})
+  })
+  .then(
+    API.getProfile(this.state.profileId)
+    .then(res => {
+      console.log("frogs",res)
+      this.setState({
+        myProfile : res.data,
+        downPayment : res.data[0].downPayment,
+        desiredPayment : res.data[0].desiredPayment,
+        loanTerm : res.data[0].loanTerm,
+        propertyId : res.data[0].property,
+        profileId : res.data[0]._id
         })
-      )
-      .catch(err => console.log(err));
-  };
+      })
+  )
+  .catch(err => console.log(err));  
+
+}
+
+  
 
   deleteProfile = id => {
     API.deleteProfile(id)
@@ -76,6 +83,7 @@ class Registration extends Component {
 
 
   render() {
+    console.log("State",this.state);
     return (
       <div>
         <Navbar />
@@ -97,7 +105,7 @@ class Registration extends Component {
                       <div>{this.state.email}</div>
                     </strong>
                     <div>
-                      {this.state.profiles.map(profile => (
+                      {this.state.myProfile.map(profile => (
                         <div key={profile._id}>
                           <strong>
                             <div>{profile.desiredPayment}</div>
