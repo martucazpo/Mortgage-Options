@@ -79,11 +79,11 @@ class Registration extends Component {
   render() {
     console.log("State", this.state);
     return (
-      <div>
+      <div className="regPage">
         <Navbar />
-        <div className="row">
+        <div className="row regRow">
           <div className="col s2"></div>
-          <div className="col s8 skeleton regBox">
+          <div className="col s8 regBox">
             <div className="formDiv">
               <h3>
                 {this.state.name}, once you have filled it out, this form will
