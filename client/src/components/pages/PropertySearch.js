@@ -55,7 +55,7 @@ class PropertySearch extends Component {
         }, () => {
 
           API.findPropertyAndPop(this.state.profileId)
-          .then(res => 
+          .then(res =>
             this.setState({
               savedProp: res.data.property,
               // name: this.state.name,
