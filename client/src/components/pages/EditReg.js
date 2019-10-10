@@ -5,8 +5,8 @@ import { withRouter } from "react-router-dom";
 
 class EditReg extends Component {
   state = {
-    desiredPayment: "",
-    loanTerm: "",
+    totalPayment: "",
+    termMonths: "",
     downPayment: ""
   };
 
@@ -15,8 +15,8 @@ class EditReg extends Component {
       .then(res => {
         console.log("My res", res);
         this.setState({
-          desiredPayment: res.data.desiredPayment,
-          loanTerm: res.data.loanTerm,
+          totalPayment: res.data.totalPayment,
+          termMonths: res.data.termMonths,
           downPayment: res.data.downPayment
         });
       })
@@ -45,17 +45,21 @@ class EditReg extends Component {
         <input
           type="text"
           placeholder="Desired Payment Amount"
-          name="desiredPayment"
-          value={this.state.desiredPayment}
+          name="totalPayment"
+          value={this.state.totalPayment}
           onChange={this.handleInputChange}
         />
-        <input
-          type="text"
-          placeholder="Desired Loan Term"
-          name="loanTerm"
-          value={this.state.loanTerm}
-          onChange={this.handleInputChange}
-        />
+        <label>Amortize your Loan</label>
+        <select class="browser-default">
+          <option value="" disabled selected>
+            Loan Term
+          </option>
+          <option value="360">30 Years</option>
+          <option value="240">20 Years</option>
+          <option value="180">15 Years</option>
+          <option value="120">10 Years</option>
+          <option value="60">5 Years</option>
+        </select>
         <input
           type="text"
           placeholder="Down Payment"

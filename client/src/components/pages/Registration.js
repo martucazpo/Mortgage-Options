@@ -8,11 +8,13 @@ import EditBtn from "../EditBtn";
 import { withRouter } from "react-router-dom";
 import Navbar from "../layout/Navbar";
 import { Link } from "react-router-dom";
-import calculator from "../Mortgage/Calculator";
+// import calculator from "../Mortgage/Calculator";
 
 import "./Registration.css";
 
+
 import MortgageCalculator from "mortgage-calculator-react";
+
 
 // const reactElement = (
 //   <div>
@@ -23,10 +25,8 @@ import MortgageCalculator from "mortgage-calculator-react";
 class Registration extends Component {
   state = {
     profiles: [],
-    myProfile: [],
     // name: "",
     // email: "",
-
     totalPayment: "",
     termMonths: "",
     downPayment: ""
@@ -42,7 +42,9 @@ class Registration extends Component {
         });
       })
 
+
       .catch(err => console.log(err));
+
   }
 
   loadProfile = () => {
@@ -77,7 +79,6 @@ class Registration extends Component {
   };
 
   render() {
-    console.log("State", this.state);
     return (
       <div className="regPage">
         <Navbar />
@@ -114,7 +115,7 @@ class Registration extends Component {
                       <div>{this.state.email}</div>
                     </strong>
                     <div>
-                      {this.state.myProfile.map(profile => (
+                      {this.state.profiles.map(profile => (
                         <div key={profile._id}>
                           <strong>
                             <div>{profile.totalPayment}</div>
