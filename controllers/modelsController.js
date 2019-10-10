@@ -56,28 +56,29 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 createProfile: function(req, res) {
-    const {email, ...rest} = req.body;
+    const {id, ...rest} = req.body;
     db.Profile
       .create(rest)
       .then(dbProfile => {
-        db.User.findOneAndUpdate({email:email}, 
+        db.User.findOneAndUpdate(id, 
         { $push: { profile: dbProfile._id } }, { new:true }).then(abc => {
+          console.log("ABC",abc);
         });
       })
       .catch(err => res.status(422).json(err))
   },
-  getPopProf: function(req,res){
-     db.User.findOne(req.params.email)
-     .populate("profile")
-     .then(profile =>console.log("populated!",profile))
-     .catch(err => (console.log(err)))
-  },
+  // getPopProf: function(req,res){
+  //    db.User.findOne(req.params.email)
+  //    .populate("profile")
+  //    .then(profile =>console.log("populated!",profile))
+  //    .catch(err => (console.log(err)))
+  // },
   createProperty: function(req, res) {
     db.Property
       .create(req.body)
       .then(dbProperty => {
         db.Profile.findOneAndUpdate(req.body.id, 
-        { $push: { property: dbProperty._id } }, { new:true }).then(abc => {
+        { $push: { property: dbProperty._id } }, { new:true }).then(abc => {console.log("ABC",abc)
         });
       })
       .catch(err => res.status(422).json(err))
@@ -88,6 +89,14 @@ createProfile: function(req, res) {
      db.Profile.findById(_id)
      .populate("property")
      .then(property =>console.log("populated!",property))
+     .catch(err => (console.log(err)))
+  },
+  popUser: function(req,res){
+    //  console.log("PARAMS",req.params)
+      //console.log("BODY", req.body)
+     db.User.findById(req.params.id)
+     .populate("profile")
+     .then(profile =>console.log("profiled!",profile))
      .catch(err => (console.log(err)))
   },
   createUser: function(req, res) {

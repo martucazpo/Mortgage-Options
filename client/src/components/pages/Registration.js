@@ -12,7 +12,9 @@ import calculator from "../Mortgage/Calculator";
 
 import "./Registration.css";
 
+
 import MortgageCalculator from "mortgage-calculator-react";
+
 
 // const reactElement = (
 //   <div>
@@ -23,8 +25,10 @@ import MortgageCalculator from "mortgage-calculator-react";
 class Registration extends Component {
   state = {
     profiles: [],
+    myProfile: [],
     // name: "",
     // email: "",
+
     totalPayment: "",
     termMonths: "",
     downPayment: ""
@@ -38,10 +42,11 @@ class Registration extends Component {
           // name: res.data.name,
           // email: res.data.email
         });
+
       })
-      .catch(err => console.log(err));
-    this.loadProfile();
-  }
+  )
+  .catch(err => console.log(err));  
+
 
   loadProfile = () => {
     API.getProfiles()
@@ -55,6 +60,7 @@ class Registration extends Component {
       )
       .catch(err => console.log(err));
   };
+
 
   deleteProfile = id => {
     API.deleteProfile(id)
@@ -75,6 +81,7 @@ class Registration extends Component {
   };
 
   render() {
+    console.log("State",this.state);
     return (
       <div>
         <Navbar />
@@ -111,7 +118,7 @@ class Registration extends Component {
                       <div>{this.state.email}</div>
                     </strong>
                     <div>
-                      {this.state.profiles.map(profile => (
+                      {this.state.myProfile.map(profile => (
                         <div key={profile._id}>
                           <strong>
                             <div>{profile.totalPayment}</div>

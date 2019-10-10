@@ -2,8 +2,10 @@ import React, { Component } from "react";
 import ProfileDetail from "../profileDetails";
 import API from "../../utils/API";
 import { withRouter } from "react-router-dom";
+
 import materialize from "materialize-css";
 import ReactDOM from "react-dom";
+
 
 // const options = ["one", "two", "three"];
 
@@ -38,10 +40,10 @@ class Form extends Component {
       downPayment: this.state.downPayment,
       termMonths: this.state.loanTerm
     });
-    API.populateProps({ email: this.props.match.params.email })
-      .then(console.log("populated"))
-      .catch(err => console.log(err));
-    this.handleLocationReload();
+    //  API.popUser(this.props.id)
+    //    .then(console.log("populated res"))
+    //   .catch(err => console.log(err));
+    // this.handleLocationReload();
   };
 
   handleLocationReload = () => {
@@ -89,8 +91,8 @@ class Form extends Component {
         </div> */}
 
         <label>Amortize your Loan</label>
-        <select class="browser-default">
-          <option value="" disabled selected>
+        <select className="browser-default">
+          <option value="" disabled >
             Loan Term
           </option>
           <option value="360">30 Years</option>
