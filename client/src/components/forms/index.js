@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ProfileDetail from "../profileDetails";
 import API from "../../utils/API";
 import { withRouter } from "react-router-dom";
-import materialize from "materialize-css";
 
 // const options = ["one", "two", "three"];
 
@@ -37,10 +36,10 @@ class Form extends Component {
       downPayment: this.state.downPayment,
       loanTerm: this.state.loanTerm
     });
-    API.populateProps({ email: this.props.match.params.email })
-      .then(console.log("populated"))
-      .catch(err => console.log(err));
-    this.handleLocationReload();
+    //  API.popUser(this.props.id)
+    //    .then(console.log("populated res"))
+    //   .catch(err => console.log(err));
+    // this.handleLocationReload();
   };
 
   handleLocationReload = () => {
