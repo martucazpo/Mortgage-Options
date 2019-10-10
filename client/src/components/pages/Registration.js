@@ -12,9 +12,7 @@ import calculator from "../Mortgage/Calculator";
 
 import "./Registration.css";
 
-
 import MortgageCalculator from "mortgage-calculator-react";
-
 
 // const reactElement = (
 //   <div>
@@ -42,11 +40,10 @@ class Registration extends Component {
           // name: res.data.name,
           // email: res.data.email
         });
-
       })
-  )
-  .catch(err => console.log(err));  
 
+      .catch(err => console.log(err));
+  }
 
   loadProfile = () => {
     API.getProfiles()
@@ -60,7 +57,6 @@ class Registration extends Component {
       )
       .catch(err => console.log(err));
   };
-
 
   deleteProfile = id => {
     API.deleteProfile(id)
@@ -81,7 +77,7 @@ class Registration extends Component {
   };
 
   render() {
-    console.log("State",this.state);
+    console.log("State", this.state);
     return (
       <div>
         <Navbar />
