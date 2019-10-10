@@ -46,7 +46,7 @@ class Registration extends Component {
         id : res.data._id,
         profileId : res.data.profile[0]})
   })
-  .then(data => API.getProfile(this.state.profileId)
+  .then(data => API.getProfile(this.state.profileId))
     .then(res => {
       console.log("frogs",res)
       this.setState({
@@ -59,11 +59,9 @@ class Registration extends Component {
         })
 
       })
+ .catch(err => console.log(err))
 
-
-      .catch(err => console.log(err));
-
-  }
+    }
 
   loadProfile = () => {
     API.getProfiles()
