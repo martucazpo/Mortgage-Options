@@ -38,7 +38,8 @@ ListPrice: 0,
 TaxAnnualAmount: 0,
 profileId: "",
 propertyId: [],
-properties: []
+properties: [],
+profile: []
   };
 }
 
@@ -59,6 +60,7 @@ properties: []
     .then(res => {
       console.log("bullfrog",res);
       this.setState({
+       // profile: res.data.profile,
         properties: res.data.property,
         downPayment : res.data.profile[0].downPayment,
         totalPayment : res.data.profile[0].totalPayment,

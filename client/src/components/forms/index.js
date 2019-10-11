@@ -13,19 +13,22 @@ import { logoutUser } from "../../actions/authActions";
 
 class Form extends Component {
   // Setting the initial values of this.state.username and this.state.password
-  state = {
-    // name: "",
-    // email: this.props.email,
-
-    desiredPayment: "",
-    loanTerm: "",
-    name: "",
-    email: "",
-    id : "",
-    totalPayment: "",
-    termMonths: "",
-    downPayment: ""
+  constructor(props){
+  super(props);
+  this.state = {
+  desiredPayment: "",
+  loanTerm: "",
+  name: "",
+  email: "",
+  id : "",
+  totalPayment: "",
+  termMonths: "",
+  downPayment: ""
   };
+  this.handleInputChange = this.handleInputChange.bind(this);
+  this.handleForm = this.handleForm.bind(this);
+  this.handleLocationReload =this.handleLocationReload.bind(this);
+}
 
   componentDidMount(){
     let user = this.props.auth;
@@ -69,14 +72,13 @@ class Form extends Component {
       termMonths: this.state.loanTerm
     })
     .catch(err => console.log (err))
-    API.popUser(user.user.id)
-      .then(() => {
-        console.log("rabbits")
-        this.props.history.push("/registration");
-      })
-      .catch(err => console.log(err));
-
-     //this.handleLocationReload();
+    // API.popUser(user.user.id)
+    //   .then(() => {
+    //     console.log("rabbits")
+    //   })
+    //   .catch(err => console.log(err));
+     
+      this.handleLocationReload();
   }
 
 
@@ -84,7 +86,7 @@ class Form extends Component {
 
 
   handleLocationReload = () => {
-    window.location.reload();
+    window.location.reload()
   };
 
   render() {
