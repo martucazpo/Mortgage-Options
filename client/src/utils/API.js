@@ -39,9 +39,9 @@ export default {
     console.log("I called the ferret!")
     return axios.get("/api/users/pop/" + id);
   },
-  // populateProps: function(){
-  //   return axios.get("/api/users/test");
-  // },
+   populateProps: function(){
+     return axios.get("/api/users/test");
+   },
   updateProfile: function(id, info) {
     return axios.put("/api/profiles/" + id, info);
   },
