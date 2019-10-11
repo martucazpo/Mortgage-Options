@@ -24,7 +24,7 @@ class PropertySearch extends Component {
       email: "",
       profileId: "",
       savedProp: [],
-      _id: ""
+      id: ""
     };
     this.renderSavedProps = this.renderSavedProps.bind(this);
     this.searchProperties = this.searchProperties.bind(this);
@@ -55,7 +55,7 @@ class PropertySearch extends Component {
         savedProp : res.data.property,
         ListPrice : res.data.ListPrice,
         TaxAnnualAmount : res.data.property.TaxAnnualAmount,
-        _id: res.data.property._id,
+        id: res.data.property._id,
         img : res.data.property.imageArr
       })
     })
@@ -155,9 +155,16 @@ class PropertySearch extends Component {
   };
 
   deleteProperty = id => {
+    let user = this.props.auth;
+    console.log("delete id",id)
     API.deleteProperty(id)
-      .then(console.log("profile deleted"))
+      .then(console.log("property deleted"))
       .catch(err => console.log(err));
+    
+    API.updateUser(user.user.id)
+    .then(console.log ("property deleted from user"))
+    .catch(err => console.log(err))
+
     this.handleLocationReload();
   };
 

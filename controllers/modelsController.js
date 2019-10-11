@@ -114,7 +114,7 @@ createProfile: function(req, res) {
   },
   updateProfile: function(req, res) {
     db.Profile
-      .findOneAndUpdate(req.params.id)
+      .findOneAndUpdate({_id:req.params.id},req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

@@ -35,6 +35,10 @@ export default {
     console.log("USER")
     return axios.get("/api/users/" + id);
   },
+  updateUser: function(id) {
+    console.log("user updated")
+    return axios.get("/api/users/" + id);
+  },
   popUser: function(id){
     console.log("I called the ferret!")
     return axios.get("/api/users/pop/" + id);
@@ -49,6 +53,7 @@ export default {
     return axios.delete("/api/profiles/" + id);
   },
   deleteProperty: function(id) {
+    "Is anybody home?"
     return axios.delete("/api/properties/proper/" + id);
   },
   // Saves a book to the database
