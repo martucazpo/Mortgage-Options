@@ -1,0 +1,9 @@
+.registerBox {
+  background-color: white;
+  margin-top: 10%;
+  border-radius: 5px;
+}
+
+.registerButton {
+  margin-bottom: 20px;
+}
