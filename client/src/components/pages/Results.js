@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import LinkList from "../linksList";
 import "./Results.css";
-import { withRouter } from "react-router-dom";
+//import { withRouter } from "react-router-dom";
 import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
 import Chart from "react-google-charts";
 import MortgageCalculator from "mortgage-calculator-react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 
 const data = [
   ["Task", "Hours per Day"],
@@ -23,22 +26,28 @@ const options = {
 };
 
 class Results extends Component {
-  state = {
-    name: "",
-    email: "",
-    totalPayment: 0,
-    downPayment: 0,
-    termMonths: 0,
-    ListPrice: 0,
-    TaxAnnualAmount: 0,
-    profileId: "",
-    propertyId: [],
-    properties: []
+constructor (props){
+super(props);
+this. state = {
+name: "",
+email: "",
+totalPayment: 0,
+downPayment: 0,
+termMonths: 0,
+ListPrice: 0,
+TaxAnnualAmount: 0,
+profileId: "",
+propertyId: [],
+properties: []
   };
+}
 
   componentDidMount() {
-    API.getUser(sessionStorage.getItem('username')).then(res => {
-      console.log(res);
+    let user = this.props.auth;
+
+    API.getUser(user.user.id)
+    .then(res => {
+      console.log("toast",res); 
       this.setState({
         name: res.data.name,
         email: res.data.email,
@@ -46,28 +55,22 @@ class Results extends Component {
       });
     });
 
-    API.getProfile(this.state.profileId)
-      .then(res => {
-        this.setState(
-          {
-            downPayment: res.data[0].downPayment,
-            totalPayment: res.data[0].totalPayment,
-            termMonths: res.data[0].termMonths,
-            propertyId: res.data[0].property,
-            profileId: res.data[0]._id
-          },
-          () => {
-            API.findPropertyAndPop(this.state.profileId).then(res =>
-              this.setState({
-                totalPayment: res.data.totalPayment,
-                downPayment: res.data.downPayment,
-                properties: res.data.property
-              })
-            );
-          }
-        );
+    API.popUser(user.user.id)
+    .then(res => {
+      console.log("bullfrog",res);
+      this.setState({
+        properties: res.data.property,
+        downPayment : res.data.profile[0].downPayment,
+        totalPayment : res.data.profile[0].totalPayment,
+        termMonths : res.data.profile[0].termMonths,
+        ListPrice : res.data.property.ListPrice,
+        TaxAnnualAmount : res.data.property.TaxAnnualAmount,
+        _id: res.data.property._id,
+        img : res.data.property.imageArr
       })
-      .catch(err => console.log(err));
+    })
+
+    
   }
   //  {/* <Navbar /> */}
   renderproperties = () => {
@@ -124,7 +127,21 @@ class Results extends Component {
   }
 }
 
+
+Results.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Results);
+
+
 // const rootElement = document.getElementById("root");
 // ReactDOM.render(<App />, rootElement);
 
-export default withRouter(Results);
+//export default withRouter(Results);

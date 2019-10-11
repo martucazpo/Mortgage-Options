@@ -23,6 +23,12 @@ const UserSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "Profile"
     }
+  ],
+  property: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Property"
+    }
   ]
 });
 module.exports = User = mongoose.model("users", UserSchema);
