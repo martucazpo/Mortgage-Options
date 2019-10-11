@@ -1,27 +1,59 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import ProfileDetail from "../profileDetails";
-import { withRouter } from "react-router-dom";
+//import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 
 class EditReg extends Component {
   state = {
+    // name: "",
+    // email: this.props.email,
+
+    desiredPayment: "",
+    loanTerm: "",
+    name: "",
+    email: "",
+    id : "",
+    profileId : "",
     totalPayment: "",
     termMonths: "",
     downPayment: ""
   };
 
-  componentDidMount() {
-    API.getProfile(this.props.match.params.id)
-      .then(res => {
-        console.log("My res", res);
-        this.setState({
-          totalPayment: res.data.totalPayment,
-          termMonths: res.data.termMonths,
-          downPayment: res.data.downPayment
-        });
+  componentDidMount(){
+    let user = this.props.auth;
+    API.popUser(user.user.id)
+    .then(res => {
+      console.log("Edit?",res); 
+      this.setState({
+        name : res.data.name,
+        email : res.data.email,
+        id : res.data._id,
+        profileId : res.data.profile[0]._id,
+        loanTerm : res.data.profile[0].loanTerm,
+        totalPayment: res.data.profile[0].totalPayment,
+        termMonths : res.data.profile[0].termMonths,
+        downPayment : res.data.profile[0].termMonths
       })
-      .catch(err => console.log(err));
+  })
+   
   }
+
+
+  // componentDidMount() {
+  //   API.getProfile(this.props.match.params.id)
+  //     .then(res => {
+  //       console.log("My res", res);
+  //       this.setState({
+  //         totalPayment: res.data.totalPayment,
+  //         termMonths: res.data.termMonths,
+  //         downPayment: res.data.downPayment
+  //       });
+  //     })
+  //     .catch(err => console.log(err));
+  // }
   handleInputChange = event => {
     console.log("I can handle imput change");
     const { name, value } = event.target;
@@ -31,15 +63,41 @@ class EditReg extends Component {
   };
 
   handleForm = event => {
+    let user = this.props.auth;
     event.preventDefault();
-    API.updateProfile(this.props.match.params.id, this.state)
-      .then(res => console.log("item updated!!!" + res.data))
+    API.updateProfile(this.state.profileId,{
+      loanTerm:this.state.loanTerm,
+      downPayment:this.state.downPayment,
+      totalPayment:this.state.totalPayment
+    })
+      .then(res => console.log("item updated!!!",res))
       .catch(err => console.log(err));
+    
+    API.updateUser(user.user.id)
+    .then(res => console.log("user updated",res))
+    .catch(err => console.log(err));
+
+    API.popUser(user.user.id)
+    .then(res => {
+      console.log("have I changed?",res); 
+      this.setState({
+        name : res.data.name,
+        email : res.data.email,
+        id : res.data._id,
+        profileId : res.data.profile[0]._id,
+        loanTerm : res.data.profile[0].loanTerm,
+        totalPayment: res.data.profile[0].totalPayment,
+        termMonths : res.data.profile[0].termMonths,
+        downPayment : res.data.profile[0].termMonths
+      })
+  })
+
     this.props.history.push("/registration");
   };
 
   render() {
-    console.log(this.props);
+    console.log("Arizona",this.state);
+    console.log("Profile ID",this.state.profileId)
     return (
       <form>
         <input
@@ -74,4 +132,16 @@ class EditReg extends Component {
   }
 }
 
-export default withRouter(EditReg);
+EditReg.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(EditReg);
+
+//export default withRouter(EditReg);

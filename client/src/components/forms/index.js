@@ -31,9 +31,6 @@ class Form extends Component {
     let user = this.props.auth;
     API.getUser(user.user.id)
     .then(res => {
-
-
-      console.log("LKDJF:LSD")
       console.log("ID?",res); 
       this.setState({
         name : res.data.name,
@@ -77,7 +74,7 @@ class Form extends Component {
         console.log("rabbits")
         this.props.history.push("/registration");
       })
-      .catc99999999999999999999999999999999999999999999999999969h(err => console.log(err));
+      .catch(err => console.log(err));
 
      //this.handleLocationReload();
   }
