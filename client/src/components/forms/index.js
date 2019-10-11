@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import ProfileDetail from "../profileDetails";
 import API from "../../utils/API";
-import { withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
+//import { withRouter } from "react-router-dom";
 
 // import materialize from "materialize-css";
 // import ReactDOM from "react-dom";
@@ -25,7 +28,8 @@ class Form extends Component {
   };
 
   componentDidMount(){
-    API.getUser(sessionStorage.getItem('username'))
+    let user = this.props.auth;
+    API.getUser(user.user.id)
     .then(res => {
 
 
@@ -54,6 +58,7 @@ class Form extends Component {
   handleForm = event => {
     console.log("HELLO");
     event.preventDefault();
+    let user = this.props.auth;
     
     API.saveProfile({
       // name: this.state.name
@@ -64,16 +69,17 @@ class Form extends Component {
       downPayment: this.state.downPayment,
       loanTerm: this.state.loanTerm,
       totalPayment: this.state.totalPayment,
-      downPayment: this.state.downPayment,
       termMonths: this.state.loanTerm
-    });
-    API.populateProps({ email: this.props.match.params.email })
+    })
+    .catch(err => console.log (err))
+    API.popUser(user.user.id)
       .then(() => {
-      //  this.props.history.push("/property");
+        console.log("rabbits")
+        this.props.history.push("/registration");
       })
-      .catch(err => console.log(err));
+      .catc99999999999999999999999999999999999999999999999999969h(err => console.log(err));
 
-    // this.handleLocationReload();
+     //this.handleLocationReload();
   }
 
 
@@ -156,4 +162,15 @@ class Form extends Component {
   }
 }
 
-export default withRouter(Form);
+Form.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Form);
+//export default withRouter(Form);

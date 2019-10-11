@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
 import LinkList from "../linksList";
-import { withRouter } from "react-router-dom";
 import Navbar from "../layout/Navbar";
 import { Link } from "react-router-dom";
 import "./PropertySearch.css";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 
 let imageArr = [];
 let dataArr = [];
@@ -32,10 +34,11 @@ class PropertySearch extends Component {
   }
 
   componentDidMount() {
-
-    API.getUser(sessionStorage.getItem('username'))
+    let user = this.props.auth;
+    console.log(user.user.id);
+    API.getUser(user.user.id)
     .then(res => {
-      console.log(res); 
+      console.log("toast",res); 
       this.setState({
         name: res.data.name,
         email: res.data.email,
@@ -47,6 +50,7 @@ class PropertySearch extends Component {
 
     API.getProfile(this.state.profileId)
     .then(res => {
+      console.log("recieved")
       this.setState({
         downPayment : res.data[0].downPayment,
         desiredPayment : res.data[0].desiredPayment,
@@ -138,6 +142,7 @@ class PropertySearch extends Component {
               {this.renderImages(list.img)}
               <span className="card-title">Card Title</span>
               <a
+              href ="/property"
                 className="btn-floating halfway-fab waves-effect waves-light red"
                 onClick={() =>
                   this.handleForm(
@@ -147,7 +152,7 @@ class PropertySearch extends Component {
                   )
                 }
               >
-                <i class="material-icons">add</i>
+                <i className="material-icons">add</i>
               </a>
             </div>
             <div className="card-content">
@@ -156,96 +161,7 @@ class PropertySearch extends Component {
             </div>
           </div>
         </div>
-
-        {/* 
-          <div className="col s3">
-            <div className="card">
-              <div className="card-image">
-                {this.renderImages(list.img)}
-                <span className="card-title">Card Title</span>
-                <a
-                  className="btn-floating halfway-fab waves-effect waves-light red"
-                  onClick={() =>
-                    this.handleForm(
-                      list.ListPrice,
-                      list.TaxAnnualAmount,
-                      list.img.length > 0 ? list.img[0] : []
-                    )
-                  }
-                >
-                  <i class="material-icons">add</i>
-                </a>
-              </div>
-              <div className="card-content">
-                <p>List Price {list.ListPrice}</p>
-                <p>Annual Tax Amount {list.TaxAnnualAmount}</p>
-              </div>
-            </div>
-          </div>
-
-
-
-
-
-          <div className="col s3">
-            <div className="card">
-              <div className="card-image">
-                {this.renderImages(list.img)}
-                <span className="card-title">Card Title</span>
-                <a
-                  className="btn-floating halfway-fab waves-effect waves-light red"
-                  onClick={() =>
-                    this.handleForm(
-                      list.ListPrice,
-                      list.TaxAnnualAmount,
-                      list.img.length > 0 ? list.img[0] : []
-                    )
-                  }
-                >
-                  <i class="material-icons">add</i>
-                </a>
-              </div>
-              <div className="card-content">
-                <p>List Price {list.ListPrice}</p>
-                <p>Annual Tax Amount {list.TaxAnnualAmount}</p>
-              </div>
-            </div>
-          </div>
-
-
-
-
-
-
-          <div className="col s3">
-            <div className="card">
-              <div className="card-image">
-                {this.renderImages(list.img)}
-                <span className="card-title">Card Title</span>
-                <a
-                  className="btn-floating halfway-fab waves-effect waves-light red"
-                  onClick={() =>
-                    this.handleForm(
-                      list.ListPrice,
-                      list.TaxAnnualAmount,
-                      list.img.length > 0 ? list.img[0] : []
-                    )
-                  }
-                >
-                  <i class="material-icons">add</i>
-                </a>
-              </div>
-              <div className="card-content">
-                <p>List Price {list.ListPrice}</p>
-                <p>Annual Tax Amount {list.TaxAnnualAmount}</p>
-              </div>
-            </div>
-          </div>
-
-
-           */}
-      </div>
-      // </div>
+        </div>
     ));
     return listHtml;
   };
@@ -337,6 +253,19 @@ class PropertySearch extends Component {
       </div>
     );
   }
-}
 
-export default withRouter(PropertySearch);
+  }
+
+
+
+PropertySearch.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(PropertySearch);

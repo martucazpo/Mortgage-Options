@@ -5,36 +5,39 @@ import API from "../../utils/API";
 import { List, ListItem } from "../List";
 import LinkList from "../linksList";
 import EditBtn from "../EditBtn";
-import { withRouter } from "react-router-dom";
 import Navbar from "../layout/Navbar";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions";
 // import calculator from "../Mortgage/Calculator";
 
 import "./Registration.css";
 
-
-import MortgageCalculator from "mortgage-calculator-react";
-
-
-// const reactElement = (
-//   <div>
-//     <MortgageCalculator />
-//   </div>
-// );
+//import MortgageCalculator from "mortgage-calculator-react"
 
 class Registration extends Component {
-  state = {
+  constructor(props) {
+    super(props);
+  this.state = {
     profiles: [],
-    // name: "",
-    // email: "",
+     name: "",
+     email: "",
     totalPayment: "",
     termMonths: "",
     downPayment: ""
   };
+ this.deleteProfile = this.deleteProfile.bind(this);
+ this.handleInputChange = this.handleInputChange.bind(this);
+ this.handleLocationReload = this.handleLocationReload.bind(this);
+ this.renderProfiles = this.renderProfiles.bind(this);
+}
 
   componentDidMount() {
-    console.log("My Id!",sessionStorage.getItem('username'))
-    API.getUser(sessionStorage.getItem('username'))
+    let user = this.props.auth;
+    console.log("MMMMMMMMMM", user)
+    //console.log("My Id!",sessionStorage.getItem('username'))
+    API.getUser(user.user.id)
     .then(res => {
 
 
@@ -46,35 +49,29 @@ class Registration extends Component {
         id : res.data._id,
         profileId : res.data.profile[0]})
   })
-  .then(data => API.getProfile(this.state.profileId))
+  .catch(err => console.log(err))
+
+  API.popUser(user.user.id)
+  .then(res => {
+    console.log("innit", res.data.profile[0]._id)
+   API.getProfile(res.data.profile[0]._id)
     .then(res => {
       console.log("frogs",res)
       this.setState({
-        myProfile : res.data,
-        downPayment : res.data[0].downPayment,
-        desiredPayment : res.data[0].desiredPayment,
-        loanTerm : res.data[0].loanTerm,
-        propertyId : res.data[0].property,
-        profileId : res.data[0]._id
-        })
+        profiles : [res.data],
+        downPayment : res.data.downPayment,
+        desiredPayment : res.data.desiredPayment,
+        loanTerm : res.data.loanTerm,
+        propertyId : res.data.property,
+        profileId : res.data._id})
+        });
+      
 
       })
- .catch(err => console.log(err))
-
-    }
-
-  loadProfile = () => {
-    API.getProfiles()
-      .then(res =>
-        this.setState({
-          profiles: res.data,
-          totalPayment: this.state.totalPayment,
-          termMonths: this.state.termMonths,
-          downPayment: this.state.downPayment
-        })
-      )
-      .catch(err => console.log(err));
-  };
+  .catch(err => console.log(err))
+    
+  }
+    
 
   deleteProfile = id => {
     API.deleteProfile(id)
@@ -93,6 +90,22 @@ class Registration extends Component {
   handleLocationReload = () => {
     window.location.reload();
   };
+
+  renderProfiles =()=> {
+    const myProfile = this.state.profiles.map(profile => (
+      <div key={profile._id}>
+        <strong>
+          <div>{profile.totalPayment}</div>
+          <div>{profile.downPayment}</div>
+          <div>{profile.termMonths}</div>
+        </strong>
+        <EditBtn id={profile._id} />
+        <DeleteBtn
+          onClick={() => this.deleteProfile(profile._id)}
+        />
+      </div>))
+    return myProfile;
+  }
 
   render() {
     return (
@@ -131,19 +144,7 @@ class Registration extends Component {
                       <div>{this.state.email}</div>
                     </strong>
                     <div>
-                      {this.state.profiles.map(profile => (
-                        <div key={profile._id}>
-                          <strong>
-                            <div>{profile.totalPayment}</div>
-                            <div>{profile.downPayment}</div>
-                            <div>{profile.termMonths}</div>
-                          </strong>
-                          <EditBtn id={profile._id} />
-                          <DeleteBtn
-                            onClick={() => this.deleteProfile(profile._id)}
-                          />
-                        </div>
-                      ))}
+                      <div>{this.renderProfiles()}</div>
                     </div>
                   </div>
                 </ListItem>
@@ -169,4 +170,15 @@ class Registration extends Component {
   }
 }
 
-export default withRouter(Registration);
+Registration.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Registration);
+//export default withRouter(Registration);

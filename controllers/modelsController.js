@@ -94,7 +94,7 @@ createProfile: function(req, res) {
     // console.log("BODY", req.body)
      db.Profile.findById(req.body.id)
      .populate("property")
-     .then(property =>console.log("populated!",property))
+     .then(property =>res.json(property))
      .catch(err => (console.log(err)))
   },
   popUser: function(req,res){
@@ -102,7 +102,7 @@ createProfile: function(req, res) {
       //console.log("BODY", req.body)
      db.User.findById(req.params.id)
      .populate("profile")
-     .then(profile =>console.log("profiled!",profile))
+     .then(profile =>res.json(profile))
      .catch(err => (console.log(err)))
   },
   createUser: function(req, res) {
