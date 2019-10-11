@@ -82,8 +82,8 @@ createProfile: function(req, res) {
     db.Property
       .create(req.body)
       .then(dbProperty => {
-        console.log("looking for profile", req.body.id)
-        db.Profile.findOneAndUpdate({_id:req.body.id}, 
+        console.log("looking for user", req.body.id)
+        db.User.findOneAndUpdate({_id:req.body.id}, 
         { $push: { property: dbProperty._id } }, { new:true }).then(abc => {console.log("FFYG",abc)
         });
       })
@@ -102,6 +102,7 @@ createProfile: function(req, res) {
       //console.log("BODY", req.body)
      db.User.findById(req.params.id)
      .populate("profile")
+     .populate("property")
      .then(profile =>res.json(profile))
      .catch(err => (console.log(err)))
   },

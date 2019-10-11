@@ -48,30 +48,18 @@ class PropertySearch extends Component {
 
     this.searchProperties();
 
-    API.getProfile(this.state.profileId)
+    API.popUser(user.user.id)
     .then(res => {
-      console.log("recieved")
+      console.log("bullfrog",res);
       this.setState({
-        downPayment : res.data[0].downPayment,
-        desiredPayment : res.data[0].desiredPayment,
-        loanTerm : res.data[0].loanTerm,
-        propertyId : res.data[0].property,
-        profileId : res.data[0]._id })
-        })
-        .then( data =>
-        API.findPropertyAndPop(this.state.profileId))
-        .then(res =>
-        this.setState({
-        savedProp: res.data.property,
-              // name: this.state.name,
-               // email: this.state.email,
-       ListPrice: res.data.property.ListPrice,
-      TaxAnnualAmount: res.data.property.TaxAnnualAmount,
-      _id: res.data.property._id,
-      img: res.data.property.img
-            }))
-      
-    .catch(err => console.log(err));
+        savedProp : res.data.property,
+        ListPrice : res.data.ListPrice,
+        TaxAnnualAmount : res.data.property.TaxAnnualAmount,
+        _id: res.data.property._id,
+        img : res.data.property.imageArr
+      })
+    })
+
     
   }
 
@@ -120,11 +108,12 @@ class PropertySearch extends Component {
   };
 
   handleForm = (ListPrice, TaxAnnualAmount, img) => {
+    let user = this.props.auth;
     API.saveProperty({
       ListPrice,
       TaxAnnualAmount,
       img: img.MediaURL,
-      id: this.state.profileId
+      id: user.user.id
     })
       .then(console.log("property saved!"))
 
@@ -141,8 +130,7 @@ class PropertySearch extends Component {
             <div className="card-image">
               {this.renderImages(list.img)}
               <span className="card-title">Card Title</span>
-              <a
-              href ="/property"
+              <button
                 className="btn-floating halfway-fab waves-effect waves-light red"
                 onClick={() =>
                   this.handleForm(
@@ -153,7 +141,7 @@ class PropertySearch extends Component {
                 }
               >
                 <i className="material-icons">add</i>
-              </a>
+              </button>
             </div>
             <div className="card-content">
               <p>List Price {list.ListPrice}</p>
