@@ -96,10 +96,10 @@ class PropertySearch extends Component {
     if (img <= 0) {
       return (
         <img
-          value={"../../images/noImage.png"}
-          key={"../../images/noImage.png"}
-          src={"../../images/noImage.png"}
-          alt={"../../images/noImage.png"}
+          value={"../../../images/noImage.png"}
+          key={"../../../images/noImage.png"}
+          src={"../../../images/noImage.png"}
+          alt={"../../../images/noImage.png"}
         />
       );
     }
