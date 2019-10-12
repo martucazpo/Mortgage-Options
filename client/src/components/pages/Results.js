@@ -34,7 +34,8 @@ class Results extends Component {
     TaxAnnualAmount: 0,
     profileId: "",
     propertyId: [],
-    properties: []
+    properties: [],
+    savedProp: []
   };
 
   componentDidMount() {
@@ -62,12 +63,12 @@ class Results extends Component {
   }
   //  {/* <Navbar /> */}
   renderproperties = () => {
-    return this.state.properties.map(property => (
+    return this.state.savedProp.map(property => (
       <div>
-        <p>
-          {property.ListPrice}
-          {property.TaxAnnualAmount}
-        </p>
+        
+         <p>{property.ListPrice}</p>
+          <img style={{height:"100px",width:"auto"}}src={property.img}/>
+        
       </div>
     ));
   };
