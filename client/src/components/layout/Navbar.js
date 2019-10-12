@@ -10,12 +10,13 @@ import Modal from "react-modal";
 
 const customStyles = {
   content: {
-    top: "50%",
+    top: "30%",
     left: "50%",
     right: "auto",
     bottom: "auto",
     marginRight: "-50%",
-    transform: "translate(-50%, -50%)"
+    transform: "translate(-50%, -50%)",
+    width: "400px"
   }
 };
 
@@ -87,17 +88,29 @@ class Navbar extends Component {
           style={customStyles}
           contentLabel="Example Modal"
         >
-          <button onClick={this.closeModal}>X</button>
-          <h2 ref={subtitle => (this.subtitle = subtitle)}></h2>
-          <div>We're sad to see you go</div>
-
           <button
-            onClick={this.onLogoutClick}
-            className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+            className="btn btn-small waves-effect waves-light hoverable red closeButton"
+            onClick={this.closeModal}
           >
-            Logout
+            X
           </button>
-          <br></br>
+          <h2 ref={subtitle => (this.subtitle = subtitle)}></h2>
+          <div className="row">
+            <div className="col s12 goodbye">
+              <p>We're sad to see you go, {user.name}.</p>
+            </div>
+          </div>
+
+          <div className="row">
+            <div className="col s12 logOutButton">
+              <button
+                onClick={this.onLogoutClick}
+                className="btn waves-effect waves-light hoverable black"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
         </Modal>
       </div>
     );

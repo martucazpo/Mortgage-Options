@@ -83,7 +83,7 @@ class Form extends Component {
     return (
       <form>
         <div>
-          <h3>Welcome to Mortgage Genie {this.state.name}!</h3>
+          <h3>Welcome to Mortgage Genie, {this.state.name}!</h3>
           <p>Please enter some information to help get started</p>
         </div>
         {/* <input

@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import Footer from "../layout/Footer";
 // import calculator from "../Mortgage/Calculator";
 
 import "./Registration.css";
@@ -149,12 +150,7 @@ class Registration extends Component {
             </Link>
           </div>
         </div>
-
-        <div className="row">
-          <div className="col s12 links">
-            <LinkList />
-          </div>
-        </div>
+        <Footer />
       </div>
     );
   }
