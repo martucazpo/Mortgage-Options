@@ -18,3 +18,22 @@
 .App {
   font-family: "Raleway", sans-serif;
 }
+
+.closeButton {
+  border-radius: 50px;
+}
+
+.logOutButton {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.goodbye {
+  text-align: center;
+  font-family: "Raleway", sans-serif;
+  font-size: 2em;
+}
+
+.ReactModal__Overlay--after-open {
+  z-index: 1000 !important;
+}

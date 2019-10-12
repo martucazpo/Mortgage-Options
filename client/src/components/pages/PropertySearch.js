@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import LinkList from "../linksList";
+// import LinkList from "../linksList";
 import Navbar from "../layout/Navbar";
 import { Link } from "react-router-dom";
 import "./PropertySearch.css";
@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import NoImage from "../../images/mgNoImage.gif";
+import Footer from "../layout/Footer";
 
 let imageArr = [];
 let dataArr = [];
@@ -206,14 +207,6 @@ class PropertySearch extends Component {
         <Navbar />
 
         <div className="row propertyPage">
-          <div>
-            <p>Because of the rules and regulations around real-estate, we were not allowed to use a functioning MLS API for this App.</p>
-            <p>The developers here at Mortgage Genie would like to thank the Bridge Interactive: </p>
-            <p>"A modern platform for normalized real estate data
-The Bridge API works with industry partners to provide a consistent API for the data you need to build real estate products at scale."</p>
-<p>We are grateful to them for graciously providing a test API for developers. They can be reached here:</p>
-<a href = "https://www.bridgeinteractive.com">The Bridge Interactive</a>
-          </div>
           <div className="col s1"></div>
           <div className="col s10 propertyBox">
             <div className="propertySearch">
@@ -237,12 +230,13 @@ The Bridge API works with industry partners to provide a consistent API for the 
             </div>
           </div>
         </div>
+        <Footer />
         <div className="col s1"></div>
-        <div className="row">
+        {/* <div className="row">
           <div className="col s12 links">
             <LinkList />
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }
