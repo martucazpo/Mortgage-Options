@@ -2,8 +2,7 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-// const keys = require("../../config/keys");
-
+const keys = require("../../config/keys");
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -76,7 +75,7 @@ const email = req.body.email;
 // Sign token
         jwt.sign(
           payload,
-          'thesecretkey',
+          keys.secretOrKey,
           {
             expiresIn: 31556926 // 1 year in seconds
           },
