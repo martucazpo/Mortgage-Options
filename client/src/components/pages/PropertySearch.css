@@ -1,0 +1,10 @@
+.propertyPage {
+  background-color: #e8e8e8;
+}
+
+.propertyBox {
+  background-color: white;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border-radius: 5px;
+}

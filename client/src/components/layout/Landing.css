@@ -1,0 +1,72 @@
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.landingContainer {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: url("../../images/landingPhoto.jpg");
+  background-position: center;
+  background-color: #203b8c;
+  font-family: "Raleway", sans-serif;
+}
+
+.landingRow {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================================= */
+
+.mgLogo {
+  height: 250px;
+  margin-bottom: 5%;
+  margin-top: 3%;
+}
+
+.welcomeInfo {
+  text-align: center;
+  padding: 50px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  /* font-size: 1.75em; */
+  background: rgb(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 10px;
+}
+
+.welcome {
+  font-size: 2.5em;
+}
+
+.welcomeBlurb {
+  /* margin-bottom: 20px; */
+  padding: 50px;
+  font-size: 1.75em;
+}
+
+.buttonRow {
+  text-align: center;
+}

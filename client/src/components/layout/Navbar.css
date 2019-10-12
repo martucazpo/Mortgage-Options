@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.skeleton {
+  border: 2px solid black;
+}
+
+.navLogo {
+  margin-left: 50px;
+}
+
+.helloUser {
+  margin-right: 50px;
+}
+
+.App {
+  font-family: "Raleway", sans-serif;
+}

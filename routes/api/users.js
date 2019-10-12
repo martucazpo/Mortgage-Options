@@ -8,12 +8,14 @@ const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
+const modelsController = require("../../controllers/modelsController")
 
 // @route POST api/users/register
 // @desc Register user
 // @access Public
 router.post("/register", (req, res) => {
     // Form validation
+    console.log(req.body);
   const { errors, isValid } = validateRegisterInput(req.body);
   // Check validation
     if (!isValid) {
@@ -93,6 +95,12 @@ const email = req.body.email;
     });
   });
 });
+
+router.route("/").get(modelsController.findAllUsers).post(modelsController.createUser);
+
+router.route("/:id").get(modelsController.findUserById).put(modelsController.updateUser);
+//router.route("/test").get(modelsController.getPopProf);
+router.route("/pop/:id").get(modelsController.popUser);
 
 module.exports = router;
   

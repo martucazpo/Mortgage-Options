@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
+import "./Login.css";
 class Login extends Component {
   constructor() {
     super();
@@ -17,38 +18,39 @@ class Login extends Component {
   componentDidMount() {
     // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/registration");
     }
   }
 
-componentDidUpdate(nextProps) {
+  componentDidUpdate(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard"); // push user to dashboard when they login
+      this.props.history.push("/registration"); // push user to dashboard when they login
     }
-//if (nextProps.errors) {
-     // this.setState({
-     //   errors: nextProps.errors
-     // });
-   // }
+    //if (nextProps.errors) {
+    // this.setState({
+    //   errors: nextProps.errors
+    // });
+    // }
   }
 
-onChange = e => {
+  onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
-onSubmit = e => {
+  onSubmit = e => {
     e.preventDefault();
-const userData = {
+    const userData = {
       email: this.state.email,
       password: this.state.password
     };
-this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+    this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
   };
-render() {
+  render() {
     const { errors } = this.state;
-return (
-      <div className="container">
-        <div style={{ marginTop: "4rem" }} className="row">
-          <div className="col s8 offset-s2">
+    return (
+      <div className="container logInContainer">
+        <div className="row">
+          <div className="col s2"></div>
+          <div className="col s8 logInBox">
             <Link to="/" className="btn-flat waves-effect">
               <i className="material-icons left">keyboard_backspace</i> Back to
               home
@@ -105,13 +107,14 @@ return (
                     marginTop: "1rem"
                   }}
                   type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  className="btn btn-large waves-effect waves-light hoverable black logInButton"
                 >
                   Login
                 </button>
               </div>
             </form>
           </div>
+          <div className="col s2"></div>
         </div>
       </div>
     );
