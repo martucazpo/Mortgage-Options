@@ -7,15 +7,9 @@ import Navbar from "../layout/Navbar";
 import Chart from "react-google-charts";
 import MortgageCalculator from "../../utils/mortgagecalculator/src/MortgageCalculator";
 
-// const reactElement = (
-//   <div>
-//     <MortgageCalculator />
-//   </div>
-// );
-
 const data = [
   ["Mortgage", "Payment Breakdown"],
-  ["Principal & Interest", 11],
+  ["Principal & Interest"],
   ["Property Tax", 2],
   ["Homeowner's Insurance", 2],
   ["Mortgage Insurance", 2]
@@ -101,7 +95,7 @@ class Results extends Component {
           <div className="col s5 skeleton rbox">
             <div>
               <MortgageCalculator
-                // styles={customStyle}
+                styles={customStyle}
                 showPaymentSchedule
                 price={""}
                 downPayment={""}

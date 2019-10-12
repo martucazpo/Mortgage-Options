@@ -107,6 +107,7 @@ class Form extends Component {
           value={this.state.totalPayment}
           onChange={this.handleInputChange}
         />
+        <br></br>
         {/* <div style={{ margin: "20px" }}>
           <Dropdown
             options={options}
@@ -123,7 +124,12 @@ class Form extends Component {
         </div> */}
 
         <label>Loan Term</label>
-        <select className="browser-default">
+        <select
+          value={this.state.loanTerm}
+          name="loanTerm"
+          className="browser-default"
+          onChange={this.handleInputChange}
+        >
           <option value="" disabled>
             Loan Term
           </option>
@@ -132,8 +138,8 @@ class Form extends Component {
           <option value="180">15 Years</option>
           <option value="120">10 Years</option>
           <option value="60">5 Years</option>
-          value={this.state.termMonths}
-          onChange={this.handleInputChange}
+          {/* value={this.state.termMonths}
+          onChange={this.handleInputChange} */}
         </select>
         <br></br>
         <input
