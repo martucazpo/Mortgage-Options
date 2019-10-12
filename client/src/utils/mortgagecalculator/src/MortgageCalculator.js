@@ -335,10 +335,10 @@ export default class MortgageCalculator extends React.Component {
           </InputWrapper>
 
           <InputWrapper styles={styles} label="Loan Term">
-            <select>
+            <select
               className="custom-select" name="termMonths" onInput=
               {this.onTermMonthsChange}
-              defaultValue={months}
+              defaultValue={months}>
               <option value="360">30 years</option>
               <option value="240">20 years</option>
               <option value="180">15 years</option>
