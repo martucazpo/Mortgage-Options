@@ -129,7 +129,7 @@ class Register extends Component {
                     marginTop: "1rem"
                   }}
                   type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3 registerButton"
+                  className="btn btn-large waves-effect waves-light hoverable black registerButton"
                 >
                   Sign up
                 </button>
