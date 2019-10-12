@@ -123,7 +123,8 @@ class Registration extends Component {
                 Ok, maybe not exactly Elven Magic, but you're only getting one
                 profile, {this.state.name}
               </p>
-              <Form email={this.state.email} />
+              {this.state.profiles.length <= 0 ? (
+              <Form/>) : (
               <List>
                 <ListItem key={this.state.name}>
                   <div>
@@ -149,6 +150,7 @@ class Registration extends Component {
                   </div>
                 </ListItem>
               </List>
+              )}
             </div>
           </div>
         </div>
