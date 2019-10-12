@@ -9,7 +9,7 @@ var React = require("react");
 var mortgageJs = require("mortgage-js");
 var pjson = require("../../../../package.json");
 
-const DefaultPrice = 500000;
+const DefaultPrice = 300;
 const DefaultDownPayment = 100000;
 const DefaultInterestRate = 0.045;
 const DefaultTermMonths = 360;
@@ -298,7 +298,7 @@ export default class MortgageCalculator extends React.Component {
               icon="$"
               type="text"
               name="price"
-              value={Util.moneyValue(totalPrice, false, false)}
+            value={Util.moneyValue(totalPrice, false, false)}
               onChange={this.onPriceChange}
             />
           </InputWrapper>
@@ -335,10 +335,10 @@ export default class MortgageCalculator extends React.Component {
           </InputWrapper>
 
           <InputWrapper styles={styles} label="Loan Term">
-            <select>
+            <select
               className="custom-select" name="termMonths" onInput=
               {this.onTermMonthsChange}
-              defaultValue={months}
+              defaultValue={months}>
               <option value="360">30 years</option>
               <option value="240">20 years</option>
               <option value="180">15 years</option>

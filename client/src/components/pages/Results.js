@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import LinkList from "../linksList";
 import customStyle from "./CustomStyle.css";
-import { withRouter } from "react-router-dom";
 import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
 import Chart from "react-google-charts";
 import Footer from "../layout/Footer";
 import MortgageCalculator from "../../utils/mortgagecalculator/src/MortgageCalculator";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logoutUser } from "../../actions/authActions"
 
 const data = [
   ["Mortgage", "Payment Breakdown"],
@@ -37,8 +39,10 @@ class Results extends Component {
   };
 
   componentDidMount() {
-    API.getUser({ email: this.props.match.params.email }).then(res => {
-      console.log(res);
+    let user = this.props.auth;
+    console.log(user.user.id);
+    API.getUser(user.user.id).then(res => {
+      console.log("toast", res);
       this.setState({
         name: res.data.name,
         email: res.data.email,
@@ -46,28 +50,16 @@ class Results extends Component {
       });
     });
 
-    API.getProfile(this.state.profileId)
-      .then(res => {
-        this.setState(
-          {
-            downPayment: res.data[0].downPayment,
-            totalPayment: res.data[0].totalPayment,
-            termMonths: res.data[0].termMonths,
-            propertyId: res.data[0].property,
-            profileId: res.data[0]._id
-          },
-          () => {
-            API.findPropertyAndPop(this.state.profileId).then(res =>
-              this.setState({
-                totalPayment: res.data.totalPayment,
-                downPayment: res.data.downPayment,
-                properties: res.data.property
-              })
-            );
-          }
-        );
-      })
-      .catch(err => console.log(err));
+    API.popUser(user.user.id).then(res => {
+      console.log("bullfrog", res);
+      this.setState({
+        savedProp: res.data.property,
+        ListPrice: res.data.ListPrice,
+        TaxAnnualAmount: res.data.property.TaxAnnualAmount,
+        id: res.data.property._id,
+        img: res.data.property.imageArr
+      });
+    });
   }
   //  {/* <Navbar /> */}
   renderproperties = () => {
@@ -128,7 +120,17 @@ class Results extends Component {
   }
 }
 
+Results.propTypes = {
+  logoutUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Results);
 // const rootElement = document.getElementById("root");
 // ReactDOM.render(<App />, rootElement);
 
-export default withRouter(Results);

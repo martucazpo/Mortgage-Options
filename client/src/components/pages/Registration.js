@@ -10,12 +10,13 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+
 import Footer from "../layout/Footer";
 // import calculator from "../Mortgage/Calculator";
 
+
 import "./Registration.css";
 
-//import MortgageCalculator from "mortgage-calculator-react"
 
 class Registration extends Component {
   constructor(props) {
@@ -36,12 +37,8 @@ class Registration extends Component {
 
   componentDidMount() {
     let user = this.props.auth;
-    console.log("MMMMMMMMMM", user);
-    //console.log("My Id!",sessionStorage.getItem('username'))
     API.getUser(user.user.id)
       .then(res => {
-        console.log("LKDJF:LSD");
-        console.log("ID?", res);
         this.setState({
           name: res.data.name,
           email: res.data.email,
@@ -53,9 +50,7 @@ class Registration extends Component {
 
     API.popUser(user.user.id)
       .then(res => {
-        console.log("innit", res.data.profile[0]._id);
         API.getProfile(res.data.profile[0]._id).then(res => {
-          console.log("frogs", res);
           this.setState({
             profiles: [res.data],
             downPayment: res.data.downPayment,
@@ -71,9 +66,8 @@ class Registration extends Component {
 
   deleteProfile = id => {
     API.deleteProfile(id)
-      .then(console.log("profile deleted"))
-      .catch(err => console.log(err));
-    this.handleLocationReload();
+    .then(()=>this.handleLocationReload())
+    .catch(err => console.log(err))
   };
 
   handleInputChange = event => {
