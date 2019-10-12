@@ -7,6 +7,7 @@ import "./PropertySearch.css";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import NoImage from "../../images/mgNoImage.gif";
 
 let imageArr = [];
 let dataArr = [];
@@ -36,9 +37,8 @@ class PropertySearch extends Component {
   componentDidMount() {
     let user = this.props.auth;
     console.log(user.user.id);
-    API.getUser(user.user.id)
-    .then(res => {
-      console.log("toast",res); 
+    API.getUser(user.user.id).then(res => {
+      console.log("toast", res);
       this.setState({
         name: res.data.name,
         email: res.data.email,
@@ -48,19 +48,16 @@ class PropertySearch extends Component {
 
     this.searchProperties();
 
-    API.popUser(user.user.id)
-    .then(res => {
-      console.log("bullfrog",res);
+    API.popUser(user.user.id).then(res => {
+      console.log("bullfrog", res);
       this.setState({
-        savedProp : res.data.property,
-        ListPrice : res.data.ListPrice,
-        TaxAnnualAmount : res.data.property.TaxAnnualAmount,
+        savedProp: res.data.property,
+        ListPrice: res.data.ListPrice,
+        TaxAnnualAmount: res.data.property.TaxAnnualAmount,
         id: res.data.property._id,
-        img : res.data.property.imageArr
-      })
-    })
-
-    
+        img: res.data.property.imageArr
+      });
+    });
   }
 
   searchProperties() {
@@ -87,14 +84,7 @@ class PropertySearch extends Component {
 
   renderImages = img => {
     if (img <= 0) {
-      return (
-        <img
-          value={"../../images/noImage.png"}
-          key={"../../images/noImage.png"}
-          src={"../../images/noImage.png"}
-          alt={"../../images/noImage.png"}
-        />
-      );
+      return <img value={NoImage} key={NoImage} src={NoImage} alt={NoImage} />;
     }
     const oneImage = [img[0]];
     return oneImage.map(image => (
@@ -129,7 +119,7 @@ class PropertySearch extends Component {
           <div className="card">
             <div className="card-image">
               {this.renderImages(list.img)}
-              <span className="card-title">Card Title</span>
+              <span className="card-title"></span>
               <button
                 className="btn-floating halfway-fab waves-effect waves-light red"
                 onClick={() =>
@@ -149,21 +139,21 @@ class PropertySearch extends Component {
             </div>
           </div>
         </div>
-        </div>
+      </div>
     ));
     return listHtml;
   };
 
   deleteProperty = id => {
     let user = this.props.auth;
-    console.log("delete id",id)
+    console.log("delete id", id);
     API.deleteProperty(id)
       .then(console.log("property deleted"))
       .catch(err => console.log(err));
-    
+
     API.updateUser(user.user.id)
-    .then(console.log ("property deleted from user"))
-    .catch(err => console.log(err))
+      .then(console.log("property deleted from user"))
+      .catch(err => console.log(err));
 
     this.handleLocationReload();
   };
@@ -256,10 +246,7 @@ The Bridge API works with industry partners to provide a consistent API for the 
       </div>
     );
   }
-
-  }
-
-
+}
 
 PropertySearch.propTypes = {
   logoutUser: PropTypes.func.isRequired,
