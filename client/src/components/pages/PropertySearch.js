@@ -216,6 +216,14 @@ class PropertySearch extends Component {
         <Navbar />
 
         <div className="row propertyPage">
+          <div>
+            <p>Because of the rules and regulations around real-estate, we were not allowed to use a functioning MLS API for this App.</p>
+            <p>The developers here at Mortgage Genie would like to thank the Bridge Interactive: </p>
+            <p>"A modern platform for normalized real estate data
+The Bridge API works with industry partners to provide a consistent API for the data you need to build real estate products at scale."</p>
+<p>We are grateful to them for graciously providing a test API for developers. They can be reached here:</p>
+<a href = "https://www.bridgeinteractive.com">The Bridge Interactive</a>
+          </div>
           <div className="col s1"></div>
           <div className="col s10 propertyBox">
             <div className="propertySearch">
