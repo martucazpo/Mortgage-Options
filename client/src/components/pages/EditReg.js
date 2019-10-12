@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
 import Navbar from "../layout/Navbar";
+import Footer from "../layout/Footer";
 import "./EditReg.css";
 
 class EditReg extends Component {
@@ -148,6 +149,7 @@ class EditReg extends Component {
           </div>
           <div className="col s4"></div>
         </div>
+        <Footer />
       </div>
     );
   }

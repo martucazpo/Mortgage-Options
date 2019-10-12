@@ -4,6 +4,7 @@ import customStyle from "./CustomStyle.css";
 import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
 import Chart from "react-google-charts";
+import Footer from "../layout/Footer";
 import MortgageCalculator from "../../utils/mortgagecalculator/src/MortgageCalculator";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -84,7 +85,7 @@ class Results extends Component {
 
         <div className="row resultRow">
           <div className="col s1"></div>
-          <div className="col s5 skeleton rbox">
+          <div className="col s5 rbox">
             <div>
               <MortgageCalculator
                 styles={customStyle}
@@ -100,7 +101,7 @@ class Results extends Component {
               />
             </div>
           </div>
-          <div className="col s5 skeleton rbox">
+          <div className="col s5 rbox">
             <div className="App">
               <Chart
                 chartType="PieChart"
@@ -113,10 +114,7 @@ class Results extends Component {
           </div>
           <div className="col s1"></div>
         </div>
-        <div className="row">
-          <div className="col s12 links"></div>
-          <LinkList />
-        </div>
+        <Footer />
       </div>
     );
   }
