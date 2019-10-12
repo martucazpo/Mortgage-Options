@@ -47,7 +47,7 @@ class Login extends Component {
   render() {
     const { errors } = this.state;
     return (
-      <div className="container">
+      <div className="container logInContainer">
         <div className="row">
           <div className="col s2"></div>
           <div className="col s8 logInBox">
