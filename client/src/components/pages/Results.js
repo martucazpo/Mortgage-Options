@@ -12,15 +12,15 @@ import { logoutUser } from "../../actions/authActions";
 
 const data = [
   ["Task", "Hours per Day"],
-  ["Work", 11],
-  ["Eat", 2],
-  ["Commute", 2],
-  ["Watch TV", 2],
-  ["Sleep", 7] // CSS-style declaration
+  ["Principal & Interest", 11],
+  ["Property Tax", 2],
+  ["Homeowner's Insurance", 2],
+  ["Mortgage Insurance", 2]
+  // CSS-style declaration
 ];
 
 const options = {
-  title: "My Daily Activities",
+  title: "My Monthly Payment",
   pieHole: 0.4,
   is3D: false
 };
