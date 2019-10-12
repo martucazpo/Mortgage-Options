@@ -62,9 +62,9 @@ profile: []
       this.setState({
        // profile: res.data.profile,
         properties: res.data.property,
-        downPayment : res.data.profile[0].downPayment,
-        totalPayment : res.data.profile[0].totalPayment,
-        termMonths : res.data.profile[0].termMonths,
+        downPayment : res.data.profile.downPayment,
+        totalPayment : res.data.profile.totalPayment,
+        termMonths : res.data.profile.termMonths,
         ListPrice : res.data.property.ListPrice,
         TaxAnnualAmount : res.data.property.TaxAnnualAmount,
         _id: res.data.property._id,

@@ -71,12 +71,7 @@ class Form extends Component {
       totalPayment: this.state.totalPayment,
       termMonths: this.state.loanTerm
     })
-    .catch(err => console.log (err))
-    // API.popUser(user.user.id)
-    //   .then(() => {
-    //     console.log("rabbits")
-    //   })
-    //   .catch(err => console.log(err));
+    .catch(err => console.log (err));
      
       this.handleLocationReload();
   }
@@ -92,7 +87,12 @@ class Form extends Component {
   render() {
     console.log(this.state);
     return (
+      
       <form>
+        <div>
+        <h3>Welcome to Mortgage Genie {this.state.name}!</h3>
+        <p>Please enter some information to help get started</p>
+      </div>
         {/* <input
           type="text"
           placeholder="Name"
