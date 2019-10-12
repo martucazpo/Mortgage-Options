@@ -13,35 +13,34 @@ import { logoutUser } from "../../actions/authActions";
 
 class Form extends Component {
   // Setting the initial values of this.state.username and this.state.password
-  constructor(props){
-  super(props);
-  this.state = {
-  desiredPayment: "",
-  loanTerm: "",
-  name: "",
-  email: "",
-  id : "",
-  totalPayment: "",
-  termMonths: "",
-  downPayment: ""
-  };
-  this.handleInputChange = this.handleInputChange.bind(this);
-  this.handleForm = this.handleForm.bind(this);
-  this.handleLocationReload =this.handleLocationReload.bind(this);
-}
+  constructor(props) {
+    super(props);
+    this.state = {
+      desiredPayment: "",
+      loanTerm: "",
+      name: "",
+      email: "",
+      id: "",
+      totalPayment: "",
+      termMonths: "",
+      downPayment: ""
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleForm = this.handleForm.bind(this);
+    this.handleLocationReload = this.handleLocationReload.bind(this);
+  }
 
-  componentDidMount(){
+  componentDidMount() {
     let user = this.props.auth;
-    API.getUser(user.user.id)
-    .then(res => {
-      console.log("ID?",res); 
+    API.getUser(user.user.id).then(res => {
+      console.log("ID?", res);
       this.setState({
-        name : res.data.name,
-        email : res.data.email,
-        id : res.data._id,
-        profileId : res.data.profile[0]})
-  })
-   
+        name: res.data.name,
+        email: res.data.email,
+        id: res.data._id,
+        profileId: res.data.profile[0]
+      });
+    });
   }
 
   // handle any changes to the input fields
@@ -53,46 +52,40 @@ class Form extends Component {
     this.setState({
       [name]: value
     });
-  }
+  };
 
   handleForm = event => {
     console.log("HELLO");
     event.preventDefault();
-    let user = this.props.auth;
-    
+    // let user = this.props.auth;
+
     API.saveProfile({
       // name: this.state.name
       // email:this.props.email,
 
-      id : this.state.id,
+      id: this.state.id,
       desiredPayment: this.state.desiredPayment,
       downPayment: this.state.downPayment,
       loanTerm: this.state.loanTerm,
       totalPayment: this.state.totalPayment,
       termMonths: this.state.loanTerm
-    })
-    .catch(err => console.log (err));
-     
-      this.handleLocationReload();
-  }
+    }).catch(err => console.log(err));
 
-
-
-
+    this.handleLocationReload();
+  };
 
   handleLocationReload = () => {
-    window.location.reload()
+    window.location.reload();
   };
 
   render() {
     console.log(this.state);
     return (
-      
       <form>
         <div>
-        <h3>Welcome to Mortgage Genie {this.state.name}!</h3>
-        <p>Please enter some information to help get started</p>
-      </div>
+          <h3>Welcome to Mortgage Genie {this.state.name}!</h3>
+          <p>Please enter some information to help get started</p>
+        </div>
         {/* <input
           type="text"
           placeholder="Name"
@@ -114,6 +107,7 @@ class Form extends Component {
           value={this.state.totalPayment}
           onChange={this.handleInputChange}
         />
+        <br></br>
         {/* <div style={{ margin: "20px" }}>
           <Dropdown
             options={options}
@@ -129,8 +123,13 @@ class Form extends Component {
           />
         </div> */}
 
-        <label>Amortize your Loan</label>
-        <select className="browser-default">
+        <label>Loan Term</label>
+        <select
+          value={this.state.loanTerm}
+          name="loanTerm"
+          className="browser-default"
+          onChange={this.handleInputChange}
+        >
           <option value="" disabled>
             Loan Term
           </option>
@@ -139,8 +138,8 @@ class Form extends Component {
           <option value="180">15 Years</option>
           <option value="120">10 Years</option>
           <option value="60">5 Years</option>
-          value={this.state.termMonths}
-          onChange={this.handleInputChange}
+          {/* value={this.state.termMonths}
+          onChange={this.handleInputChange} */}
         </select>
         <br></br>
         <input

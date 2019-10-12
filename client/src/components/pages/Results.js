@@ -1,54 +1,43 @@
 import React, { Component } from "react";
 import LinkList from "../linksList";
-import "./Results.css";
-//import { withRouter } from "react-router-dom";
+import customStyle from "./CustomStyle.css";
+import { withRouter } from "react-router-dom";
 import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
 import Chart from "react-google-charts";
-import MortgageCalculator from "mortgage-calculator-react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
+import MortgageCalculator from "../../utils/mortgagecalculator/src/MortgageCalculator";
 
 const data = [
-  ["Task", "Hours per Day"],
-  ["Work", 11],
-  ["Eat", 2],
-  ["Commute", 2],
-  ["Watch TV", 2],
-  ["Sleep", 7] // CSS-style declaration
+  ["Mortgage", "Payment Breakdown"],
+  ["Principal & Interest"],
+  ["Property Tax", 2],
+  ["Homeowner's Insurance", 2],
+  ["Mortgage Insurance", 2]
 ];
 
 const options = {
-  title: "My Daily Activities",
+  title: "My Monthly Payment",
   pieHole: 0.4,
   is3D: false
 };
 
 class Results extends Component {
-constructor (props){
-super(props);
-this. state = {
-name: "",
-email: "",
-totalPayment: 0,
-downPayment: 0,
-termMonths: 0,
-ListPrice: 0,
-TaxAnnualAmount: 0,
-profileId: "",
-propertyId: [],
-properties: [],
-profile: []
+  state = {
+    name: "",
+    email: "",
+    totalPayment: 0,
+    downPayment: 0,
+    termMonths: 0,
+    ListPrice: 0,
+    TaxAnnualAmount: 0,
+    profileId: "",
+    propertyId: [],
+    properties: []
   };
-}
 
   componentDidMount() {
-    let user = this.props.auth;
-
-    API.getUser(user.user.id)
-    .then(res => {
-      console.log("toast",res); 
+    API.getUser({ email: this.props.match.params.email }).then(res => {
+      console.log(res);
       this.setState({
         name: res.data.name,
         email: res.data.email,
@@ -56,23 +45,28 @@ profile: []
       });
     });
 
-    API.popUser(user.user.id)
-    .then(res => {
-      console.log("bullfrog",res);
-      this.setState({
-       // profile: res.data.profile,
-        properties: res.data.property,
-        downPayment : res.data.profile.downPayment,
-        totalPayment : res.data.profile.totalPayment,
-        termMonths : res.data.profile.termMonths,
-        ListPrice : res.data.property.ListPrice,
-        TaxAnnualAmount : res.data.property.TaxAnnualAmount,
-        _id: res.data.property._id,
-        img : res.data.property.imageArr
+    API.getProfile(this.state.profileId)
+      .then(res => {
+        this.setState(
+          {
+            downPayment: res.data[0].downPayment,
+            totalPayment: res.data[0].totalPayment,
+            termMonths: res.data[0].termMonths,
+            propertyId: res.data[0].property,
+            profileId: res.data[0]._id
+          },
+          () => {
+            API.findPropertyAndPop(this.state.profileId).then(res =>
+              this.setState({
+                totalPayment: res.data.totalPayment,
+                downPayment: res.data.downPayment,
+                properties: res.data.property
+              })
+            );
+          }
+        );
       })
-    })
-
-    
+      .catch(err => console.log(err));
   }
   //  {/* <Navbar /> */}
   renderproperties = () => {
@@ -88,24 +82,31 @@ profile: []
   render() {
     console.log("this is my current state", this.state);
     return (
-      <div className="resultPage">
+      <div>
         <Navbar />
-
         <div className="results">
           <h3>Results</h3>
 
           {this.renderproperties()}
         </div>
 
-
         <div className="row">
           <div className="col s1"></div>
           <div className="col s5 skeleton rbox">
             <div>
-              <MortgageCalculator />
+              <MortgageCalculator
+                styles={customStyle}
+                showPaymentSchedule
+                price={""}
+                downPayment={""}
+                interestRate={""}
+                months={""}
+                additionalPrincipalPayment={""}
+                taxRate={0.01}
+                insuranceRate={0.01}
+                mortgageInsuranceEnabled={false}
+              />
             </div>
-            <div id="mortgage-calculator-react"></div>
-            <script src="https://www.fastforma.com/mortgage-calculator-react.js"></script>
           </div>
           <div className="col s5 skeleton rbox">
             <div className="App">
@@ -129,21 +130,7 @@ profile: []
   }
 }
 
-
-Results.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
-};
-const mapStateToProps = state => ({
-  auth: state.auth
-});
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(Results);
-
-
 // const rootElement = document.getElementById("root");
 // ReactDOM.render(<App />, rootElement);
 
-//export default withRouter(Results);
+export default withRouter(Results);
