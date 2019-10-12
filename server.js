@@ -6,6 +6,11 @@ const passport = require("passport");
 const users = require("./routes/api/users");
 const routes = require("./routes");
 // Bodyparser middleware
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 app.use(
   bodyParser.urlencoded({
     extended: false
@@ -28,9 +33,7 @@ app.get('*', (req, res) => {
 //const db = require("./config/keys").mongoURI;
 // Connect to MongoDB
 mongoose
-  .connect(
-   // db,
-   "mongodb://localhost/mortgageOptionsDev",
+  .connect(process.env.MONGODB_URI ||"mongodb://localhost/mortgageOptionsDev",
     { useNewUrlParser: true,
       useUnifiedTopology: true
      }
