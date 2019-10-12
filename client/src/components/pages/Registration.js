@@ -19,59 +19,54 @@ import "./Registration.css";
 class Registration extends Component {
   constructor(props) {
     super(props);
-  this.state = {
-    profiles: [],
-     name: "",
-     email: "",
-    totalPayment: "",
-    termMonths: "",
-    downPayment: ""
-  };
- this.deleteProfile = this.deleteProfile.bind(this);
- this.handleInputChange = this.handleInputChange.bind(this);
- this.handleLocationReload = this.handleLocationReload.bind(this);
- this.renderProfiles = this.renderProfiles.bind(this);
-}
+    this.state = {
+      profiles: [],
+      name: "",
+      email: "",
+      totalPayment: "",
+      termMonths: "",
+      downPayment: ""
+    };
+    this.deleteProfile = this.deleteProfile.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleLocationReload = this.handleLocationReload.bind(this);
+    this.renderProfiles = this.renderProfiles.bind(this);
+  }
 
   componentDidMount() {
     let user = this.props.auth;
-    console.log("MMMMMMMMMM", user)
+    console.log("MMMMMMMMMM", user);
     //console.log("My Id!",sessionStorage.getItem('username'))
     API.getUser(user.user.id)
-    .then(res => {
-
-
-      console.log("LKDJF:LSD")
-      console.log("ID?",res); 
-      this.setState({
-        name : res.data.name,
-        email : res.data.email,
-        id : res.data._id,
-        profileId : res.data.profile[0]})
-  })
-  .catch(err => console.log(err))
-
-  API.popUser(user.user.id)
-  .then(res => {
-    console.log("innit", res.data.profile[0]._id)
-   API.getProfile(res.data.profile[0]._id)
-    .then(res => {
-      console.log("frogs",res)
-      this.setState({
-        profiles : [res.data],
-        downPayment : res.data.downPayment,
-        desiredPayment : res.data.desiredPayment,
-        loanTerm : res.data.loanTerm,
-        propertyId : res.data.property,
-        profileId : res.data._id})
+      .then(res => {
+        console.log("LKDJF:LSD");
+        console.log("ID?", res);
+        this.setState({
+          name: res.data.name,
+          email: res.data.email,
+          id: res.data._id,
+          profileId: res.data.profile[0]
         });
-      
-
       })
-  .catch(err => console.log(err))
-    
+      .catch(err => console.log(err));
+
+    API.popUser(user.user.id)
+      .then(res => {
+        console.log("innit", res.data.profile[0]._id);
+        API.getProfile(res.data.profile[0]._id).then(res => {
+          console.log("frogs", res);
+          this.setState({
+            profiles: [res.data],
+            downPayment: res.data.downPayment,
+            desiredPayment: res.data.desiredPayment,
+            loanTerm: res.data.loanTerm,
+            propertyId: res.data.property,
+            profileId: res.data._id
+          });
+        });
+      })
+      .catch(err => console.log(err));
   }
-    
 
   deleteProfile = id => {
     API.deleteProfile(id)
@@ -91,7 +86,7 @@ class Registration extends Component {
     window.location.reload();
   };
 
-  renderProfiles =()=> {
+  renderProfiles = () => {
     const myProfile = this.state.profiles.map(profile => (
       <div key={profile._id}>
         <strong>
@@ -100,12 +95,11 @@ class Registration extends Component {
           <div>{profile.termMonths}</div>
         </strong>
         <EditBtn id={profile._id} />
-        <DeleteBtn
-          onClick={() => this.deleteProfile(profile._id)}
-        />
-      </div>))
+        <DeleteBtn onClick={() => this.deleteProfile(profile._id)} />
+      </div>
+    ));
     return myProfile;
-  }
+  };
 
   render() {
     return (
@@ -116,40 +110,46 @@ class Registration extends Component {
           <div className="col s8 regBox">
             <div className="formDiv">
               {this.state.profiles.length <= 0 ? (
-              <Form/>) : (
-              <List>
-                <ListItem key={this.state.name}>
-                  <div>
-                    <h3>
-                      Here is the information you entered,{""}{this.state.name}.
-                    </h3>
-                    <p>
-                      Please check too see if it is correct,
-                    </p>
-                    <p>
-                      and then let's find a property!
-                    </p>
-                    <strong>
-                      <div>{this.state.name}</div>
-                      <div>{this.state.email}</div>
-                    </strong>
+                <Form />
+              ) : (
+                <List>
+                  <ListItem key={this.state.name}>
                     <div>
-                      <div>{this.renderProfiles()}</div>
+                      <h3>
+                        Here is the information you entered,{""}
+                        {this.state.name}.
+                      </h3>
+                      <p>Please check too see if it is correct,</p>
+                      <p>and then let's find a property!</p>
+                      <strong>
+                        <div>{this.state.name}</div>
+                        <div>{this.state.email}</div>
+                      </strong>
+                      <div>
+                        <div>{this.renderProfiles()}</div>
+                      </div>
                     </div>
-                  </div>
-                </ListItem>
-              </List>
+                  </ListItem>
+                </List>
               )}
             </div>
           </div>
+          <div className="col s2"></div>
         </div>
-        <div>
-          {" "}
-          <Link to={"/property"}>
-            <button type="button">Let's Find A Property!</button>
-          </Link>
+
+        <div className="row">
+          <div className="col s12 findPropButton">
+            <Link to={"/property"}>
+              <button
+                type="button"
+                className="btn btn-large waves-effect waves-light hoverable black"
+              >
+                Let's Find A Property!
+              </button>
+            </Link>
+          </div>
         </div>
-        <div className="col s2"></div>
+
         <div className="row">
           <div className="col s12 links">
             <LinkList />

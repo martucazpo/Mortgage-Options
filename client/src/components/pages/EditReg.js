@@ -5,6 +5,8 @@ import ProfileDetail from "../profileDetails";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import Navbar from "../layout/Navbar";
+import "./EditReg.css";
 
 class EditReg extends Component {
   state = {
@@ -15,32 +17,29 @@ class EditReg extends Component {
     loanTerm: "",
     name: "",
     email: "",
-    id : "",
-    profileId : "",
+    id: "",
+    profileId: "",
     totalPayment: "",
     termMonths: "",
     downPayment: ""
   };
 
-  componentDidMount(){
+  componentDidMount() {
     let user = this.props.auth;
-    API.popUser(user.user.id)
-    .then(res => {
-      console.log("Edit?",res); 
+    API.popUser(user.user.id).then(res => {
+      console.log("Edit?", res);
       this.setState({
-        name : res.data.name,
-        email : res.data.email,
-        id : res.data._id,
-        profileId : res.data.profile[0]._id,
-        loanTerm : res.data.profile[0].loanTerm,
+        name: res.data.name,
+        email: res.data.email,
+        id: res.data._id,
+        profileId: res.data.profile[0]._id,
+        loanTerm: res.data.profile[0].loanTerm,
         totalPayment: res.data.profile[0].totalPayment,
-        termMonths : res.data.profile[0].termMonths,
-        downPayment : res.data.profile[0].termMonths
-      })
-  })
-   
+        termMonths: res.data.profile[0].termMonths,
+        downPayment: res.data.profile[0].termMonths
+      });
+    });
   }
-
 
   // componentDidMount() {
   //   API.getProfile(this.props.match.params.id)
@@ -65,69 +64,91 @@ class EditReg extends Component {
   handleForm = event => {
     let user = this.props.auth;
     event.preventDefault();
-    API.updateProfile(this.state.profileId,{
-      loanTerm:this.state.loanTerm,
-      downPayment:this.state.downPayment,
-      totalPayment:this.state.totalPayment
+    API.updateProfile(this.state.profileId, {
+      loanTerm: this.state.loanTerm,
+      downPayment: this.state.downPayment,
+      totalPayment: this.state.totalPayment
     })
-      .then(res => console.log("item updated!!!",res))
+      .then(res => console.log("item updated!!!", res))
       .catch(err => console.log(err));
-    
-    API.updateUser(user.user.id)
-    .then(res => console.log("user updated",res))
-    .catch(err => console.log(err));
 
-    API.popUser(user.user.id)
-    .then(res => {
-      console.log("have I changed?",res); 
+    API.updateUser(user.user.id)
+      .then(res => console.log("user updated", res))
+      .catch(err => console.log(err));
+
+    API.popUser(user.user.id).then(res => {
+      console.log("have I changed?", res);
       this.setState({
-        name : res.data.name,
-        email : res.data.email,
-        id : res.data._id,
-        profileId : res.data.profile[0]._id,
-        loanTerm : res.data.profile[0].loanTerm,
+        name: res.data.name,
+        email: res.data.email,
+        id: res.data._id,
+        profileId: res.data.profile[0]._id,
+        loanTerm: res.data.profile[0].loanTerm,
         totalPayment: res.data.profile[0].totalPayment,
-        termMonths : res.data.profile[0].termMonths,
-        downPayment : res.data.profile[0].termMonths
-      })
-  })
+        termMonths: res.data.profile[0].termMonths,
+        downPayment: res.data.profile[0].termMonths
+      });
+    });
 
     this.props.history.push("/registration");
   };
 
   render() {
-    console.log("Arizona",this.state);
-    console.log("Profile ID",this.state.profileId)
+    console.log("Arizona", this.state);
+    console.log("Profile ID", this.state.profileId);
     return (
-      <form>
-        <input
-          type="text"
-          placeholder="Desired Payment Amount"
-          name="totalPayment"
-          value={this.state.totalPayment}
-          onChange={this.handleInputChange}
-        />
-        <label>Amortize your Loan</label>
-        <select class="browser-default">
-          <option value="" disabled selected>
-            Loan Term
-          </option>
-          <option value="360">30 Years</option>
-          <option value="240">20 Years</option>
-          <option value="180">15 Years</option>
-          <option value="120">10 Years</option>
-          <option value="60">5 Years</option>
-        </select>
-        <input
-          type="text"
-          placeholder="Down Payment"
-          name="downPayment"
-          value={this.state.downPayment}
-          onChange={this.handleInputChange}
-        />
-        <ProfileDetail name={this.state.name} email={this.state.email} />
-        <button onClick={this.handleForm}>Submit</button>
-      </form>
+      <div>
+        <Navbar />
+        <div className="row">
+          <div className="col s4"></div>
+          <div className="col s4 editInfoBox">
+            <form>
+              <div className="editForms">
+                <label>Desired Payment Amount</label>
+                <input
+                  type="text"
+                  // placeholder="Desired Payment Amount"
+                  name="totalPayment"
+                  value={this.state.totalPayment}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+              <div className="editForms">
+                <label>Amortize your Loan</label>
+                <select className="browser-default">
+                  <option className="editForms" value="" disabled selected>
+                    Loan Term
+                  </option>
+                  <option value="360">30 Years</option>
+                  <option value="240">20 Years</option>
+                  <option value="180">15 Years</option>
+                  <option value="120">10 Years</option>
+                  <option value="60">5 Years</option>
+                </select>
+              </div>
+              <div className="editForms">
+                <label>Down Payment</label>
+                <input
+                  className="editForms"
+                  type="text"
+                  // placeholder="Down Payment"
+                  name="downPayment"
+                  value={this.state.downPayment}
+                  onChange={this.handleInputChange}
+                />
+              </div>
+              <ProfileDetail name={this.state.name} email={this.state.email} />
+              <button
+                className="btn btn-large waves-effect waves-light hoverable black editSubButton"
+                onClick={this.handleForm}
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+          <div className="col s4"></div>
+        </div>
+      </div>
     );
   }
 }
