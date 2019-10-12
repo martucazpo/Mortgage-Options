@@ -90,7 +90,7 @@ class Results extends Component {
           {this.renderproperties()}
         </div>
 
-        <div className="row">
+        <div className="row resultRow">
           <div className="col s1"></div>
           <div className="col s5 skeleton rbox">
             <div>
