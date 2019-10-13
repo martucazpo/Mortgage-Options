@@ -161,7 +161,7 @@ class PropertySearch extends Component {
 
   renderSavedProps = () => {
     const propertyHtml = this.state.savedProp.map(savedProps => (
-      <div>
+      <div key={savedProps.ListPrice}>
         <strong>List Price {savedProps.ListPrice}</strong>
         <p>Annual Tax Amount {savedProps.TaxAnnualAmount}</p>
         <img

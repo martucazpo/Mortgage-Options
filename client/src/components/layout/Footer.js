@@ -5,12 +5,12 @@ class Footer extends Component {
   render() {
     return (
       <div>
-        <footer class="page-footer black">
-          <div class="container">
-            <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Mortgage Genie</h5>
-                <p class="grey-text text-lighten-4">
+        <footer className="page-footer black">
+          <div className="container">
+            <div className="row">
+              <div className="col l6 s12">
+                <h5 className="white-text">Mortgage Genie</h5>
+                <div className="grey-text text-lighten-4">
                   <p>
                     Because of the rules and regulations around real-estate, we
                     were not allowed to use a functioning MLS API for this App.
@@ -32,26 +32,26 @@ class Footer extends Component {
                   <a href="https://www.bridgeinteractive.com">
                     The Bridge Interactive
                   </a>
-                </p>
+                </div>
               </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
+              <div className="col l4 offset-l2 s12">
+                <h5 className="white-text">Links</h5>
+                <LinkList style={{color:"white"}}/>
+                {/* <ul>
                   <li>
-                    <a class="grey-text text-lighten-3" href="#!">
+                  <a className="grey-text text-lighten-3" href="#!">
                       <LinkList />
                     </a>
                   </li>
-                </ul>
+                </ul> */}
               </div>
             </div>
           </div>
-          <div class="footer-copyright">
-            <div class="container">
+          <div className="footer-copyright">
+            <div className="container">
               Mortgage Genie 2019 ©
-              <a class="grey-text text-lighten-4 right" href="#!">
+              <a className="grey-text text-lighten-4 right" href="#!"/>
                 {/* More Links */}
-              </a>
             </div>
           </div>
         </footer>
