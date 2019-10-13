@@ -25,9 +25,9 @@ class Registration extends Component {
       profiles: [],
       name: "",
       email: "",
-      totalPayment: "",
-      termMonths: "",
-      downPayment: ""
+      totalPayment: 0,
+      termMonths: 0,
+      downPayment: 0
     };
     this.deleteProfile = this.deleteProfile.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);

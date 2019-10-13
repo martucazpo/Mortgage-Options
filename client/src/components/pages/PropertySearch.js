@@ -111,7 +111,6 @@ class PropertySearch extends Component {
       .catch(err => console.log(err));
     this.handleLocationReload();
   };
-
   renderListings = () => {
     const listHtml = this.state.listings.map(list => (
       <div>

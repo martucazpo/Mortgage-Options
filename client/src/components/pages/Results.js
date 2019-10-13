@@ -26,7 +26,9 @@ import { logoutUser } from "../../actions/authActions"
 // };
 
 class Results extends Component {
-  state = {
+  constructor(props){
+    super(props);
+  this.state = {
     name: "",
     email: "",
     totalPayment: 0,
@@ -42,6 +44,8 @@ class Results extends Component {
     monthlyTax: 7,
     monthlyInsurance: 5
   };
+  this.renderproperties = this.renderproperties.bind(this);
+}
 
   componentDidMount() {
     let user = this.props.auth;
@@ -58,6 +62,8 @@ class Results extends Component {
     API.popUser(user.user.id).then(res => {
       console.log("bullfrog", res);
       this.setState({
+        downPayment:res.data.profile[0].downPayment,
+        termMonths: res.data.profile[0].termMonths,
         savedProp: res.data.property,
         ListPrice: res.data.ListPrice,
         TaxAnnualAmount: res.data.property.TaxAnnualAmount,
@@ -73,8 +79,10 @@ class Results extends Component {
          <p>{property.ListPrice}</p>
           <img style={{height:"100px",width:"auto"}}src={property.img} alt={""}/>
       </div>
-    ));
+    ))
   };
+
+ 
 
   render() {
     console.log("this is my current state", this.state);
@@ -94,10 +102,10 @@ class Results extends Component {
               <MortgageCalculator
                 styles={customStyle}
                 showPaymentSchedule
-                price={""}
-                downPayment={""}
+                price={this.state.ListPrice}
+                downPayment={this.state.downPayment}
                 interestRate={""}
-                months={""}
+                months={this.state.termMonths}
                 additionalPrincipalPayment={""}
                 taxRate={0.01}
                 insuranceRate={0.01}
