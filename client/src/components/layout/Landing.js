@@ -9,7 +9,7 @@ class Landing extends Component {
         <div className="row">
           <div className="col s1"></div>
           <div className="col s10 welcomeInfo">
-            <img src={Logo} className="mgLogo"></img>
+            <img src={Logo} className="mgLogo" alt={""}></img>
             <br></br>
             <p className="welcome">WELCOME</p>
             {/* <br></br> */}

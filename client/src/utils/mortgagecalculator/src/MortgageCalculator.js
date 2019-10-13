@@ -7,7 +7,7 @@ import IconInput from "./IconInput";
 
 var React = require("react");
 var mortgageJs = require("mortgage-js");
-var pjson = require("../../../../package.json");
+//var pjson = require("../../../../package.json");
 
 const DefaultPrice = 300;
 const DefaultDownPayment = 100000;
@@ -35,7 +35,7 @@ export default class MortgageCalculator extends React.Component {
     this.mortgageCalculator.downPayment = Util.numberValueOrDefault(
       props.downPayment,
       0,
-      DefaultDownPayment
+     DefaultDownPayment
     );
     this.mortgageCalculator.interestRate = Util.numberValueOrDefault(
       props.interestRate,

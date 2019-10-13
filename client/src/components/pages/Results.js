@@ -3,7 +3,7 @@ import PieChart from "../Charts/index";
 import customStyle from "./CustomStyle.css";
 import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
-import Chart from "react-google-charts";
+//import Chart from "react-google-charts";
 import Footer from "../layout/Footer";
 //import ReactDOM from "react-dom";
 import MortgageCalculator from "../../utils/mortgagecalculator/src/MortgageCalculator";
@@ -46,6 +46,7 @@ class Results extends Component {
     };
     this.renderproperties = this.renderproperties.bind(this);
     this.popCalc = this.popCalc.bind(this);
+    this.handleLocationReload = this.handleLocationReload.bind(this);
   }
   componentDidMount() {
     let user = this.props.auth;
@@ -106,7 +107,13 @@ class Results extends Component {
         }
       );
     });
+  
   };
+
+  handleLocationReload = () => {
+    window.location.reload();
+  };
+
   render() {
     console.log("this is my current state", this.state);
     return (
