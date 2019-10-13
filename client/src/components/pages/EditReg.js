@@ -13,8 +13,6 @@ class EditReg extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      desiredPayment: 0,
-      loanTerm: 0,
       name: "",
       email: "",
       id: "",
@@ -36,7 +34,6 @@ class EditReg extends Component {
         email: res.data.email,
         id: res.data._id,
         profileId: res.data.profile[0]._id,
-        loanTerm: res.data.profile[0].loanTerm,
         totalPayment: res.data.profile[0].totalPayment,
         termMonths: res.data.profile[0].termMonths,
         downPayment: res.data.profile[0].termMonths
@@ -56,7 +53,6 @@ class EditReg extends Component {
     let user = this.props.auth;
     event.preventDefault();
     API.updateProfile(this.state.profileId, {
-      loanTerm: this.state.loanTerm,
       downPayment: this.state.downPayment,
       totalPayment: this.state.totalPayment,
       termMonths: this.state.termMonths

@@ -16,7 +16,7 @@ var ProfileSchema = new Schema({
   // The ref property links the ObjectId to the Note model
   // This allows us to populate the Article with an associated Note
   downPayment: {
-    type: String
+    type: Number
   },
   totalPayment: {
     type: Number
