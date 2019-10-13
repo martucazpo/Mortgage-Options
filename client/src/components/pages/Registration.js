@@ -54,8 +54,8 @@ class Registration extends Component {
           this.setState({
             profiles: [res.data],
             downPayment: res.data.downPayment,
-            desiredPayment: res.data.desiredPayment,
-            loanTerm: res.data.loanTerm,
+            totalPayment: res.data.totalPayment,
+            termMonths: res.data.termMonths,
             propertyId: res.data.property,
             profileId: res.data._id
           });

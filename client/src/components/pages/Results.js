@@ -26,7 +26,6 @@ import { logoutUser } from "../../actions/authActions";
 // };
 
 class Results extends Component {
-<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.state = {
@@ -48,29 +47,6 @@ class Results extends Component {
     this.renderproperties = this.renderproperties.bind(this);
     this.popCalc = this.popCalc.bind(this);
   }
-=======
-  constructor(props){
-    super(props);
-  this.state = {
-    name: "",
-    email: "",
-    totalPayment: 0,
-    downPayment: 0,
-    termMonths: 0,
-    ListPrice: 0,
-    TaxAnnualAmount: 0,
-    profileId: "",
-    propertyId: [],
-    properties: [],
-    savedProp: [],
-    principleAndInterest: 11,
-    monthlyTax: 7,
-    monthlyInsurance: 5
-  };
-  this.renderproperties = this.renderproperties.bind(this);
-}
-
->>>>>>> 2b42e7d955c9c5b213c43cec9e8aefaf8bcf8753
   componentDidMount() {
     let user = this.props.auth;
     console.log(user.user.id);
@@ -117,7 +93,6 @@ class Results extends Component {
       </div>
     ))
   };
-<<<<<<< HEAD
   popCalc = id => {
     API.getProperty(id).then(res => {
       console.log("pigeon");
@@ -132,11 +107,6 @@ class Results extends Component {
       );
     });
   };
-=======
-
- 
-
->>>>>>> 2b42e7d955c9c5b213c43cec9e8aefaf8bcf8753
   render() {
     console.log("this is my current state", this.state);
     return (

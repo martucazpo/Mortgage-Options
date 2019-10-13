@@ -16,8 +16,6 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      desiredPayment: 0,
-      loanTerm: 0,
       name: "",
       email: "",
       id: "",
@@ -64,9 +62,7 @@ class Form extends Component {
       // email:this.props.email,
 
       id: this.state.id,
-      desiredPayment: this.state.desiredPayment,
       downPayment: this.state.downPayment,
-      loanTerm: this.state.loanTerm,
       totalPayment: this.state.totalPayment,
       termMonths: this.state.termMonths
     }).catch(err => console.log(err));
@@ -150,8 +146,8 @@ class Form extends Component {
           onChange={this.handleInputChange}
         />
         <ProfileDetail
-          desiredPayment={this.state.totalPayment}
-          loanTerm={this.state.termMonths}
+          totalPayment={this.state.totalPayment}
+          termMonths={this.state.termMonths}
           downPayment={this.state.downPayment}
         />
         <button onClick={this.handleForm}>Submit</button>
