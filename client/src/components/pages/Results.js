@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PieChart from "../Charts/index"
+import PieChart from "../Charts/index";
 import customStyle from "./CustomStyle.css";
 import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
@@ -9,7 +9,7 @@ import Footer from "../layout/Footer";
 import MortgageCalculator from "../../utils/mortgagecalculator/src/MortgageCalculator";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions"
+import { logoutUser } from "../../actions/authActions";
 
 // const data = [
 //   // ["Mortgage", "Payment Breakdown"],
@@ -26,23 +26,27 @@ import { logoutUser } from "../../actions/authActions"
 // };
 
 class Results extends Component {
-  state = {
-    name: "",
-    email: "",
-    totalPayment: 0,
-    downPayment: 0,
-    termMonths: 0,
-    ListPrice: 0,
-    TaxAnnualAmount: 0,
-    profileId: "",
-    propertyId: [],
-    properties: [],
-    savedProp: [],
-    principleAndInterest: 11,
-    monthlyTax: 7,
-    monthlyInsurance: 5
-  };
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "",
+      email: "",
+      totalPayment: 0,
+      downPayment: 0,
+      termMonths: 0,
+      ListPrice: 0,
+      TaxAnnualAmount: 0,
+      profileId: "",
+      propertyId: [],
+      properties: [],
+      savedProp: [],
+      principleAndInterest: 11,
+      monthlyTax: 7,
+      monthlyInsurance: 5
+    };
+    this.renderproperties = this.renderproperties.bind(this);
+    this.popCalc = this.popCalc.bind(this);
+  }
   componentDidMount() {
     let user = this.props.auth;
     console.log(user.user.id);
@@ -70,12 +74,37 @@ class Results extends Component {
   renderproperties = () => {
     return this.state.savedProp.map(property => (
       <div key={property._id}>
-         <p>{property.ListPrice}</p>
-          <img style={{height:"100px",width:"auto"}}src={property.img} alt={""}/>
+        <p>{property.ListPrice}</p>
+        <img
+          style={{ height: "100px", width: "auto" }}
+          src={property.img}
+          alt={""}
+        />
+
+        <button
+          onClick={() => this.popCalc(property._id)}
+          className="btn btn-primary"
+          style={{ marginTop: "5px" }}
+        >
+          See Property
+        </button>
       </div>
     ));
   };
-
+  popCalc = id => {
+    API.getProperty(id).then(res => {
+      console.log("pigeon");
+      this.setState(
+        {
+          ListPrice: this.state.ListPrice,
+          TaxAnnualAmount: this.state.TaxAnnualAmount
+        },
+        () => {
+          console.log("My very own state", this.state);
+        }
+      );
+    });
+  };
   render() {
     console.log("this is my current state", this.state);
     return (
@@ -94,10 +123,10 @@ class Results extends Component {
               <MortgageCalculator
                 styles={customStyle}
                 showPaymentSchedule
-                price={""}
-                downPayment={""}
+                price={this.state.ListPrice}
+                downPayment={this.state.downPayment}
                 interestRate={""}
-                months={""}
+                months={this.state.termMonths}
                 additionalPrincipalPayment={""}
                 taxRate={0.01}
                 insuranceRate={0.01}
@@ -108,11 +137,11 @@ class Results extends Component {
           <div className="col s1"></div>
           <div className="col s5 rbox">
             <div className="App">
-            <PieChart
-principleAndInterest = {this.state.principleAndInterest}
-monthlyTax={this.state.monthlyTax}
-monthlyInsurance={this.state.monthlyInsurance}
-/>        
+              <PieChart
+                principleAndInterest={this.state.principleAndInterest}
+                monthlyTax={this.state.monthlyTax}
+                monthlyInsurance={this.state.monthlyInsurance}
+              />
             </div>
           </div>
           <div className="col s1"></div>
@@ -137,4 +166,3 @@ export default connect(
 
 // const rootElement = document.getElementById("root");
 // ReactDOM.render(<App />, rootElement);
-

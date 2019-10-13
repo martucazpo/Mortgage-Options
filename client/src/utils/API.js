@@ -8,9 +8,9 @@ export default {
   search: function() {
     return axios.get(BASEURL);
   },
-  findPropertyAndPop: function(id){
-    console.log("popcorn")
-    return axios.get("/api/properties/tester/" + id)
+  findPropertyAndPop: function(id) {
+    console.log("popcorn");
+    return axios.get("/api/properties/tester/" + id);
   },
   getProfiles: function() {
     return axios.get("/api/profiles");
@@ -26,26 +26,27 @@ export default {
     return axios.get("/api/profiles/" + id);
   },
   getProperty: function(id) {
+    console.log("are you here?");
     return axios.get("/api/properties/proper/" + id);
   },
   populateProperty: function(profileId) {
     return axios.get("/api/profiles/" + profileId);
   },
   getUser: function(id) {
-    console.log("USER")
+    console.log("USER");
     return axios.get("/api/users/" + id);
   },
   updateUser: function(id) {
-    console.log("user updated")
+    console.log("user updated");
     return axios.get("/api/users/" + id);
   },
-  popUser: function(id){
-    console.log("I called the ferret!")
+  popUser: function(id) {
+    console.log("I called the ferret!");
     return axios.get("/api/users/pop/" + id);
   },
-   populateProps: function(){
-     return axios.get("/api/users/test");
-   },
+  populateProps: function() {
+    return axios.get("/api/users/test");
+  },
   updateProfile: function(id, info) {
     return axios.put("/api/profiles/" + id, info);
   },
@@ -53,7 +54,7 @@ export default {
     return axios.delete("/api/profiles/" + id);
   },
   deleteProperty: function(id) {
-    "Is anybody home?"
+    "Is anybody home?";
     return axios.delete("/api/properties/proper/" + id);
   },
   // Saves a book to the database
