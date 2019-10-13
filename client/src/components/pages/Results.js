@@ -65,8 +65,8 @@ class Results extends Component {
         downPayment:res.data.profile[0].downPayment,
         termMonths: res.data.profile[0].termMonths,
         savedProp: res.data.property,
-        ListPrice: res.data.ListPrice,
-        TaxAnnualAmount: res.data.property.TaxAnnualAmount,
+        //ListPrice: res.data.ListPrice,
+        //TaxAnnualAmount: res.data.property.TaxAnnualAmount,
         id: res.data.property._id,
         img: res.data.property.imageArr
       });
@@ -95,11 +95,11 @@ class Results extends Component {
   };
   popCalc = id => {
     API.getProperty(id).then(res => {
-      console.log("pigeon");
+      console.log("pigeon",res);
       this.setState(
         {
-          ListPrice: this.state.ListPrice,
-          TaxAnnualAmount: this.state.TaxAnnualAmount
+          ListPrice: res.data.ListPrice,
+          TaxAnnualAmount: res.data.TaxAnnualAmount
         },
         () => {
           console.log("My very own state", this.state);
