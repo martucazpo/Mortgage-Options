@@ -26,6 +26,7 @@ import { logoutUser } from "../../actions/authActions";
 // };
 
 class Results extends Component {
+<<<<<<< HEAD
   constructor(props) {
     super(props);
     this.state = {
@@ -47,6 +48,29 @@ class Results extends Component {
     this.renderproperties = this.renderproperties.bind(this);
     this.popCalc = this.popCalc.bind(this);
   }
+=======
+  constructor(props){
+    super(props);
+  this.state = {
+    name: "",
+    email: "",
+    totalPayment: 0,
+    downPayment: 0,
+    termMonths: 0,
+    ListPrice: 0,
+    TaxAnnualAmount: 0,
+    profileId: "",
+    propertyId: [],
+    properties: [],
+    savedProp: [],
+    principleAndInterest: 11,
+    monthlyTax: 7,
+    monthlyInsurance: 5
+  };
+  this.renderproperties = this.renderproperties.bind(this);
+}
+
+>>>>>>> 2b42e7d955c9c5b213c43cec9e8aefaf8bcf8753
   componentDidMount() {
     let user = this.props.auth;
     console.log(user.user.id);
@@ -62,6 +86,8 @@ class Results extends Component {
     API.popUser(user.user.id).then(res => {
       console.log("bullfrog", res);
       this.setState({
+        downPayment:res.data.profile[0].downPayment,
+        termMonths: res.data.profile[0].termMonths,
         savedProp: res.data.property,
         ListPrice: res.data.ListPrice,
         TaxAnnualAmount: res.data.property.TaxAnnualAmount,
@@ -89,8 +115,9 @@ class Results extends Component {
           See Property
         </button>
       </div>
-    ));
+    ))
   };
+<<<<<<< HEAD
   popCalc = id => {
     API.getProperty(id).then(res => {
       console.log("pigeon");
@@ -105,6 +132,11 @@ class Results extends Component {
       );
     });
   };
+=======
+
+ 
+
+>>>>>>> 2b42e7d955c9c5b213c43cec9e8aefaf8bcf8753
   render() {
     console.log("this is my current state", this.state);
     return (

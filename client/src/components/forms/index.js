@@ -16,14 +16,14 @@ class Form extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      desiredPayment: "",
-      loanTerm: "",
+      desiredPayment: 0,
+      loanTerm: 0,
       name: "",
       email: "",
       id: "",
-      totalPayment: "",
-      termMonths: "",
-      downPayment: ""
+      totalPayment: 0,
+      termMonths: 0,
+      downPayment: 0
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleForm = this.handleForm.bind(this);
@@ -68,7 +68,7 @@ class Form extends Component {
       downPayment: this.state.downPayment,
       loanTerm: this.state.loanTerm,
       totalPayment: this.state.totalPayment,
-      termMonths: this.state.loanTerm
+      termMonths: this.state.termMonths
     }).catch(err => console.log(err));
 
     this.handleLocationReload();
@@ -125,7 +125,7 @@ class Form extends Component {
 
         <label>Loan Term</label>
         <select
-          value={this.state.loanTerm}
+          value={this.state.termMonths}
           name="loanTerm"
           className="browser-default"
           onChange={this.handleInputChange}

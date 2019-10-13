@@ -10,20 +10,22 @@ import Footer from "../layout/Footer";
 import "./EditReg.css";
 
 class EditReg extends Component {
-  state = {
-    // name: "",
-    // email: this.props.email,
-
-    desiredPayment: "",
-    loanTerm: "",
-    name: "",
-    email: "",
-    id: "",
-    profileId: "",
-    totalPayment: "",
-    termMonths: "",
-    downPayment: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      desiredPayment: 0,
+      loanTerm: 0,
+      name: "",
+      email: "",
+      id: "",
+      profileId: "",
+      totalPayment: 0,
+      termMonths: 0,
+      downPayment: 0
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleForm = this.handleForm.bind(this);
+  }
 
   componentDidMount() {
     let user = this.props.auth;
@@ -42,18 +44,6 @@ class EditReg extends Component {
     });
   }
 
-  // componentDidMount() {
-  //   API.getProfile(this.props.match.params.id)
-  //     .then(res => {
-  //       console.log("My res", res);
-  //       this.setState({
-  //         totalPayment: res.data.totalPayment,
-  //         termMonths: res.data.termMonths,
-  //         downPayment: res.data.downPayment
-  //       });
-  //     })
-  //     .catch(err => console.log(err));
-  // }
   handleInputChange = event => {
     console.log("I can handle imput change");
     const { name, value } = event.target;
@@ -68,7 +58,8 @@ class EditReg extends Component {
     API.updateProfile(this.state.profileId, {
       loanTerm: this.state.loanTerm,
       downPayment: this.state.downPayment,
-      totalPayment: this.state.totalPayment
+      totalPayment: this.state.totalPayment,
+      termMonths: this.state.termMonths
     })
       .then(res => console.log("item updated!!!", res))
       .catch(err => console.log(err));
@@ -116,8 +107,13 @@ class EditReg extends Component {
               </div>
               <div className="editForms">
                 <label>Amortize your Loan</label>
-                <select className="browser-default">
-                  <option className="editForms" value="" disabled selected>
+                <select
+                  value={this.state.termMonths}
+                  name="loanTerm"
+                  className="browser-default"
+                  onChange={this.handleInputChange}
+                >
+                  <option value="" disabled>
                     Loan Term
                   </option>
                   <option value="360">30 Years</option>
