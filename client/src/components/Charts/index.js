@@ -11,7 +11,7 @@ import Chart from "react-google-charts";
 //   ["Monthly Insurance", 4] // CSS-style declaration
 // ];
 const options = {
-  title: "My Monthly Payments",
+  title: "Percentage of Cost",
   pieHole: 0.4,
   is3D: false
 };

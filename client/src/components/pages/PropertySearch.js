@@ -190,7 +190,7 @@ class PropertySearch extends Component {
                 Annual Tax Amount : {savedProps.TaxAnnualAmount}
               </div>
             </div>
-            <div class="card-action">
+            <div className="card-action">
               <Link to={"/results"}>
                 <button
                   className="btn z-depth-3 waves-effect waves-light hoverable black"

@@ -372,7 +372,7 @@ export default class MortgageCalculator extends React.Component {
               type="button"
               onClick={() => this.setState({ showAdvanced: !showAdvanced })}
             >
-              {showAdvanced ? "Hide" : "Show"} Advanced
+              {showAdvanced ? "Hide" : "Hide"} Advanced
             </button>
           </div>
           {showAdvanced ? (

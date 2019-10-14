@@ -120,6 +120,7 @@ class Form extends Component {
           />
         </div> */}
 
+<<<<<<< HEAD
           <label>Loan Term</label>
           <select
             value={this.state.termMonths}
@@ -136,6 +137,24 @@ class Form extends Component {
             <option value="120">10 Years</option>
             <option value="60">5 Years</option>
             {/* value={this.state.termMonths}
+=======
+        <label>Loan Term</label>
+        <select
+          value={this.state.termMonths}
+          name="termMonths"
+          className="browser-default"
+          onChange={this.handleInputChange}
+        >
+          <option value="" disabled>
+            Loan Term
+          </option>
+          <option value="360">30 Years</option>
+          <option value="240">20 Years</option>
+          <option value="180">15 Years</option>
+          <option value="120">10 Years</option>
+          <option value="60">5 Years</option>
+          {/* value={this.state.termMonths}
+>>>>>>> bcd2b8cf8f2a6abfcd2f2963bfc21a92626de0aa
           onChange={this.handleInputChange} */}
           </select>
           <br></br>
