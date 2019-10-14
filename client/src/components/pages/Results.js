@@ -144,8 +144,8 @@ class Results extends Component {
                 showPaymentSchedule
                 totalPrice={this.state.ListPrice}
                 downPayment={this.state.downPayment}
-                interestRate={""}
-                months={this.state.termMonths}
+                interestRate={0.04}
+                months={360}
                 additionalPrincipalPayment={""}
                 taxRate={0.01}
                 insuranceRate={0.01}

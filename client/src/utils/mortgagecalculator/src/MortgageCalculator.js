@@ -330,7 +330,8 @@ export default class MortgageCalculator extends React.Component {
               icon="%"
               type="number"
               name="interestRate"
-              defaultValue={Util.percentValue(interestRate, false)}
+              value={this.props.interestRate}
+              //defaultValue={Util.percentValue(interestRate, false)}
               step="0.01"
               onInput={this.onInterestRateChange}
             />
@@ -380,7 +381,8 @@ export default class MortgageCalculator extends React.Component {
                   icon="%"
                   type="number"
                   name="taxRate"
-                  defaultValue={Util.percentValue(taxRate, false)}
+                  value={this.props.taxRate}
+                  //defaultValue={Util.percentValue(taxRate, false)}
                   step="0.01"
                   onInput={this.onTaxRateChange}
                 />
@@ -392,7 +394,8 @@ export default class MortgageCalculator extends React.Component {
                   icon="%"
                   type="number"
                   name="insuranceRate"
-                  defaultValue={Util.percentValue(insuranceRate, false)}
+                  value={this.props.insuranceRate}
+                 // defaultValue={Util.percentValue(insuranceRate, false)}
                   step="0.01"
                   onInput={this.onInsuranceRateChange}
                 />
