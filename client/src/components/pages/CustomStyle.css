@@ -23,4 +23,15 @@
 
 .resultRow {
   background-color: #e8e8e8;
+  margin: 0;
+}
+
+.propChoices {
+  background-color: white;
+  border-radius: 5px;
+  margin-top: 5%;
+}
+
+.seePropButton {
+  margin: 10px;
 }
