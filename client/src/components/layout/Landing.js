@@ -8,7 +8,7 @@ class Landing extends Component {
       <div className="landingContainer">
         <div className="row">
           <div className="col s1"></div>
-          <div className="col s10 welcomeInfo">
+          <div className="col s10 z-depth-5 welcomeInfo">
             <img src={Logo} className="mgLogo" alt={""}></img>
             <br></br>
             <p className="welcome">Welcome, You've come to the right place!</p>
@@ -29,7 +29,7 @@ class Landing extends Component {
           <div className="col s2">
             <Link
               to="/register"
-              className="btn btn-large waves-effect waves-light hoverable black"
+              className="btn btn-large z-depth-5 waves-effect waves-light hoverable black"
             >
               Register
             </Link>
@@ -42,7 +42,7 @@ class Landing extends Component {
                 borderRadius: "3px",
                 letterSpacing: "1.5px"
               }}
-              className="btn btn-large waves-effect waves-light white black-text"
+              className="btn btn-large z-depth-5 waves-effect waves-light white black-text"
             >
               Log In
             </Link>

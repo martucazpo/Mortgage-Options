@@ -117,12 +117,12 @@ class PropertySearch extends Component {
       <div>
         {/* <div className="row"> */}
         <div className="col s3">
-          <div className="card">
+          <div className="card z-depth-3">
             <div className="card-image">
               {this.renderImages(list.img)}
               <span className="card-title"></span>
               <button
-                className="btn-floating halfway-fab waves-effect waves-light red"
+                className="btn-floating halfway-fab z-depth-3 waves-effect waves-light blue"
                 onClick={() =>
                   this.handleForm(
                     list.ListPrice,
@@ -163,7 +163,7 @@ class PropertySearch extends Component {
     const propertyHtml = this.state.savedProp.map(savedProps => (
       <div key={savedProps.ListPrice}>
         <div className="col s3">
-          <div className="card">
+          <div className="card z-depth-3">
             <div className="card-image">
               <img
                 image={savedProps.img}
@@ -175,7 +175,7 @@ class PropertySearch extends Component {
               <span className="card-title"></span>
               <button
                 onClick={() => this.deleteProperty(savedProps._id)}
-                className="btn-floating halfway-fab waves-effect waves-light red"
+                className="btn-floating pulse halfway-fab waves-effect waves-light blue"
               >
                 <i className="material-icons">clear</i>
               </button>
@@ -183,12 +183,16 @@ class PropertySearch extends Component {
             <div className="card-content">
               <strong>List Price {savedProps.ListPrice}</strong>
               <p>Annual Tax Amount {savedProps.TaxAnnualAmount}</p>
-              <div>
-                {" "}
-                <Link to={"/results"}>
-                  <button type="button">Let's see some results!</button>
-                </Link>
-              </div>
+            </div>
+            <div class="card-action">
+              <Link to={"/results"}>
+                <button
+                  className="btn z-depth-3 waves-effect waves-light hoverable black"
+                  type="button"
+                >
+                  Let's see some results!
+                </button>
+              </Link>
             </div>
           </div>
         </div>
@@ -228,7 +232,7 @@ class PropertySearch extends Component {
         {/* =============================================================================== */}
         <div className="row propertyPage">
           <div className="col s1"></div>
-          <div className="col s10 propertyBox">
+          <div className="col s10 savedPropBox">
             <h3>Saved Properties</h3>
             <div>{this.renderSavedProps()}</div>
           </div>
