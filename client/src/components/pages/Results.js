@@ -47,7 +47,8 @@ class Results extends Component {
     this.renderproperties = this.renderproperties.bind(this);
     this.popCalc = this.popCalc.bind(this);
     this.handleLocationReload = this.handleLocationReload.bind(this);
-  }
+    this.handleInputChange = this.handleInputChange.bind(this);
+  } 
   componentDidMount() {
     let user = this.props.auth;
     console.log(user.user.id);
@@ -103,12 +104,21 @@ class Results extends Component {
           TaxAnnualAmount: res.data.TaxAnnualAmount
         },
         () => {
-          console.log("My very own state", this.state);
+          return (this.state)
         }
       );
     });
-  
+   
   };
+
+  handleInputChange = e => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value
+    });
+  };
+
+
 
   handleLocationReload = () => {
     window.location.reload();
@@ -132,7 +142,7 @@ class Results extends Component {
               <MortgageCalculator
                 styles={customStyle}
                 showPaymentSchedule
-                price={this.state.ListPrice}
+                totalPrice={this.state.ListPrice}
                 downPayment={this.state.downPayment}
                 interestRate={""}
                 months={this.state.termMonths}
