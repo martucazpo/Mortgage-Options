@@ -135,8 +135,10 @@ class PropertySearch extends Component {
               </button>
             </div>
             <div className="card-content">
-              <p>List Price {list.ListPrice}</p>
-              <p>Annual Tax Amount {list.TaxAnnualAmount}</p>
+              <div className="ListAndTax">List Price : {list.ListPrice}</div>
+              <div className="ListAndTax">
+                Annual Tax Amount : {list.TaxAnnualAmount}
+              </div>
             </div>
           </div>
         </div>
@@ -181,8 +183,12 @@ class PropertySearch extends Component {
               </button>
             </div>
             <div className="card-content">
-              <strong>List Price {savedProps.ListPrice}</strong>
-              <p>Annual Tax Amount {savedProps.TaxAnnualAmount}</p>
+              <div className="ListAndTax">
+                List Price : {savedProps.ListPrice}
+              </div>
+              <div className="ListAndTax">
+                Annual Tax Amount : {savedProps.TaxAnnualAmount}
+              </div>
             </div>
             <div class="card-action">
               <Link to={"/results"}>

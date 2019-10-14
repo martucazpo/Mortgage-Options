@@ -55,6 +55,7 @@ body {
   background: rgb(0, 0, 0, 0.6);
   color: white;
   border-radius: 10px;
+  text-shadow: 1px 1px black;
 }
 
 .welcome {

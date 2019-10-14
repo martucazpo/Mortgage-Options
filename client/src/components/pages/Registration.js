@@ -13,9 +13,7 @@ import { logoutUser } from "../../actions/authActions";
 import Footer from "../layout/Footer";
 // import calculator from "../Mortgage/Calculator";
 
-
 import "./Registration.css";
-
 
 class Registration extends Component {
   constructor(props) {
@@ -65,8 +63,8 @@ class Registration extends Component {
 
   deleteProfile = id => {
     API.deleteProfile(id)
-    .then(()=>this.handleLocationReload())
-    .catch(err => console.log(err))
+      .then(() => this.handleLocationReload())
+      .catch(err => console.log(err));
   };
 
   handleInputChange = event => {
@@ -113,13 +111,14 @@ class Registration extends Component {
                         Here is the information you entered,{""}
                         {this.state.name}.
                       </h3>
-                      <p>Please check too see if it is correct,</p>
-                      <p>and then let's find a property!</p>
-                      <strong>
-                        <div>{this.state.name}</div>
-                        <div>{this.state.email}</div>
-                      </strong>
-                      <div>
+                      <div className="regText">
+                        <p>Please check too see if it is correct,</p>
+                        <p>and then let's find a property!</p>
+                        <strong>
+                          <div>{this.state.name}</div>
+                          <div>{this.state.email}</div>
+                        </strong>
+                        <div></div>
                         <div>{this.renderProfiles()}</div>
                       </div>
                     </div>
