@@ -220,31 +220,21 @@ class PropertySearch extends Component {
             <div className="propertySearch">
               <div className="gallery">
                 <div className="row">{this.renderListings()}</div>
-                <h3>Saved Properties</h3>
-                <div>{this.renderSavedProps()}</div>
-                <h3>
-                  Hi {this.state.name}, for what you want to pay per month we
-                  recomend a property priced at "PRICE GOES HERE"
-                </h3>
-                <div>
-                  {" "}
-                  <Link to={"/results"}>
-                    <button type="button">
-                      Let's see what that means to you {this.state.name}
-                    </button>
-                  </Link>
-                </div>
               </div>
             </div>
           </div>
         </div>
-        <Footer />
         <div className="col s1"></div>
-        {/* <div className="row">
-          <div className="col s12 links">
-            <LinkList />
+        {/* =============================================================================== */}
+        <div className="row propertyPage">
+          <div className="col s1"></div>
+          <div className="col s10 propertyBox">
+            <h3>Saved Properties</h3>
+            <div>{this.renderSavedProps()}</div>
           </div>
-        </div> */}
+          <div className="col s1"></div>
+        </div>
+        <Footer />
       </div>
     );
   }
