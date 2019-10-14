@@ -213,17 +213,9 @@ class PropertySearch extends Component {
                 <div className="row">{this.renderListings()}</div>
                 <h3>Saved Properties</h3>
                 <div>{this.renderSavedProps()}</div>
-                <h3>
-                  Hi {this.state.name}, for what you want to pay per month we
-                  recomend a property priced at "PRICE GOES HERE"
-                </h3>
                 <div>
                   {" "}
-                  <Link to={"/results"}>
-                    <button type="button">
-                      Let's see what that means to you {this.state.name}
-                    </button>
-                  </Link>
+                 
                 </div>
               </div>
             </div>

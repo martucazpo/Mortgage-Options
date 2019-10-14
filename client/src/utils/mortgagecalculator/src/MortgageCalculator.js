@@ -103,14 +103,14 @@ export default class MortgageCalculator extends React.Component {
 
   onPriceChange(e) {
     var value = e.target.value;
-    if (value.length === 0) {
-      this.setState({
-        totalPrice: value
-      });
-      return;
-    }
-    value = Util.moneyToValue(value);
-    if (isNaN(value)) return;
+    // if (value.length === 0) {
+    //   this.setState({
+    //     totalPrice: value
+    //   });
+    //   return;
+    // }
+    // value = Util.moneyToValue(value);
+    // if (isNaN(value)) return;
     this.mortgageCalculator.totalPrice = value;
     var downPaymentPercent =
       this.state.totalPrice > 0
@@ -129,14 +129,14 @@ export default class MortgageCalculator extends React.Component {
 
   onDownPaymentChange(e) {
     var value = e.target.value;
-    if (value.length === 0) {
-      this.setState({
-        downPayment: value
-      });
-      return;
-    }
-    value = Util.moneyToValue(value);
-    if (isNaN(value)) return;
+    // if (value.length === 0) {
+    //   this.setState({
+    //     downPayment: value
+    //   });
+    //   return;
+    // }
+    // value = Util.moneyToValue(value);
+    // if (isNaN(value)) return;
     this.mortgageCalculator.downPayment = value;
     var mortgage = this.mortgageCalculator.calculatePayment();
     this.setState({
@@ -330,8 +330,8 @@ export default class MortgageCalculator extends React.Component {
               icon="%"
               type="number"
               name="interestRate"
-              //value={this.props.interestRate}
-              defaultValue={Util.percentValue(interestRate, false)}
+              value={this.props.interestRate}
+              //defaultValue={Util.percentValue(interestRate, false)}
               step="0.01"
               onInput={this.onInterestRateChange}
             />
@@ -381,8 +381,8 @@ export default class MortgageCalculator extends React.Component {
                   icon="%"
                   type="number"
                   name="taxRate"
-                  value={this.props.taxRate}
-                  //defaultValue={Util.percentValue(taxRate, false)}
+                  //value={this.props.taxRate}
+                  defaultValue={Util.percentValue(taxRate, false)}
                   step="0.01"
                   onInput={this.onTaxRateChange}
                 />
@@ -394,8 +394,8 @@ export default class MortgageCalculator extends React.Component {
                   icon="%"
                   type="number"
                   name="insuranceRate"
-                  value={this.props.insuranceRate}
-                 // defaultValue={Util.percentValue(insuranceRate, false)}
+                  //value={this.props.insuranceRate}
+                 defaultValue={Util.percentValue(insuranceRate, false)}
                   step="0.01"
                   onInput={this.onInsuranceRateChange}
                 />

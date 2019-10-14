@@ -3,13 +3,14 @@ import PieChart from "../Charts/index";
 import customStyle from "./CustomStyle.css";
 import API from "../../utils/API";
 import Navbar from "../layout/Navbar";
-//import Chart from "react-google-charts";
 import Footer from "../layout/Footer";
-//import ReactDOM from "react-dom";
 import MortgageCalculator from "../../utils/mortgagecalculator/src/MortgageCalculator";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+//import MortgageCalculator from "mortgage-calculator-react";
+
+
 
 // const data = [
 //   // ["Mortgage", "Payment Breakdown"],
