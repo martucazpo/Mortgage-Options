@@ -111,17 +111,18 @@ class PropertySearch extends Component {
       .catch(err => console.log(err));
     this.handleLocationReload();
   };
+
   renderListings = () => {
     const listHtml = this.state.listings.map(list => (
       <div>
         {/* <div className="row"> */}
         <div className="col s3">
-          <div className="card">
+          <div className="card z-depth-3">
             <div className="card-image">
               {this.renderImages(list.img)}
               <span className="card-title"></span>
               <button
-                className="btn-floating halfway-fab waves-effect waves-light red"
+                className="btn-floating halfway-fab z-depth-3 waves-effect waves-light blue"
                 onClick={() =>
                   this.handleForm(
                     list.ListPrice,
@@ -134,8 +135,10 @@ class PropertySearch extends Component {
               </button>
             </div>
             <div className="card-content">
-              <p>List Price {list.ListPrice}</p>
-              <p>Annual Tax Amount {list.TaxAnnualAmount}</p>
+              <div className="ListAndTax">List Price : {list.ListPrice}</div>
+              <div className="ListAndTax">
+                Annual Tax Amount : {list.TaxAnnualAmount}
+              </div>
             </div>
           </div>
         </div>
@@ -161,27 +164,43 @@ class PropertySearch extends Component {
   renderSavedProps = () => {
     const propertyHtml = this.state.savedProp.map(savedProps => (
       <div key={savedProps.ListPrice}>
-        <strong>List Price {savedProps.ListPrice}</strong>
-        <p>Annual Tax Amount {savedProps.TaxAnnualAmount}</p>
-        <img
-          image={savedProps.img}
-          key={savedProps.img}
-          src={savedProps.img}
-          alt={""}
-          style={{ height: "100px", width: "100px" }}
-        />
-        <button
-          onClick={() => this.deleteProperty(savedProps._id)}
-          className="btn btn-primary"
-          style={{ marginTop: "5px" }}
-        >
-          Delete Property
-        </button>
-        <div>
-          {" "}
-          <Link to={"/results"}>
-            <button type="button">Let's see some results!</button>
-          </Link>
+        <div className="col s3">
+          <div className="card z-depth-3">
+            <div className="card-image">
+              <img
+                image={savedProps.img}
+                key={savedProps.img}
+                src={savedProps.img}
+                alt={""}
+                // style={{ height: "100px", width: "100px" }}
+              />
+              <span className="card-title"></span>
+              <button
+                onClick={() => this.deleteProperty(savedProps._id)}
+                className="btn-floating pulse halfway-fab waves-effect waves-light blue"
+              >
+                <i className="material-icons">clear</i>
+              </button>
+            </div>
+            <div className="card-content">
+              <div className="ListAndTax">
+                List Price : {savedProps.ListPrice}
+              </div>
+              <div className="ListAndTax">
+                Annual Tax Amount : {savedProps.TaxAnnualAmount}
+              </div>
+            </div>
+            <div class="card-action">
+              <Link to={"/results"}>
+                <button
+                  className="btn z-depth-3 waves-effect waves-light hoverable black"
+                  type="button"
+                >
+                  Let's see some results!
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     ));
@@ -211,31 +230,21 @@ class PropertySearch extends Component {
             <div className="propertySearch">
               <div className="gallery">
                 <div className="row">{this.renderListings()}</div>
-                <h3>Saved Properties</h3>
-                <div>{this.renderSavedProps()}</div>
-                <h3>
-                  Hi {this.state.name}, for what you want to pay per month we
-                  recomend a property priced at "PRICE GOES HERE"
-                </h3>
-                <div>
-                  {" "}
-                  <Link to={"/results"}>
-                    <button type="button">
-                      Let's see what that means to you {this.state.name}
-                    </button>
-                  </Link>
-                </div>
               </div>
             </div>
           </div>
         </div>
-        <Footer />
         <div className="col s1"></div>
-        {/* <div className="row">
-          <div className="col s12 links">
-            <LinkList />
+        {/* =============================================================================== */}
+        <div className="row propertyPage">
+          <div className="col s1"></div>
+          <div className="col s10 savedPropBox">
+            <h3>Saved Properties</h3>
+            <div>{this.renderSavedProps()}</div>
           </div>
-        </div> */}
+          <div className="col s1"></div>
+        </div>
+        <Footer />
       </div>
     );
   }

@@ -77,12 +77,13 @@ class Form extends Component {
   render() {
     console.log(this.state);
     return (
-      <form>
-        <div>
-          <h3>Welcome to Mortgage Genie, {this.state.name}!</h3>
-          <p>Please enter some information to help get started</p>
-        </div>
-        {/* <input
+      <div>
+        <form>
+          <div>
+            <h3>Welcome to Mortgage Genie, {this.state.name}!</h3>
+            <p>Please enter some information to help get started</p>
+          </div>
+          {/* <input
           type="text"
           placeholder="Name"
           name="name"
@@ -96,15 +97,15 @@ class Form extends Component {
           value={this.state.email}
           onChange={this.handleInputChange}
         /> */}
-        <input
-          type="totalPayment"
-          placeholder="Desired Payment Amount"
-          name="totalPayment"
-          value={this.state.totalPayment}
-          onChange={this.handleInputChange}
-        />
-        <br></br>
-        {/* <div style={{ margin: "20px" }}>
+          <input
+            type="totalPayment"
+            placeholder="Desired Payment Amount"
+            name="totalPayment"
+            value={this.state.totalPayment}
+            onChange={this.handleInputChange}
+          />
+          <br></br>
+          {/* <div style={{ margin: "20px" }}>
           <Dropdown
             options={options}
             onChange={this._onSelect}
@@ -119,6 +120,7 @@ class Form extends Component {
           />
         </div> */}
 
+<<<<<<< HEAD
         <label>Loan Term</label>
         <select
           value={this.state.termMonths}
@@ -135,23 +137,42 @@ class Form extends Component {
           <option value="120">10 Years</option>
           <option value="60">5 Years</option>
           {/* value={this.state.termMonths}
+=======
+          <label>Loan Term</label>
+          <select
+            value={this.state.termMonths}
+            name="term Months"
+            className="browser-default"
+            onChange={this.handleInputChange}
+          >
+            <option value="" disabled>
+              Loan Term
+            </option>
+            <option value="360">30 Years</option>
+            <option value="240">20 Years</option>
+            <option value="180">15 Years</option>
+            <option value="120">10 Years</option>
+            <option value="60">5 Years</option>
+            {/* value={this.state.termMonths}
+>>>>>>> a310b84552b17e1841f9af46dfc6e5cfc6b7f222
           onChange={this.handleInputChange} */}
-        </select>
-        <br></br>
-        <input
-          type="downPayment"
-          placeholder="Down Payment"
-          name="downPayment"
-          value={this.state.downPayment}
-          onChange={this.handleInputChange}
-        />
-        <ProfileDetail
-          totalPayment={this.state.totalPayment}
-          termMonths={this.state.termMonths}
-          downPayment={this.state.downPayment}
-        />
-        <button onClick={this.handleForm}>Submit</button>
-      </form>
+          </select>
+          <br></br>
+          <input
+            type="downPayment"
+            placeholder="Down Payment"
+            name="downPayment"
+            value={this.state.downPayment}
+            onChange={this.handleInputChange}
+          />
+          <ProfileDetail
+            totalPayment={this.state.totalPayment}
+            termMonths={this.state.termMonths}
+            downPayment={this.state.downPayment}
+          />
+          <button onClick={this.handleForm}>Submit</button>
+        </form>
+      </div>
     );
   }
 }

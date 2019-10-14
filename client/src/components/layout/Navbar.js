@@ -73,9 +73,9 @@ class Navbar extends Component {
             </Link>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li>
-                <button className="helloUser" onClick={this.openModal} style={{backgroundColor:"black",color:"white"}}>
+                <a className="helloUser" onClick={this.openModal}>
                   Hello {user.name}
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -95,7 +95,7 @@ class Navbar extends Component {
           >
             X
           </button>
-           <div ref={subtitle => (this.subtitle = subtitle)}/>
+          <div ref={subtitle => (this.subtitle = subtitle)} />
           <div className="row">
             <div className="col s12 goodbye">
               <p>We're sad to see you go, {user.name}.</p>

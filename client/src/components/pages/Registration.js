@@ -122,13 +122,14 @@ class Registration extends Component {
                         Here is the information you entered,{""}
                         {this.state.name}.
                       </h3>
-                      <p>Please check too see if it is correct,</p>
-                      <p>and then let's find a property!</p>
-                      <strong>
-                        <div>{this.state.name}</div>
-                        <div>{this.state.email}</div>
-                      </strong>
-                      <div>
+                      <div className="regText">
+                        <p>Please check too see if it is correct,</p>
+                        <p>and then let's find a property!</p>
+                        <strong>
+                          <div>{this.state.name}</div>
+                          <div>{this.state.email}</div>
+                        </strong>
+                        <div></div>
                         <div>{this.renderProfiles()}</div>
                       </div>
                     </div>
