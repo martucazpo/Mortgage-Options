@@ -1,0 +1,15 @@
+.editInfoBox {
+  background-color: white;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  border-radius: 5px;
+}
+
+.editSubButton {
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+.editForms {
+  margin-bottom: 30px;
+}

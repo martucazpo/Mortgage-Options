@@ -14,4 +14,8 @@ router
   .put(modelsController.updateProfile)
   .delete(modelsController.removeProfile);
 
+router
+.route("/test")
+.get(modelsController.getPropProp);
+
 module.exports = router;

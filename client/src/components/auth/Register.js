@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
+import "./Register.css";
 class Register extends Component {
   constructor() {
     super();
@@ -15,40 +16,41 @@ class Register extends Component {
       errors: {}
     };
   }
-  
-componentDidMount() {
+
+  componentDidMount() {
     // If logged in and user navigates to Register page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/registration");
     }
   }
-/*componentDidUpdate(nextProps) {
+  /*componentDidUpdate(nextProps) {
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
       });
     }
   }*/
-onChange = e => {
+  onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
-onSubmit = e => {
+  onSubmit = e => {
     e.preventDefault();
-const newUser = {
+    const newUser = {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       password2: this.state.password2
     };
-this.props.registerUser(newUser, this.props.history); 
+    this.props.registerUser(newUser, this.props.history);
   };
-render() {
-  console.log(this.props)
+  render() {
+    console.log(this.props);
     const { errors } = this.state;
-return (
+    return (
       <div className="container">
         <div className="row">
-          <div className="col s8 offset-s2">
+          <div className="col s2"></div>
+          <div className="col s8 registerBox">
             <Link to="/" className="btn-flat waves-effect">
               <i className="material-icons left">keyboard_backspace</i> Back to
               home
@@ -127,13 +129,14 @@ return (
                     marginTop: "1rem"
                   }}
                   type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                  className="btn btn-large waves-effect waves-light hoverable black registerButton"
                 >
                   Sign up
                 </button>
               </div>
             </form>
           </div>
+          <div className="col s2"></div>
         </div>
       </div>
     );

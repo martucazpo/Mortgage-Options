@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -6,7 +5,7 @@ import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 import { Provider } from "react-redux";
 import store from "./store";
-import Navbar from "./components/layout/Navbar";
+// import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import EditReg from "./components/pages/EditReg";
@@ -29,7 +28,7 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(token);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
-// Check for expired token
+  // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
     // Logout user
@@ -44,7 +43,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <div className="App">
-            <Navbar />
+            {/* <Navbar /> */}
             <Route exact path="/" component={Landing} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
@@ -52,11 +51,19 @@ class App extends Component {
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <PrivateRoute exact path="/results/:id" component={Details} />
               <PrivateRoute exact path="/property" component={PropertySearch} />
-              <PrivateRoute exact path="/registration" component={Registration} />
-              <PrivateRoute exact path="/registration/:id" component={EditReg}/>
+              <PrivateRoute
+                exact
+                path="/registration"
+                component={Registration}
+              />
+              <PrivateRoute
+                exact
+                path="/registration/:id"
+                component={EditReg}
+              />
               <PrivateRoute exact path="/results" component={Results} />
             </Switch>
-              {/* <Route path component={NoMatch} />  */}
+            {/* <Route path component={NoMatch} />  */}
           </div>
         </Router>
       </Provider>

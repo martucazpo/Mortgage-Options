@@ -10,7 +10,7 @@ class LinkList extends React.Component {
                     <li><Link to="/property">Property</Link></li>
                     <li><Link to="/registration">Registration</Link></li>
                     <li><Link to="/results">Results</Link></li>
-                    <li><Link to="/dashboard">Dashboard 'Logout'</Link></li>
+                    {/* <li><Link to="/dashboard">Dashboard 'Logout'</Link></li> */}
                 </ul>
             </div>
         );

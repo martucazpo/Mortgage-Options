@@ -1,0 +1,26 @@
+/* .skeleton {
+  border: 2px solid black;
+} */
+
+.rbox {
+  margin-top: 5%;
+  margin-bottom: 5%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.links {
+  text-align: center;
+}
+
+/* .resultPage {
+  background-color: #e8e8e8;
+} */
+
+.App {
+  background-color: #e8e8e8;
+}
+
+.resultRow {
+  background-color: #e8e8e8;
+}
