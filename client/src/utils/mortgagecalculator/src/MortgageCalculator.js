@@ -1,7 +1,7 @@
 import Switch from "./Switch";
 import Util from "./Util";
 import DefaultStyles from "./DefaultStyle.css";
-import PaymentSchedule from "./PaymentSchedule";
+// import PaymentSchedule from "./PaymentSchedule";
 import InputWrapper from "./InputWrapper";
 import IconInput from "./IconInput";
 
@@ -460,13 +460,12 @@ export default class MortgageCalculator extends React.Component {
             <div className={styles.resultValue}>{Util.moneyValue(total)}</div>
           </div>
         </div>
-
-        {this.props.showPaymentSchedule ? (
+        {/* {this.props.showPaymentSchedule ? (
           <div className={styles.schedule}>
             <h3>Payment Schedule</h3>
             <PaymentSchedule mortgage={this.state.mortgage} />
-          </div>
-        ) : null}
+          </div> */}
+        {/* ) : null} */}
       </div>
     );
   }

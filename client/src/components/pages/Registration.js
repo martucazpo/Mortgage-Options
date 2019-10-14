@@ -97,7 +97,7 @@ class Registration extends Component {
             backgroundColor: "black"
           }}
         >
-          Delete Profile Search
+          Delete Profile
         </button>
       </div>
     ));

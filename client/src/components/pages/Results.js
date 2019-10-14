@@ -50,8 +50,7 @@ class Results extends Component {
     this.handleLocationReload = this.handleLocationReload.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.renderData = this.renderData.bind(this);
-  } 
-
+  }
 
   componentDidMount() {
     let user = this.props.auth;
@@ -68,7 +67,7 @@ class Results extends Component {
     API.popUser(user.user.id).then(res => {
       console.log("bullfrog", res);
       this.setState({
-        downPayment:res.data.profile[0].downPayment,
+        downPayment: res.data.profile[0].downPayment,
         termMonths: res.data.profile[0].termMonths,
         savedProp: res.data.property,
         //ListPrice: res.data.ListPrice,
@@ -82,26 +81,58 @@ class Results extends Component {
   renderproperties = () => {
     return this.state.savedProp.map(property => (
       <div key={property._id}>
-        <p>{property.ListPrice}</p>
+        {/* <p>{property.ListPrice}</p> */}
         <img
           style={{ height: "100px", width: "auto" }}
           src={property.img}
           alt={""}
         />
-
         <button
           onClick={() => this.popCalc(property._id)}
           className="btn btn-primary"
-          style={{ marginTop: "5px" }}
+          style={{
+            blockSize: "55px",
+            color: "white",
+            backgroundColor: "black"
+          }}
         >
           See Property
         </button>
+        &nbsp;&nbsp;&nbsp;
+        <button
+          onClick={() => this.deleteProperty(property._id)}
+          className="btn btn-primary"
+          style={{
+            blockSize: "55px",
+            color: "white",
+            backgroundColor: "black"
+          }}
+        >
+          Delete Property
+        </button>
+        {/* <button
+          onClick={() => this.deleteProperty(property._id)}
+          className="btn-floating pulse halfway-fab waves-effect waves-light blue"
+        >
+          <i className="material-icons">clear</i>
+        </button> */}
       </div>
-    ))
+    ));
+  };
+  deleteProperty = id => {
+    let user = this.props.auth;
+    console.log("delete id", id);
+    API.deleteProperty(id)
+      .then(console.log("property deleted"))
+      .catch(err => console.log(err));
+    this.handleLocationReload();
+  };
+  handleLocationReload = () => {
+    window.location.reload();
   };
   popCalc = id => {
     API.getProperty(id).then(res => {
-      console.log("pigeon",res);
+      console.log("pigeon", res);
       this.setState(
         {
           ListPrice: res.data.ListPrice,
@@ -109,23 +140,22 @@ class Results extends Component {
         },
         () => {
           this.renderData();
-          return (this.state)
+          return this.state;
         }
       );
     });
-   
   };
 
-  renderData = () =>{
+  renderData = () => {
     let data = [
       ["TotalCost", "Type of Cost"],
       ["List Price", this.state.ListPrice],
       ["Down Payment", this.state.downPayment],
       ["Annual Tax", this.state.TaxAnnualAmount] // CSS-style declaration
-    ]
+    ];
 
-     return this.setState({data})
-  }
+    return this.setState({ data });
+  };
 
   handleInputChange = e => {
     const { name, value } = e.target;
@@ -133,7 +163,6 @@ class Results extends Component {
       [name]: value
     });
   };
-
 
   handleLocationReload = () => {
     window.location.reload();
@@ -171,9 +200,7 @@ class Results extends Component {
           <div className="col s1"></div>
           <div className="col s5 rbox">
             <div className="App">
-              <PieChart
-              data = {this.state.data}
-              />
+              <PieChart data={this.state.data} />
             </div>
           </div>
           <div className="col s1"></div>
