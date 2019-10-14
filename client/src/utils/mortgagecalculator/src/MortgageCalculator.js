@@ -330,8 +330,8 @@ export default class MortgageCalculator extends React.Component {
               icon="%"
               type="number"
               name="interestRate"
-              value={this.props.interestRate}
-              //defaultValue={Util.percentValue(interestRate, false)}
+              //value={this.props.interestRate}
+              defaultValue={Util.percentValue(interestRate, false)}
               step="0.01"
               onInput={this.onInterestRateChange}
             />
