@@ -136,7 +136,6 @@ class Form extends Component {
             <option value="120">10 Years</option>
             <option value="60">5 Years</option>
             {/* value={this.state.termMonths}
-
           onChange={this.handleInputChange} */}
           </select>
           <br></br>

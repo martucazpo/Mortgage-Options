@@ -67,9 +67,9 @@ class Results extends Component {
     API.popUser(user.user.id).then(res => {
       console.log("bullfrog", res);
       this.setState({
+
         totalPayment: res.data.profile[0].totalPayment,
         downPayment: res.data.profile[0].downPayment,
-
         termMonths: res.data.profile[0].termMonths,
         savedProp: res.data.property,
         // ListPrice: res.data.ListPrice,
@@ -149,8 +149,10 @@ class Results extends Component {
       ["List Price", this.state.ListPrice],
       ["Down Payment", this.state.downPayment],
 
+
       ["Annual Tax", this.state.TaxAnnualAmount] // CSS-style declaration
     ];
+
 
     return this.setState({ data });
   };

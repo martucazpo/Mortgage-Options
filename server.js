@@ -10,6 +10,14 @@ const routes = require("./routes");
 //   app.use(express.static("client/build"));
 // }
 // Bodyparser middleware
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname,"client","build", './index.html'));
+    });
+}
+
 app.use(
   bodyParser.urlencoded({
     extended: false
@@ -33,8 +41,7 @@ app.get('*', (req, res) => {
 //const db = require("./config/keys").mongoURI;
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGODB_URI||
-   "mongodb://localhost/mortgageOptionsDev",
+  .connect(process.env.MONGODB_URI ||"mongodb://localhost/mortgageOptionsDev",
     { useNewUrlParser: true,
       useUnifiedTopology: true
      }
