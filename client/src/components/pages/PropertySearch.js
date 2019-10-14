@@ -111,6 +111,7 @@ class PropertySearch extends Component {
       .catch(err => console.log(err));
     this.handleLocationReload();
   };
+
   renderListings = () => {
     const listHtml = this.state.listings.map(list => (
       <div>
@@ -161,27 +162,35 @@ class PropertySearch extends Component {
   renderSavedProps = () => {
     const propertyHtml = this.state.savedProp.map(savedProps => (
       <div key={savedProps.ListPrice}>
-        <strong>List Price {savedProps.ListPrice}</strong>
-        <p>Annual Tax Amount {savedProps.TaxAnnualAmount}</p>
-        <img
-          image={savedProps.img}
-          key={savedProps.img}
-          src={savedProps.img}
-          alt={""}
-          style={{ height: "100px", width: "100px" }}
-        />
-        <button
-          onClick={() => this.deleteProperty(savedProps._id)}
-          className="btn btn-primary"
-          style={{ marginTop: "5px" }}
-        >
-          Delete Property
-        </button>
-        <div>
-          {" "}
-          <Link to={"/results"}>
-            <button type="button">Let's see some results!</button>
-          </Link>
+        <div className="col s3">
+          <div className="card">
+            <div className="card-image">
+              <img
+                image={savedProps.img}
+                key={savedProps.img}
+                src={savedProps.img}
+                alt={""}
+                // style={{ height: "100px", width: "100px" }}
+              />
+              <span className="card-title"></span>
+              <button
+                onClick={() => this.deleteProperty(savedProps._id)}
+                className="btn-floating halfway-fab waves-effect waves-light red"
+              >
+                <i className="material-icons">clear</i>
+              </button>
+            </div>
+            <div className="card-content">
+              <strong>List Price {savedProps.ListPrice}</strong>
+              <p>Annual Tax Amount {savedProps.TaxAnnualAmount}</p>
+              <div>
+                {" "}
+                <Link to={"/results"}>
+                  <button type="button">Let's see some results!</button>
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     ));

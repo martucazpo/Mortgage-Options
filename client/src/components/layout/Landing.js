@@ -11,16 +11,15 @@ class Landing extends Component {
           <div className="col s10 welcomeInfo">
             <img src={Logo} className="mgLogo" alt={""}></img>
             <br></br>
-            <p className="welcome">WELCOME</p>
+            <p className="welcome">Welcome, You've come to the right place!</p>
             {/* <br></br> */}
             <p className="welcomeBlurb">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <p>
+                We here at Mortgage Genie are dedicated to finding you the right
+                home at the right price.
+              </p>
+              <p>Click one of the buttons down below to get started.</p>
+              <p>Happy hunting!</p>
             </p>
           </div>
           <div className="col s1"></div>
