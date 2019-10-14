@@ -4,12 +4,12 @@ import Chart from "react-google-charts";
 
 
 
-const data = [
-  ["Payment", "Percent of Monthly Cost"],
-  ["Principle and Interest", 12],
-  ["Monthly Tax", 5],
-  ["Monthly Insurance", 4] // CSS-style declaration
-];
+// const data = [
+//   ["Payment", "Percent of Monthly Cost"],
+//   ["Principle and Interest", 12],
+//   ["Monthly Tax", 5],
+//   ["Monthly Insurance", 4] // CSS-style declaration
+// ];
 const options = {
   title: "My Monthly Payments",
   pieHole: 0.4,
@@ -23,7 +23,7 @@ class PieChart extends Component {
           chartType="PieChart"
           width="100%"
           height="400px"
-          data={data}
+          data={this.props.data}
           options={options}
         />
       </div>

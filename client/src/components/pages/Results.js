@@ -42,13 +42,17 @@ class Results extends Component {
       savedProp: [],
       principleAndInterest: 11,
       monthlyTax: 7,
-      monthlyInsurance: 5
+      monthlyInsurance: 5,
+      data: []
     };
     this.renderproperties = this.renderproperties.bind(this);
     this.popCalc = this.popCalc.bind(this);
     this.handleLocationReload = this.handleLocationReload.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.renderData = this.renderData.bind(this);
   } 
+
+
   componentDidMount() {
     let user = this.props.auth;
     console.log(user.user.id);
@@ -104,6 +108,7 @@ class Results extends Component {
           TaxAnnualAmount: res.data.TaxAnnualAmount
         },
         () => {
+          this.renderData();
           return (this.state)
         }
       );
@@ -111,13 +116,23 @@ class Results extends Component {
    
   };
 
+  renderData = () =>{
+    let data = [
+      ["TotalCost", "Type of Cost"],
+      ["List Price", this.state.ListPrice],
+      ["Down Payment", this.state.downPayment],
+      ["Annual Tax", this.state.TaxAnnualAmount] // CSS-style declaration
+    ]
+
+     return this.setState({data})
+  }
+
   handleInputChange = e => {
     const { name, value } = e.target;
     this.setState({
       [name]: value
     });
   };
-
 
 
   handleLocationReload = () => {
@@ -157,9 +172,7 @@ class Results extends Component {
           <div className="col s5 rbox">
             <div className="App">
               <PieChart
-                principleAndInterest={this.state.principleAndInterest}
-                monthlyTax={this.state.monthlyTax}
-                monthlyInsurance={this.state.monthlyInsurance}
+              data = {this.state.data}
               />
             </div>
           </div>
