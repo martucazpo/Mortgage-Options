@@ -122,9 +122,9 @@ class Form extends Component {
         <label>Loan Term</label>
         <select
           value={this.state.termMonths}
-          name="term Months"
+          name="termMonths"
           className="browser-default"
-          onChange={this.handleInputChange}
+          // onChange={this.handleInputChange}
         >
           <option value="" disabled>
             Loan Term

@@ -9,8 +9,8 @@ var React = require("react");
 var mortgageJs = require("mortgage-js");
 //var pjson = require("../../../../package.json");
 
-const DefaultPrice = 300000;
-const DefaultDownPayment = 10000;
+const DefaultPrice = 0;
+const DefaultDownPayment = 0;
 const DefaultInterestRate = 0.045;
 const DefaultTermMonths = 360;
 const DefaultTaxRate = 0.0125;
@@ -27,15 +27,15 @@ export default class MortgageCalculator extends React.Component {
   constructor(props) {
     super(props);
 
-     this.mortgageCalculator.totalPrice = Util.numberValueOrDefault(
+    this.mortgageCalculator.totalPrice = Util.numberValueOrDefault(
       props.price,
       0,
-      DefaultPrice      
+      DefaultPrice
     );
     this.mortgageCalculator.downPayment = Util.numberValueOrDefault(
       props.downPayment,
       0,
-     DefaultDownPayment
+      DefaultDownPayment
     );
     this.mortgageCalculator.interestRate = Util.numberValueOrDefault(
       props.interestRate,
@@ -72,7 +72,7 @@ export default class MortgageCalculator extends React.Component {
 
     this.state = {
       totalPrice: this.mortgageCalculator.totalPrice,
-      downPayment:this.mortgageCalculator.downPayment,
+      downPayment: this.mortgageCalculator.downPayment,
       mortgageInsuranceEnabled: this.mortgageCalculator
         .mortgageInsuranceEnabled,
       additionalPrincipal: 0,
@@ -298,8 +298,8 @@ export default class MortgageCalculator extends React.Component {
               icon="$"
               type="text"
               name="price"
-              value={this.props.totalPrice}
-            //value={Util.moneyValue(totalPrice, false, false)}
+              // value={this.props.totalPrice}
+              value={Util.moneyValue(totalPrice, false, false)}
               onChange={this.onPriceChange}
             />
           </InputWrapper>
@@ -339,9 +339,11 @@ export default class MortgageCalculator extends React.Component {
 
           <InputWrapper styles={styles} label="Loan Term">
             <select
-              className="custom-select" name="termMonths" onInput=
-              {this.onTermMonthsChange}
-              defaultValue={months}>
+              className="custom-select"
+              name="termMonths"
+              onInput={this.onTermMonthsChange}
+              defaultValue={months}
+            >
               <option value="360">30 years</option>
               <option value="240">20 years</option>
               <option value="180">15 years</option>
@@ -395,7 +397,7 @@ export default class MortgageCalculator extends React.Component {
                   type="number"
                   name="insuranceRate"
                   value={this.props.insuranceRate}
-                 // defaultValue={Util.percentValue(insuranceRate, false)}
+                  // defaultValue={Util.percentValue(insuranceRate, false)}
                   step="0.01"
                   onInput={this.onInsuranceRateChange}
                 />

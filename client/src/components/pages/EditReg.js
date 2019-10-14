@@ -71,10 +71,9 @@ class EditReg extends Component {
         email: res.data.email,
         id: res.data._id,
         profileId: res.data.profile[0]._id,
-        loanTerm: res.data.profile[0].loanTerm,
         totalPayment: res.data.profile[0].totalPayment,
         termMonths: res.data.profile[0].termMonths,
-        downPayment: res.data.profile[0].termMonths
+        downPayment: res.data.profile[0].downPayment
       });
     });
 
@@ -102,10 +101,10 @@ class EditReg extends Component {
                 />
               </div>
               <div className="editForms">
-                <label>Amortize your Loan</label>
+                <label>Your Loan Term</label>
                 <select
                   value={this.state.termMonths}
-                  name="loanTerm"
+                  name="termMonths"
                   className="browser-default"
                   onChange={this.handleInputChange}
                 >

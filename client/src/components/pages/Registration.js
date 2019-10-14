@@ -13,9 +13,7 @@ import { logoutUser } from "../../actions/authActions";
 import Footer from "../layout/Footer";
 // import calculator from "../Mortgage/Calculator";
 
-
 import "./Registration.css";
-
 
 class Registration extends Component {
   constructor(props) {
@@ -24,9 +22,9 @@ class Registration extends Component {
       profiles: [],
       name: "",
       email: "",
-      totalPayment: 0,
-      termMonths: 0,
-      downPayment: 0
+      totalPayment: "",
+      termMonths: "",
+      downPayment: ""
     };
     this.deleteProfile = this.deleteProfile.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -65,8 +63,8 @@ class Registration extends Component {
 
   deleteProfile = id => {
     API.deleteProfile(id)
-    .then(()=>this.handleLocationReload())
-    .catch(err => console.log(err))
+      .then(() => this.handleLocationReload())
+      .catch(err => console.log(err));
   };
 
   handleInputChange = event => {
@@ -89,7 +87,18 @@ class Registration extends Component {
           <div>{profile.termMonths}</div>
         </strong>
         <EditBtn id={profile._id} />
-        <DeleteBtn onClick={() => this.deleteProfile(profile._id)} />
+        &nbsp;&nbsp;&nbsp;
+        <button
+          onClick={() => this.deleteProfile(profile._id)}
+          className="btn btn-primary"
+          style={{
+            blockSize: "55px",
+            color: "white",
+            backgroundColor: "black"
+          }}
+        >
+          Delete Profile Search
+        </button>
       </div>
     ));
     return myProfile;
