@@ -50,7 +50,7 @@ class Footer extends Component {
           <div className="footer-copyright">
             <div className="container">
               Mortgage Genie 2019 ©
-              <a className="grey-text text-lighten-4 right" href="#!"/>
+              {/* <a className="grey-text text-lighten-4 right" href="#!"/> */}
                 {/* More Links */}
             </div>
           </div>

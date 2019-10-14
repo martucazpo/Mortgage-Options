@@ -3,7 +3,6 @@ import Form from "../forms";
 import DeleteBtn from "../DeleteBtn";
 import API from "../../utils/API";
 import { List, ListItem } from "../List";
-import LinkList from "../linksList";
 import EditBtn from "../EditBtn";
 import Navbar from "../layout/Navbar";
 import { Link } from "react-router-dom";

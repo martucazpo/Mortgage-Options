@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import API from "../../utils/API";
-import LinkList from "../linksList";
+//import LinkList from "../linksList";
 import Navbar from "../layout/Navbar";
 import { Link } from "react-router-dom";
 import "./PropertySearch.css";

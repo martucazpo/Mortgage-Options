@@ -7,10 +7,10 @@ import IconInput from "./IconInput";
 
 var React = require("react");
 var mortgageJs = require("mortgage-js");
-var pjson = require("../../../../package.json");
+//var pjson = require("../../../../package.json");
 
-const DefaultPrice = 300;
-const DefaultDownPayment = 100000;
+const DefaultPrice = 300000;
+const DefaultDownPayment = 10000;
 const DefaultInterestRate = 0.045;
 const DefaultTermMonths = 360;
 const DefaultTaxRate = 0.0125;
@@ -27,15 +27,15 @@ export default class MortgageCalculator extends React.Component {
   constructor(props) {
     super(props);
 
-    this.mortgageCalculator.totalPrice = Util.numberValueOrDefault(
+     this.mortgageCalculator.totalPrice = Util.numberValueOrDefault(
       props.price,
       0,
-      DefaultPrice
+      DefaultPrice      
     );
     this.mortgageCalculator.downPayment = Util.numberValueOrDefault(
       props.downPayment,
       0,
-      DefaultDownPayment
+     DefaultDownPayment
     );
     this.mortgageCalculator.interestRate = Util.numberValueOrDefault(
       props.interestRate,
@@ -72,7 +72,7 @@ export default class MortgageCalculator extends React.Component {
 
     this.state = {
       totalPrice: this.mortgageCalculator.totalPrice,
-      downPayment: this.mortgageCalculator.downPayment,
+      downPayment:this.mortgageCalculator.downPayment,
       mortgageInsuranceEnabled: this.mortgageCalculator
         .mortgageInsuranceEnabled,
       additionalPrincipal: 0,
@@ -298,7 +298,8 @@ export default class MortgageCalculator extends React.Component {
               icon="$"
               type="text"
               name="price"
-            value={Util.moneyValue(totalPrice, false, false)}
+              value={this.props.totalPrice}
+            //value={Util.moneyValue(totalPrice, false, false)}
               onChange={this.onPriceChange}
             />
           </InputWrapper>
@@ -309,7 +310,8 @@ export default class MortgageCalculator extends React.Component {
               icon="$"
               type="text"
               name="downPayment"
-              value={Util.moneyValue(downPayment, false, false)}
+              value={this.props.downPayment}
+              //value={Util.moneyValue(downPayment, false, false)}
               onChange={this.onDownPaymentChange}
             />
             <IconInput

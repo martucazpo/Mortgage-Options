@@ -21,8 +21,8 @@ const customStyles = {
 };
 
 class Navbar extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       modalIsOpen: false,
@@ -73,9 +73,9 @@ class Navbar extends Component {
             </Link>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li>
-                <a className="helloUser" onClick={this.openModal}>
+                <button className="helloUser" onClick={this.openModal} style={{backgroundColor:"black",color:"white"}}>
                   Hello {user.name}
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -85,6 +85,7 @@ class Navbar extends Component {
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
+          ariaHideApp={false}
           style={customStyles}
           contentLabel="Example Modal"
         >
@@ -94,7 +95,7 @@ class Navbar extends Component {
           >
             X
           </button>
-          <h2 ref={subtitle => (this.subtitle = subtitle)}></h2>
+           <div ref={subtitle => (this.subtitle = subtitle)}/>
           <div className="row">
             <div className="col s12 goodbye">
               <p>We're sad to see you go, {user.name}.</p>
