@@ -5,7 +5,7 @@ const app = express();
 const passport = require("passport");
 const users = require("./routes/api/users");
 const routes = require("./routes");
-const path = require('path')
+const path = require('path');
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static("client/build"));
 // }
@@ -14,6 +14,7 @@ const path = require('path')
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get('*', (req, res) => {
+    console.log('I am updated')
     res.sendFile(path.join(__dirname,"client","build", './index.html'));
     });
 }
