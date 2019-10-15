@@ -1,8 +1,6 @@
-import React, {Component} from "react";
-//import ReactDOM from "react-dom";
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import Chart from "react-google-charts";
-
-
 
 // const data = [
 //   ["Payment", "Percent of Monthly Cost"],
@@ -31,9 +29,7 @@ class PieChart extends Component {
   }
 }
 
-export default PieChart
-   
-
+export default PieChart;
 
 // const rootElement = document.getElementById("root");
 // ReactDOM.render(<App />, rootElement);
