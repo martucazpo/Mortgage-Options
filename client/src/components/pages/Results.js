@@ -67,11 +67,15 @@ class Results extends Component {
     API.popUser(user.user.id).then(res => {
       console.log("bullfrog", res);
       this.setState({
+<<<<<<< HEAD
+=======
+
+>>>>>>> 94cfb5b937fc18b3cc677907aaba4e840a5b66fe
         totalPayment: res.data.profile[0].totalPayment,
         downPayment: res.data.profile[0].downPayment,
         termMonths: res.data.profile[0].termMonths,
         savedProp: res.data.property,
-        //ListPrice: res.data.ListPrice,
+        // ListPrice: res.data.ListPrice,
         //TaxAnnualAmount: res.data.property.TaxAnnualAmount,
         id: res.data.property._id,
         img: res.data.property.imageArr
@@ -82,6 +86,7 @@ class Results extends Component {
   renderproperties = () => {
     return this.state.savedProp.map(property => (
       <div key={property._id}>
+<<<<<<< HEAD
         <p>{property.ListPrice}</p>
         <img
           style={{ height: "100px", width: "auto" }}
@@ -111,6 +116,32 @@ class Results extends Component {
         >
           Delete Property
         </button>
+=======
+        <div className="col s3">
+          <div className="card z-depth-3">
+            <div className="card-image">
+              <img src={property.img} alt={""} />
+              <span className="card-title"></span>
+              <button
+                onClick={() => this.deleteProperty(property._id)}
+                className="btn-floating pulse halfway-fab waves-effect waves-light blue"
+              >
+                <i className="material-icons">clear</i>
+              </button>
+            </div>
+            <div class="card-context">
+              <br></br>
+              <button
+                onClick={() => this.popCalc(property._id)}
+                className="btn z-depth-3 waves-effect waves-light hoverable black seePropButton"
+              >
+                See Property
+              </button>
+            </div>
+          </div>
+        </div>
+        {/* <p>{property.ListPrice}</p> */}
+>>>>>>> 94cfb5b937fc18b3cc677907aaba4e840a5b66fe
         {/* <button
           onClick={() => this.deleteProperty(property._id)}
           className="btn-floating pulse halfway-fab waves-effect waves-light blue"
@@ -152,8 +183,16 @@ class Results extends Component {
       ["TotalCost", "Type of Cost"],
       ["List Price", this.state.ListPrice],
       ["Down Payment", this.state.downPayment],
+<<<<<<< HEAD
       ["Tax Annual Amount", this.state.totalPayment + this.state.downPayment] // CSS-style declaration
     ];
+=======
+
+
+      ["Annual Tax", this.state.TaxAnnualAmount] // CSS-style declaration
+    ];
+
+>>>>>>> 94cfb5b937fc18b3cc677907aaba4e840a5b66fe
 
     return this.setState({ data });
   };
@@ -174,10 +213,14 @@ class Results extends Component {
     return (
       <div>
         <Navbar />
-        <div className="results">
-          <h3>Results</h3>
+        <div className="row">
+          <div className="col s1"></div>
+          <div className="col s10 propChoices">
+            <h3>Your Saved Homes.</h3>
 
-          {this.renderproperties()}
+            {this.renderproperties()}
+          </div>
+          <div className="col s1"></div>
         </div>
 
         <div className="row resultRow">
@@ -199,7 +242,7 @@ class Results extends Component {
             </div>
           </div>
           <div className="col s1"></div>
-          <div className="col s5 rbox">
+          <div className="col s4 rbox">
             <div className="App">
               <PieChart data={this.state.data} />
             </div>
