@@ -67,12 +67,8 @@ class Results extends Component {
     API.popUser(user.user.id).then(res => {
       console.log("bullfrog", res);
       this.setState({
-<<<<<<< HEAD
+        totalPayment: res.data.profile[0].totalPayment,
         downPayment: res.data.profile[0].downPayment,
-=======
-        totalPayment:res.data.profile[0].totalPayment,
-        downPayment:res.data.profile[0].downPayment,
->>>>>>> bcd2b8cf8f2a6abfcd2f2963bfc21a92626de0aa
         termMonths: res.data.profile[0].termMonths,
         savedProp: res.data.property,
         //ListPrice: res.data.ListPrice,
@@ -86,7 +82,7 @@ class Results extends Component {
   renderproperties = () => {
     return this.state.savedProp.map(property => (
       <div key={property._id}>
-        {/* <p>{property.ListPrice}</p> */}
+        <p>{property.ListPrice}</p>
         <img
           style={{ height: "100px", width: "auto" }}
           src={property.img}
@@ -156,13 +152,8 @@ class Results extends Component {
       ["TotalCost", "Type of Cost"],
       ["List Price", this.state.ListPrice],
       ["Down Payment", this.state.downPayment],
-<<<<<<< HEAD
-      ["Annual Tax", this.state.TaxAnnualAmount] // CSS-style declaration
+      ["Tax Annual Amount", this.state.totalPayment + this.state.downPayment] // CSS-style declaration
     ];
-=======
-      ["Tax Annual Amount" , this.state.totalPayment + this.state.downPayment] // CSS-style declaration
-    ]
->>>>>>> bcd2b8cf8f2a6abfcd2f2963bfc21a92626de0aa
 
     return this.setState({ data });
   };
