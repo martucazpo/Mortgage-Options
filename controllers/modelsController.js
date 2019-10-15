@@ -44,25 +44,28 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findUserById: function(req, res) {
+    console.log('hit')
+    console.log(req.params.id)
     db.User.findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   createProfile: function(req, res) {
-    console.log("RECK", req.body);
-    console.log("RECK ID", req.body.id);
-    db.Profile.create(req.body)
-      .then(dbProfile => {
-        console.log("PROFILE", dbProfile);
-        db.User.findOneAndUpdate(
-          { _id: req.body.id },
-          { $push: { profile: dbProfile._id } },
-          { new: true }
-        ).then(abc => {
-          console.log("ABC", abc);
-        });
-      })
-      .catch(err => res.status(422).json(err));
+    console.log('HELLO WORLD')
+    // console.log("RECK", req.body);
+    // console.log("RECK ID", req.body.id);
+    // db.Profile.create(req.body)
+    //   .then(dbProfile => {
+    //     console.log("PROFILE", dbProfile);
+    //     db.User.findOneAndUpdate(
+    //       { _id: req.body.id },
+    //       { $push: { profile: dbProfile._id } },
+    //       { new: true }
+    //     ).then(abc => {
+    //       console.log("ABC", abc);
+    //     });
+    //   })
+    //   .catch(err => res.status(422).json(err));
   },
   // getPopProf: function(req,res){
   //    db.User.findOne(req.params.email)

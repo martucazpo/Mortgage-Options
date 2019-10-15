@@ -59,7 +59,7 @@ export default {
   },
   // Saves a book to the database
   saveProfile: function(profileData) {
-    return axios.post("/api/profiles/", profileData);
+    return axios.post("/api/profiles", profileData);
   },
   saveProperty: function(propertyData) {
     return axios.post("/api/properties/", propertyData);
