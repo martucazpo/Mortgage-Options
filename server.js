@@ -11,13 +11,6 @@ const path = require('path');
 // }
 // Bodyparser middleware
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get('*', (req, res) => {
-    console.log('I am updated')
-    res.sendFile(path.join(__dirname,"client","build", './index.html'));
-    });
-}
 
 app.use(
   bodyParser.urlencoded({
@@ -34,9 +27,13 @@ app.use("/api/users", users);
 //app.use("/api/test",users);
 app.use(routes);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname,"client","build", './index.html'));
-  });
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get('*', (req, res) => {
+    console.log('I am updated')
+    res.sendFile(path.join(__dirname,"client","build", './index.html'));
+    });
+}
 
 // DB Config
 //const db = require("./config/keys").mongoURI;
