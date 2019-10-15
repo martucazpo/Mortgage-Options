@@ -27,14 +27,6 @@ app.use("/api/users", users);
 //app.use("/api/test",users);
 app.use(routes);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get('*', (req, res) => {
-    console.log('I am updated')
-    res.sendFile(path.join(__dirname,"client","build", './index.html'));
-    });
-}
-
 // DB Config
 //const db = require("./config/keys").mongoURI;
 // Connect to MongoDB
