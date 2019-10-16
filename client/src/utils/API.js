@@ -1,8 +1,8 @@
 import axios from "axios";
-let apiKey = process.env.REACT_APP_REAL_ESTATE_KEY;
+//let apiKey = process.env.REACT_APP_REAL_ESTATE_KEY;
 let BASEURL =
-  "https://api.bridgedataoutput.com/api/v2/test_sd/listings?access_token=" +
-  apiKey;
+  "https://api.bridgedataoutput.com/api/v2/test_sd/listings?access_token=d3bbe72d694abf78a8395471bb912049" 
+  
 
 export default {
   search: function() {
@@ -59,7 +59,7 @@ export default {
   },
   // Saves a book to the database
   saveProfile: function(profileData) {
-    return axios.post("/api/profiles/", profileData);
+    return axios.post("/api/profiles", profileData);
   },
   saveProperty: function(propertyData) {
     return axios.post("/api/properties/", propertyData);

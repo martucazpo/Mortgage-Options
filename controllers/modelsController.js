@@ -44,11 +44,14 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findUserById: function(req, res) {
+    console.log('hit')
+    console.log(req.params.id)
     db.User.findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   createProfile: function(req, res) {
+    console.log('HELLO WORLD')
     console.log("RECK", req.body);
     console.log("RECK ID", req.body.id);
     db.Profile.create(req.body)

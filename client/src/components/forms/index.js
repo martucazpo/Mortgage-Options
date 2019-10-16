@@ -67,7 +67,7 @@ class Form extends Component {
       termMonths: this.state.termMonths
     }).catch(err => console.log(err));
 
-    this.handleLocationReload();
+     this.handleLocationReload();
   };
 
   handleLocationReload = () => {
