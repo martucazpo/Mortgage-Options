@@ -67,10 +67,6 @@ class Results extends Component {
     API.popUser(user.user.id).then(res => {
       console.log("bullfrog", res);
       this.setState({
-<<<<<<< HEAD
-=======
-
->>>>>>> 94cfb5b937fc18b3cc677907aaba4e840a5b66fe
         totalPayment: res.data.profile[0].totalPayment,
         downPayment: res.data.profile[0].downPayment,
         termMonths: res.data.profile[0].termMonths,
@@ -86,37 +82,6 @@ class Results extends Component {
   renderproperties = () => {
     return this.state.savedProp.map(property => (
       <div key={property._id}>
-<<<<<<< HEAD
-        <p>{property.ListPrice}</p>
-        <img
-          style={{ height: "100px", width: "auto" }}
-          src={property.img}
-          alt={""}
-        />
-        <button
-          onClick={() => this.popCalc(property._id)}
-          className="btn btn-primary"
-          style={{
-            blockSize: "55px",
-            color: "white",
-            backgroundColor: "black"
-          }}
-        >
-          See Property
-        </button>
-        &nbsp;&nbsp;&nbsp;
-        <button
-          onClick={() => this.deleteProperty(property._id)}
-          className="btn btn-primary"
-          style={{
-            blockSize: "55px",
-            color: "white",
-            backgroundColor: "black"
-          }}
-        >
-          Delete Property
-        </button>
-=======
         <div className="col s3">
           <div className="card z-depth-3">
             <div className="card-image">
@@ -129,7 +94,7 @@ class Results extends Component {
                 <i className="material-icons">clear</i>
               </button>
             </div>
-            <div class="card-context">
+            <div className="card-context">
               <br></br>
               <button
                 onClick={() => this.popCalc(property._id)}
@@ -141,7 +106,6 @@ class Results extends Component {
           </div>
         </div>
         {/* <p>{property.ListPrice}</p> */}
->>>>>>> 94cfb5b937fc18b3cc677907aaba4e840a5b66fe
         {/* <button
           onClick={() => this.deleteProperty(property._id)}
           className="btn-floating pulse halfway-fab waves-effect waves-light blue"
@@ -183,16 +147,8 @@ class Results extends Component {
       ["TotalCost", "Type of Cost"],
       ["List Price", this.state.ListPrice],
       ["Down Payment", this.state.downPayment],
-<<<<<<< HEAD
       ["Tax Annual Amount", this.state.totalPayment + this.state.downPayment] // CSS-style declaration
     ];
-=======
-
-
-      ["Annual Tax", this.state.TaxAnnualAmount] // CSS-style declaration
-    ];
-
->>>>>>> 94cfb5b937fc18b3cc677907aaba4e840a5b66fe
 
     return this.setState({ data });
   };
