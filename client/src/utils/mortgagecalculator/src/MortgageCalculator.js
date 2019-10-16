@@ -23,15 +23,14 @@ const ValidTermMonths = [60, 120, 180, 240, 360];
 
 export default class MortgageCalculator extends React.Component {
   mortgageCalculator = mortgageJs.createMortgageCalculator();
-
   constructor(props) {
     super(props);
-
-    this.mortgageCalculator.totalPrice = Util.numberValueOrDefault(
-      props.price,
-      0,
-      DefaultPrice
-    );
+    this.mortgageCalculator.totalPrice = props.totalPrice;
+    // this.mortgageCalculator.totalPrice = Util.numberValueOrDefault(
+    //   props.price,
+    //   0,
+    //   DefaultPrice
+    // );
     this.mortgageCalculator.downPayment = Util.numberValueOrDefault(
       props.downPayment,
       0,
@@ -99,16 +98,51 @@ export default class MortgageCalculator extends React.Component {
     );
   }
 
-  onMortgageChange(mortgage) {}
+  componentDidMount() {
+    this.calcTheBottomMortagage();
+  }
+  componentWillReceiveProps(nextProps) {
+    console.log("props updated");
+    console.log(nextProps);
+    if (nextProps.totalPrice > 0) {
+      this.mortgageCalculator.defaultPrice = nextProps.totalPrice;
+      var mortgage = this.mortgageCalculator.calculatePayment();
+      this.setState(
+        {
+          totalPrice: nextProps.totalPrice,
+          mortgage
+        },
+        () => {
+          this.calcTheBottomMortagage();
+        }
+      );
+      // console.log("this state");
+      // console.log(this.state);
+      // this.onPriceChange(null);
+    }
+  }
+
+  onMortgageChange(mortgage) {
+    console.log("MORRR", mortgage);
+  }
 
   onPriceChange(e) {
-    var value = e.target.value;
-    if (value.length === 0) {
-      this.setState({
-        totalPrice: value
-      });
-      return;
+    var value;
+    if (e != null) {
+      console.log("e is not null");
+      value = e.target.value;
+      console.log(value);
+      if (value.length === 0) {
+        this.setState({
+          totalPrice: value
+        });
+        return;
+      }
+    } else {
+      value = this.state.totalPrice;
+      console.log("starting value" + value);
     }
+
     value = Util.moneyToValue(value);
     if (isNaN(value)) return;
     this.mortgageCalculator.totalPrice = value;
@@ -126,6 +160,27 @@ export default class MortgageCalculator extends React.Component {
     });
     this.onMortgageChange(mortgage);
   }
+
+  calcTheBottomMortagage = () => {
+    if (!this.state.totalPrice) return;
+    let value = this.state.totalPrice.toString();
+    console.log("MY PPPRRRIIICCEEEE", this.state.totalPrice);
+    value = Util.moneyToValue(value);
+    if (isNaN(value)) return;
+    this.mortgageCalculator.totalPrice = value;
+    var downPaymentPercent =
+      this.state.totalPrice > 0
+        ? this.state.downPayment / this.state.totalPrice
+        : DefaultDownPaymentPercent;
+    var downPayment = downPaymentPercent * value;
+    this.mortgageCalculator.downPayment = downPayment;
+    var mortgage = this.mortgageCalculator.calculatePayment();
+    this.setState({
+      totalPrice: value,
+      downPayment: downPayment,
+      mortgage: mortgage
+    });
+  };
 
   onDownPaymentChange(e) {
     var value = e.target.value;
@@ -299,7 +354,8 @@ export default class MortgageCalculator extends React.Component {
               type="text"
               name="price"
               // value={this.props.totalPrice}
-              value={Util.moneyValue(totalPrice, false, false)}
+              // value={Util.moneyValue(totalPrice, false, false)}
+              value={this.state.totalPrice}
               onChange={this.onPriceChange}
             />
           </InputWrapper>
@@ -311,7 +367,7 @@ export default class MortgageCalculator extends React.Component {
               type="text"
               name="downPayment"
               value={this.props.downPayment}
-              //value={Util.moneyValue(downPayment, false, false)}
+              // value={Util.moneyValue(downPayment, false, false)}
               onChange={this.onDownPaymentChange}
             />
             <IconInput
