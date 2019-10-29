@@ -20,4 +20,8 @@ By clicking on the results button the user is taken to the results page where wh
 ![mortgage-options-ten](client/src/images/readMeImages/tenResults.png)
 ![mortgage-options-eleven](client/src/images/readMeImages/elevenResults.png)
 When the user is done, he or she can log out, ending the session.
-![mortgage-options-twelve](client\src\images\readMeImages\twelveLogOut.png)
+![mortgage-options-twelve](client/src/images/readMeImages/twelveLogOut.png)
+
+## Where to find
+
+This app is deployed on Heroku at https://lit-sea-68567.herokuapp.com/
