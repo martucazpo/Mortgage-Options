@@ -31,7 +31,7 @@
     "jsonwebtoken": "^8.5.1",
     "materialize": "^1.0.0",
     "materialize-css": "^1.0.0",
-    "mongoose": "^5.7.1",
+    "mongoose": "^5.7.5",
     "mortgage-calculator-react": "^0.1.3",
     "mortgage-js": "^0.1.2",
     "passport": "^0.4.0",
